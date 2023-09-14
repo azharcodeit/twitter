@@ -1,0 +1,43 @@
+@use 'fonts';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+  Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
+*/
+
+.main {
+  width: 100vw;
+  min-height: 100vh;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  padding: 120px 24px 160px 24px;
+  pointer-events: none;
+}
+
+
+@media screen and (max-width: 640px) {
+  .main {
+    padding: 0;
+  }
+}
+
+/* Tailwind Styles */
+
+.app {
+  @apply grid grid-cols-4 max-w-7xl mx-auto sm:px-16 px-6;
+}
+
+.logo_text {
+  @apply max-sm:hidden 
+}
+.post-botton{
+  @apply text-white bg-main-primary h-12 rounded-3xl w-10/12 font-medium
+}
+/* Feed Component */
+/* Form Component */
+/* Nav Component */
+/* PromptCard Component */

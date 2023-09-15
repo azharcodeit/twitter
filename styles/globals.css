@@ -31,11 +31,22 @@
   @apply grid grid-cols-4 max-w-7xl mx-auto sm:px-16 px-6;
 }
 
-.logo_text {
-  @apply max-sm:hidden 
+.hidden_md {
+  @apply max-md:hidden
 }
-.post-botton{
-  @apply text-white bg-main-primary h-12 rounded-3xl w-10/12 font-medium
+
+.feed_md {
+  @apply max-md:col-span-3
+}
+.textarea[contentEditable]:empty::before {
+  content: "Placeholder still possible";
+  color: gray;
+}
+.textarea[contentEditable]:empty::after {
+  text-decoration: none;
+  user-select: text;
+  font-family: inherit;
+  font-size: inherit;
 }
 /* Feed Component */
 /* Form Component */

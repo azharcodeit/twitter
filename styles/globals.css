@@ -28,16 +28,17 @@
 /* Tailwind Styles */
 
 .app {
-  @apply grid grid-cols-4 max-w-7xl mx-auto sm:px-16 px-6;
+  @apply grid xl:grid-cols-4 max-w-7xl mx-auto;
+}
+
+.hidden_xl {
+  @apply max-xl:hidden
 }
 
 .hidden_md {
   @apply max-md:hidden
 }
 
-.feed_md {
-  @apply max-md:col-span-3
-}
 .textarea[contentEditable]:empty::before {
   content: "Placeholder still possible";
   color: gray;

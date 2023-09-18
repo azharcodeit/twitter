@@ -7,6 +7,15 @@
 /* 
   Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
 */
+html {
+  overflow: hidden;
+  height: 100%;
+}
+
+body {
+  height: 100%;
+  overflow: auto;
+}
 
 .main {
   width: 100vw;
@@ -28,16 +37,17 @@
 /* Tailwind Styles */
 
 .app {
-  @apply grid grid-cols-4 max-w-7xl mx-auto sm:px-16 px-6;
+  @apply grid xl:grid-cols-4 max-w-7xl mx-auto;
+}
+
+.hidden_xl {
+  @apply max-xl:hidden
 }
 
 .hidden_md {
   @apply max-md:hidden
 }
 
-.feed_md {
-  @apply max-md:col-span-3
-}
 .textarea[contentEditable]:empty::before {
   content: "Placeholder still possible";
   color: gray;

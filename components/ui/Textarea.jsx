@@ -1,3 +1,4 @@
+'use client'
 import React from "react";
 
 const MIN_TEXTAREA_HEIGHT = 30;

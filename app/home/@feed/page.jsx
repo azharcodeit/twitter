@@ -4,7 +4,8 @@ import NewPost from "@components/NewPost";
 
 function Feed() {
   return (
-    <div className='col-span-2 border-x w-full h-max'>
+    // <div className='col-span-3 border-x w-full h-max max-md:col-span-5'>
+    <div className='xl:col-span-3 border-x w-full h-max'>
       <div className='sticky top-0 border-b bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-80'>
         <div className='flex px-4 h-14 font-semibold text-xl justify-items-center items-center'>
           <h1>Home</h1>

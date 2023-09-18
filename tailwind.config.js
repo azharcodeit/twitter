@@ -14,13 +14,16 @@ module.exports = {
       ...defaultTheme.screens,
     },
     extend: {
+      gridTemplateColumns: {
+        home: "auto 2fr auto",
+      },
       fontFamily: {
         "twitter-chirp": ["TwitterChirp", "sans-serif"],
         "twitter-chirp-extended": ["TwitterChirpExtendedHeavy", "sans-serif"],
       },
-      // prettier-ignore
       colors: {
-        'main-primary': '#1c9bef'
+        "main-primary": "#1c9bef",
+        "main-secondary": "#0f141a",
       },
     },
   },

@@ -2,7 +2,7 @@ import React from 'react'
 
 function MainContainer({children}) {
   return (
-    <div className='grid grid-flow-col grid-cols-3'>{children}</div>
+    <div className='grid grid-flow-col xl:grid-cols-5 max-xl:grid-cols-home'>{children}</div>
   )
 }
 

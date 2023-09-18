@@ -3,7 +3,7 @@ import Image from "next/image";
 
 function SearchBar() {
   return (
-    <form class='flex items-center mb-3'>
+    <form class='flex items-center'>
       <div class='relative w-full'>
         <div class='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
           <Image

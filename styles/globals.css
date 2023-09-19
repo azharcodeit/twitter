@@ -37,7 +37,24 @@ body {
 /* Tailwind Styles */
 
 .app {
-  @apply grid xl:grid-cols-4 max-w-7xl mx-auto;
+  /* @apply grid xl:grid-cols-5 max-w-[1265px] mx-auto; */
+  @apply flex flex-row mx-auto xl:w-[1265px];
+}
+
+.sidebar{
+  @apply xl:w-[275px]
+}
+
+.container{
+  @apply flex flex-row justify-between xl:w-[990px]
+}
+
+.feed{
+  @apply xl:w-[600px] 
+}
+
+.trending{
+  @apply xl:w-[350px]
 }
 
 .hidden_xl {

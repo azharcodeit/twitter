@@ -12,9 +12,9 @@ const RootLayout = ({ children }) =>{
       <body>
         <div className='main'>
         </div>
-        <main className='app grid-flow-col'>
+        <main className='app'>
           <SideBar/>
-          <div className='xl:col-span-3'>{children}</div>
+          {children}
         </main>
       </body>
     </html>

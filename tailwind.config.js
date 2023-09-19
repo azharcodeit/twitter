@@ -14,9 +14,6 @@ module.exports = {
       ...defaultTheme.screens,
     },
     extend: {
-      gridTemplateColumns: {
-        home: "auto 2fr auto",
-      },
       fontFamily: {
         "twitter-chirp": ["TwitterChirp", "sans-serif"],
         "twitter-chirp-extended": ["TwitterChirpExtendedHeavy", "sans-serif"],

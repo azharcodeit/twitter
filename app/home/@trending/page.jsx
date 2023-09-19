@@ -11,8 +11,9 @@ import Image from "next/image";
 
 function Trending() {
   return (
-    <div className='sticky top-0 xl:col-span-2 mx-3 hidden_md pb-14 h-fit'>
-      <div className='sticky top-0 w-full bg-white py-1'>
+    // <div className='sticky top-0 xl:col-span-2 mr-2 hidden_md pb-14 h-fit'>
+    <div className='trending sticky top-0 mr-2 hidden_md pb-14 h-fit'>
+      <div className='sticky top-0 w-full bg-white py-1 mb-3'>
         {" "}
         <SearchBar />
       </div>
@@ -27,36 +28,6 @@ function Trending() {
           />
           <Button text={"Subscribe"} />
         </div>
-      </Container>
-      <Container>
-        <TypographyTitle title={"Who to follow"} />
-        <div className='flex py-3 items-center justify-between'>
-          <ProfileInfo
-            username={"Anytime fitness"}
-            nickname={"anytimefitness"}
-            image={"/assets/icons/profile.svg"}
-          />
-          <Button text={"Follow"} />
-        </div>
-        <div className='flex py-3 items-center justify-between'>
-          <ProfileInfo
-            username={"Anytime fitness"}
-            nickname={"anytimefitness"}
-            image={"/assets/icons/profile.svg"}
-          />
-          <Button text={"Follow"} />
-        </div>
-        <div className='flex py-3 items-center justify-between'>
-          <ProfileInfo
-            username={"Anytime fitness"}
-            nickname={"anytimefitness"}
-            image={"/assets/icons/profile.svg"}
-          />
-          <Button text={"Follow"} />
-        </div>
-        <Link href={"explore/tabs/for-you"} className='py-3 text-main-primary'>
-          Show more
-        </Link>
       </Container>
       <Container>
         <TypographyTitle title={"What's happening"} />
@@ -101,6 +72,36 @@ function Trending() {
           <p className='text-slate-500 text-sm'>2,200 views</p>
         </div>
         <Link href={"explore/tabs/for-you"} className='pt-3 text-main-primary'>
+          Show more
+        </Link>
+      </Container>
+      <Container>
+        <TypographyTitle title={"Who to follow"} />
+        <div className='flex py-3 items-center justify-between'>
+          <ProfileInfo
+            username={"Anytime fitness"}
+            nickname={"anytimefitness"}
+            image={"/assets/icons/profile.svg"}
+          />
+          <Button text={"Follow"} />
+        </div>
+        <div className='flex py-3 items-center justify-between'>
+          <ProfileInfo
+            username={"Anytime fitness"}
+            nickname={"anytimefitness"}
+            image={"/assets/icons/profile.svg"}
+          />
+          <Button text={"Follow"} />
+        </div>
+        <div className='flex py-3 items-center justify-between'>
+          <ProfileInfo
+            username={"Anytime fitness"}
+            nickname={"anytimefitness"}
+            image={"/assets/icons/profile.svg"}
+          />
+          <Button text={"Follow"} />
+        </div>
+        <Link href={"explore/tabs/for-you"} className='py-3 text-main-primary'>
           Show more
         </Link>
       </Container>

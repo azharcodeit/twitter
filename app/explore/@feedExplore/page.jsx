@@ -2,7 +2,7 @@ import React from 'react'
 
 function FeedExplore() {
   return (
-    <div className='col-span-2 m-3'>FeedExplore</div>
+    <div className='m-3'>FeedExplore</div>
   )
 }
 

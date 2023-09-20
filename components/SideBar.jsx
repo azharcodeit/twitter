@@ -4,7 +4,7 @@ import ProfileInfo from "./ui/ProfileInfo";
 
 function SideBar() {
   return (
-    <nav className='sidebar xl:col-span-1 max-xl:w-fit w-full h-screen flex flex-col justify-between pl-2 pr-2 sticky top-0'>
+    <nav className='sidebar xl:col-span-1 w-full h-screen flex flex-col justify-between pl-2 pr-2 sticky top-0'>
       <div className='flex flex-col max-xl:items-center xl:gap-2 md:gap-1'>
         <Link href={"/home"}>
           <Image
@@ -115,13 +115,13 @@ function SideBar() {
           />
           <p className='hidden_xl text-xl'>More</p>
         </Link>
-        <button className='flex items-center justify-content-center text-white bg-main-primary rounded-3xl m-3 xl:h-12 xl:w-[90%]'>
+        <button className='flex items-center justify-content-center text-white bg-main-primary rounded-3xl xl:m-3 xl:h-12 xl:w-[90%]'>
           <Image
             src={"/assets/icons/post-small.svg"}
             alt='post-feather'
             width={25}
             height={25}
-            className='block h-6 w-6 xl:hidden m-3'
+            className='block h-6 w-6 xl:hidden m-3 '
           />
           <p className='flex flex-row w-full items-center justify-content-center hidden xl:block text-xl font-medium'>
             Post

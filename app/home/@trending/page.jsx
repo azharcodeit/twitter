@@ -11,8 +11,7 @@ import Image from "next/image";
 
 function Trending() {
   return (
-    // <div className='sticky top-0 xl:col-span-2 mr-2 hidden_md pb-14 h-fit'>
-    <div className='trending sticky top-0 mr-2 hidden_md pb-14 h-fit'>
+    <div className='trending sticky top-0 mr-2 hidden_tablet pb-14 h-fit'>
       <div className='sticky top-0 w-full bg-white py-1 mb-3'>
         {" "}
         <SearchBar />

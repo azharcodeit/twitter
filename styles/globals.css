@@ -38,23 +38,23 @@ body {
 
 .app {
   /* @apply grid xl:grid-cols-5 max-w-[1265px] mx-auto; */
-  @apply flex flex-row mx-auto xl:w-[1265px];
+  @apply flex flex-row mx-auto xl:w-[1260px] max-xl:max-w-[1100px];
 }
 
 .sidebar{
-  @apply xl:w-[275px]
+  @apply xl:w-[275px] max-xl:w-[88px] max-tablet:min-w-[72px]
 }
 
 .container{
-  @apply flex flex-row justify-between xl:w-[990px]
+  @apply flex flex-row justify-between xl:w-[990px] lg:w-[990px] max-lg:w-[920px] max-md:w-full
 }
 
 .feed{
-  @apply xl:w-[600px] 
+  @apply w-[600px] max-lg:max-w-[600px] max-tablet:w-full
 }
 
 .trending{
-  @apply xl:w-[350px]
+  @apply xl:w-[350px] lg:w-[350px] max-lg:w-[290px]
 }
 
 .hidden_xl {
@@ -63,6 +63,10 @@ body {
 
 .hidden_md {
   @apply max-md:hidden
+}
+
+.hidden_tablet {
+  @apply max-tablet:hidden
 }
 
 .textarea[contentEditable]:empty::before {

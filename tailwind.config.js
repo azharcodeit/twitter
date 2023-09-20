@@ -9,11 +9,13 @@ module.exports = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    screens: {
-      xs: "500px",
-      ...defaultTheme.screens,
-    },
     extend: {
+      screens: {
+        xs: "500px",
+        tablet: "990px",
+        lg: "1080px",
+        xl: "1265px",
+      },
       fontFamily: {
         "twitter-chirp": ["TwitterChirp", "sans-serif"],
         "twitter-chirp-extended": ["TwitterChirpExtendedHeavy", "sans-serif"],

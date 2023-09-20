@@ -1,4 +1,4 @@
-@use 'fonts';
+@use "fonts";
 
 @tailwind base;
 @tailwind components;
@@ -27,7 +27,6 @@ body {
   pointer-events: none;
 }
 
-
 @media screen and (max-width: 640px) {
   .main {
     padding: 0;
@@ -41,32 +40,32 @@ body {
   @apply flex flex-row mx-auto xl:w-[1260px] max-xl:max-w-[1100px];
 }
 
-.sidebar{
-  @apply xl:w-[275px] max-xl:w-[88px] max-tablet:min-w-[72px]
+.sidebar {
+  @apply xl:w-[275px] max-xl:w-[88px] max-tablet:min-w-[72px];
 }
 
-.container{
-  @apply flex flex-row justify-between xl:w-[990px] lg:w-[990px] max-lg:w-[920px] max-md:w-full
+.container {
+  @apply flex flex-row justify-between xl:w-[990px] lg:w-[990px] max-lg:w-[920px] max-md:w-full;
 }
 
-.feed{
-  @apply w-[600px] max-lg:max-w-[600px] max-tablet:w-full
+.feed {
+  @apply w-[600px] max-lg:max-w-[600px] max-tablet:w-full;
 }
 
-.trending{
-  @apply xl:w-[350px] lg:w-[350px] max-lg:w-[290px]
+.trending {
+  @apply xl:w-[350px] lg:w-[350px] max-lg:w-[290px];
 }
 
 .hidden_xl {
-  @apply max-xl:hidden
+  @apply max-xl:hidden;
 }
 
 .hidden_md {
-  @apply max-md:hidden
+  @apply max-md:hidden;
 }
 
 .hidden_tablet {
-  @apply max-tablet:hidden
+  @apply max-tablet:hidden;
 }
 
 .textarea[contentEditable]:empty::before {

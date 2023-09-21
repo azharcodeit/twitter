@@ -5,17 +5,17 @@ function SearchBar() {
   return (
     <form class='flex items-center'>
       <div class='relative w-full'>
-        <div class='absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none'>
+        <div class='absolute inset-y-0 left-4 flex items-center  pointer-events-none'>
           <Image
             src={"/assets/icons/search.svg"}
             alt='post'
-            width={20}
-            height={20}
+            width={17}
+            height={17}
           />
         </div>
         <input
           type='text'
-          class='bg-slate-100 text-gray-700 text-base rounded-3xl block w-full pl-12 p-3  focus:outline-none border border-slate-100  focus:border-main-primary'
+          class='bg-darker-gray-bg text-gray-700 text-sm rounded-3xl block w-full pl-14 p-3  focus:outline-none border border-darker-gray-bg  focus:border-main-primary focus:bg-white'
           placeholder='Search'
           required
         />

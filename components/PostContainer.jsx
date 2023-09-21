@@ -3,8 +3,8 @@ import Link from 'next/link'
 import Image from 'next/image'
 function PostContainer() {
   return (
-    <div className='grid grid-flow-col grid-cols-10 justify-items-center items-start h-14 px-4 py-3 border-b h-fit'>
-        <div className='flex h-full w-full col-span '>
+    <div className='grid grid-flow-col grid-cols-10 justify-items-center items-start h-14 px-4 py-3 border-darker-gray-bg border-b h-fit' onClick={()=>console.log("clicked a post!")}>
+        <div className='flex h-full w-full col-span  '>
           <Link href={"/home"}>
             <Image
               src={"/assets/icons/profile.svg"}

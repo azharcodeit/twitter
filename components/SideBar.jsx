@@ -1,11 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import ProfileInfo from "./ui/ProfileInfo";
-
 function SideBar() {
   return (
     <nav className='sidebar xl:col-span-1 w-full h-screen flex flex-col justify-between pl-2 pr-2 sticky top-0'>
-      <div className='flex flex-col max-xl:items-center xl:gap-2 md:gap-1'>
+      <div className='flex flex-col max-xl:items-center '>
         <Link href={"/home"}>
           <Image
             src={"/assets/images/logo.svg"}
@@ -15,107 +13,98 @@ function SideBar() {
             className='m-3'
           />
         </Link>
-        <Link href={"/home"} className='flex items-center'>
+        <Link href={"/home"} className='flex items-center py-1 m-3'>
           <Image
             src={"/assets/icons/home.svg"}
             alt='twitter'
             width={25}
             height={25}
-            className='m-3'
+            className="font-bold"
           />
-          <p className='hidden_xl text-xl'>Home</p>
+          <p className='hidden_xl text-xl mr-4 ml-5'>Home</p>
         </Link>
-        <Link href={"/explore"} className='flex items-center'>
+        <Link href={"/explore"} className='flex items-center py-1 m-3'>
           <Image
             src={"/assets/icons/search.svg"}
             alt='twitter'
             width={25}
             height={25}
-            className='m-3'
           />
-          <p className='hidden_xl text-xl'>Explore</p>
+          <p className='hidden_xl text-xl mr-4 ml-5'>Explore</p>
         </Link>
-        <Link href={"/notifications"} className='flex items-center'>
+        <Link href={"/notifications"} className='flex items-center py-1 m-3'>
           <Image
             src={"/assets/icons/notifications.svg"}
             alt='twitter'
             width={25}
             height={25}
-            className='m-3'
           />
-          <p className='hidden_xl text-xl'>Notifications</p>
+          <p className='hidden_xl text-xl mr-4 ml-5'>Notifications</p>
         </Link>
-        <Link href={"/messages"} className='flex items-center'>
+        <Link href={"/messages"} className='flex items-center py-1 m-3'>
           <Image
             src={"/assets/icons/messages.svg"}
             alt='twitter'
             width={25}
             height={25}
-            className='m-3'
           />
-          <p className='hidden_xl text-xl'>Messages</p>
+          <p className='hidden_xl text-xl mr-4 ml-5'>Messages</p>
         </Link>
-        <Link href={"/lists"} className='flex items-center'>
+        <Link href={"/lists"} className='flex items-center py-1 m-3'>
           <Image
             src={"/assets/icons/lists.svg"}
             alt='twitter'
             width={25}
             height={25}
-            className='m-3'
           />
-          <p className='hidden_xl text-xl'>Lists</p>
+          <p className='hidden_xl text-xl mr-4 ml-5'>Lists</p>
         </Link>
-        <Link href={"/bookmarks"} className='flex items-center'>
+        <Link href={"/bookmarks"} className='flex items-center py-1 m-3'>
           <Image
             src={"/assets/icons/bookmarks.svg"}
             alt='twitter'
             width={25}
             height={25}
-            className='m-3'
           />
-          <p className='hidden_xl text-xl'>Bookmarks</p>
+          <p className='hidden_xl text-xl mr-4 ml-5'>Bookmarks</p>
         </Link>
-        <Link href={"/communities"} className='flex items-center'>
+        <Link href={"/communities"} className='flex items-center py-1 m-3'>
           <Image
             src={"/assets/icons/lists.svg"}
             alt='twitter'
             width={25}
             height={25}
-            className='m-3'
           />
-          <p className='hidden_xl text-xl'>Communities</p>
+          <p className='hidden_xl text-xl mr-4 ml-5'>Communities</p>
         </Link>
-        <Link href={"/verified"} className='flex items-center'>
+        <Link href={"/verified"} className='flex items-center py-1 m-3'>
           <Image
             src={"/assets/images/logo.svg"}
             alt='twitter'
             width={25}
             height={25}
-            className='m-3'
           />
-          <p className='hidden_xl text-xl'>Verified</p>
+          <p className='hidden_xl text-xl mr-4 ml-5'>Verified</p>
         </Link>
-        <Link href={"/profile"} className='flex items-center'>
+        <Link href={"/profile"} className='flex items-center py-1 m-3'>
           <Image
             src={"/assets/icons/profile.svg"}
             alt='twitter'
             width={25}
             height={25}
-            className='m-3'
           />
-          <p className='hidden_xl text-xl'>Profile</p>
+          <p className='hidden_xl text-xl mr-4 ml-5'>Profile</p>
         </Link>
-        <Link href={"/more"} className='flex items-center'>
+        <Link href={"/more"} className='flex items-center py-1 m-3'>
           <Image
             src={"/assets/icons/more.svg"}
             alt='twitter'
             width={25}
             height={25}
-            className='m-3'
           />
-          <p className='hidden_xl text-xl'>More</p>
+          <p className='hidden_xl text-xl mr-4 ml-5'>More</p>
         </Link>
-        <button className='flex items-center justify-content-center text-white bg-main-primary rounded-3xl xl:m-3 xl:h-12 xl:w-[90%]'>
+        <button className='flex items-center justify-content-center text-white bg-main-primary rounded-full xl:my-3 xl:h-[52px] xl:w-[92%]'>
           <Image
             src={"/assets/icons/post-small.svg"}
             alt='post-feather'
@@ -123,7 +112,7 @@ function SideBar() {
             height={25}
             className='block h-6 w-6 xl:hidden m-3 '
           />
-          <p className='flex flex-row w-full items-center justify-content-center hidden xl:block text-xl font-medium'>
+          <p className='flex flex-row w-full items-center justify-content-center hidden xl:block text-[17px] font-bold'>
             Post
           </p>
         </button>

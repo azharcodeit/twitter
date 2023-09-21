@@ -2,7 +2,7 @@ import React from 'react'
 
 function Container({children}) {
   return (
-    <div className='flex flex-col bg-slate-50 px-4 py-3 rounded-3xl mb-4'>
+    <div className='flex flex-col bg-gray-bg px-4 py-3 rounded-2xl mb-4'>
         {children}
     </div>
   )

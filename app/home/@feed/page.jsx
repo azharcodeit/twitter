@@ -4,8 +4,8 @@ import NewPost from "@components/NewPost";
 
 function Feed() {
   return (
-    <div className='feed border-x h-max'>
-      <div className='sticky top-0 border-b bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-80'>
+    <div className='feed border-darker-gray-bg border-x h-max'>
+      <div className='sticky top-0 border-darker-gray-bg border-b bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-80'>
         <div className='flex px-4 h-14 font-semibold text-xl justify-items-center items-center'>
           <h1>Home</h1>
         </div>

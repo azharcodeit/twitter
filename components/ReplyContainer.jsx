@@ -40,16 +40,6 @@ function ReplyContainer() {
             BREAKING: Government refuses to guarantee second leg of HS2 to
             Manchester
           </div>
-          <div className='w-[504px] h-[283.5px] rounded-xl overflow-hidden row-span-5 mt-3'>
-            <Link href={"/home"}>
-              <Image
-                src={"/assets/images/post.jpg"}
-                alt='post'
-                width={"100%"}
-                height={"100%"}
-              />
-            </Link>
-          </div>
           <div className="flex justify-between row-span-1 mt-3">
             <Link href={"/home"} className="flex items-center">
               <Image

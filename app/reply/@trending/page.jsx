@@ -20,11 +20,18 @@ function Trending() {
       <Container>
         <div className='flex flex-col gap-2'>
           <TypographyTitle title={"Relevant people"} />
-          <div className="flex justify-between"><ProfileInfo  username={"Anytime fitness"}
-            nickname={"anytimefitness"}
-            image={"/assets/icons/profile.svg"}/>  <Button text={"Follow"} /></div>
-          <p
-          >Welcome to Anytime Fitness! Your home for something real. Real people. Real success.</p>
+          <div className='flex justify-between'>
+            <ProfileInfo
+              username={"Anytime fitness"}
+              nickname={"anytimefitness"}
+              image={"/assets/icons/profile.svg"}
+            />{" "}
+            <Button text={"Follow"} />
+          </div>
+          <p>
+            Welcome to Anytime Fitness! Your home for something real. Real
+            people. Real success.
+          </p>
         </div>
       </Container>
       <Container>
@@ -103,7 +110,7 @@ function Trending() {
           Show more
         </Link>
       </Container>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

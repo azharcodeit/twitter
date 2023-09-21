@@ -1,11 +1,11 @@
 "use client";
-import Feed from "./@feed/page";
+import Reply from "./@reply/page";
 import Trending from "./@trending/page";
 import MainContainer from "@components/MainContainer";
 function Home() {
   return (
     <MainContainer>
-        <Feed/>
+        <Reply/>
         <Trending/>
     </MainContainer>
   )

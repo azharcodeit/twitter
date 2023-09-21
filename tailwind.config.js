@@ -23,6 +23,7 @@ module.exports = {
       colors: {
         "main-primary": "#1c9bef",
         "main-secondary": "#0f141a",
+        "secondary-text": "#536471",
         "gray-bg": "#f8fafa",
         "darker-gray-bg": "#eff3f4",
       },

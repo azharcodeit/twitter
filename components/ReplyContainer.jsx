@@ -4,7 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from "next/navigation";
 
-function PostContainer() {
+function ReplyContainer() {
   let router = useRouter()
   return (
     <div onClick={()=> router.push('/reply', { scroll: false })} className='grid grid-flow-col grid-cols-10 justify-items-center items-start h-14 px-4 py-3 border-darker-gray-bg border-b h-fit'>
@@ -40,13 +40,13 @@ function PostContainer() {
             BREAKING: Government refuses to guarantee second leg of HS2 to
             Manchester
           </div>
-          <div className='rounded-xl overflow-hidden row-span-5 mt-3'>
+          <div className='w-[504px] h-[283.5px] rounded-xl overflow-hidden row-span-5 mt-3'>
             <Link href={"/home"}>
               <Image
                 src={"/assets/images/post.jpg"}
                 alt='post'
-                width={500}
-                height={300}
+                width={"100%"}
+                height={"100%"}
               />
             </Link>
           </div>
@@ -92,4 +92,4 @@ function PostContainer() {
   )
 }
 
-export default PostContainer
+export default ReplyContainer

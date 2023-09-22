@@ -6,7 +6,7 @@ import Textarea from "./ui/Textarea";
 function NewPost() {
   return (
     <div className='grid grid-flow-col grid-cols-10 h-14 px-4 py-3 border-darker-gray-bg border-b h-fit'>
-      <div className='flex h-full w-full col-span-1'>
+      <div className='flex w-full'>
         <Link href={"/home"}>
           <Image
             src={"/assets/icons/profile.svg"}

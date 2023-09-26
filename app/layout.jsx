@@ -1,4 +1,6 @@
 import SideBar from '@components/SideBar';
+import Provider from '@components/Provider';
+import SignInPage from './sign-in/page';
 import '@styles/globals.css';
 
 export const metadata = {
@@ -6,19 +8,20 @@ export const metadata = {
   description: 'From breaking news and entertainment to sports and politics, get the full story with all the live commentary.'
 }
  
-const RootLayout = ({ children }) =>{
- return (
-    <html lang="en">
-      <body>
-        <div className='main'>
-        </div>
-        <main className='app'>
-          <SideBar/>
-          {children}
-        </main>
-      </body>
-    </html>
-  )
-}
+const RootLayout = ({ children }) =>(
+  <Provider>
+  <html lang="en">
+    <body>
+      <div className='main'>
+      </div>
+      {/* <SignInPage /> */}
+      <main className='app'>
+        <SideBar/>
+        {children}
+      </main>
+    </body>
+  </html>
+  </Provider>
+)
 
 export default RootLayout

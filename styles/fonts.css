@@ -1,5 +1,5 @@
 @font-face {
-  font-family: TwitterChirpExtendedHeavy;
+  font-family: 'TwitterChirpExtendedHeavy';
   src: url(/public/fonts/chirp-extended-heavy-web.woff2) format("woff2");
   src: url(/public/fonts/chirp-extended-heavy-web.woff) format("woff");
   font-weight: 700;
@@ -8,7 +8,7 @@
 }
 
 @font-face {
-  font-family: TwitterChirpRegular;
+  font-family: 'TwitterChirpRegular';
   src: url(/public/fonts/chirp-regular-web.woff2) format("woff2");
   src: url(/public/fonts/chirp-regular-web.woff) format("woff");
   font-weight: 400;
@@ -17,7 +17,7 @@
 }
 
 @font-face {
-  font-family: TwitterChirpMedium;
+  font-family: 'TwitterChirpMedium';
   src: url(/public/fonts/chirp-medium-web.woff2) format("woff2");
   src: url(/public/fonts/chirp-medium-web.woff) format("woff");
   font-weight: 500;
@@ -26,7 +26,7 @@
 }
 
 @font-face {
-  font-family: TwitterChirpBold;
+  font-family: 'TwitterChirpBold';
   src: url(/public/fonts/chirp-bold-web.woff2) format("woff2");
   src: url(/public/fonts/chirp-bold-web.woff) format("woff");
   font-weight: 700;
@@ -35,7 +35,7 @@
 }
 
 @font-face {
-  font-family: TwitterChirpNormal;
+  font-family: 'TwitterChirp';
   src: url(/public/fonts/chirp-heavy-web.woff2) format("woff2");
   src: url(/public/fonts/chirp-heavy-web.woff) format("woff");
   font-weight: 800;

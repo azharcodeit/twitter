@@ -17,8 +17,11 @@ module.exports = {
         xl: "1265px",
       },
       fontFamily: {
-        "twitter-chirp": ["TwitterChirp", "sans-serif"],
-        "twitter-chirp-extended": ["TwitterChirpExtendedHeavy", "sans-serif"],
+        "twitter-chirp": ["TwitterChirpRegular", "sans-serif"],
+        "twitter-chirp-extended-heavy": [
+          "TwitterChirpExtendedHeavy",
+          "sans-serif",
+        ],
       },
       colors: {
         "main-primary": "#1c9bef",

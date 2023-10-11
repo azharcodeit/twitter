@@ -1,5 +1,5 @@
 import GoogleProvider from "next-auth/providers/google";
-import { db } from "@app/lib/prismadb";
+import db from "@lib/prismadb";
 import bcrypt from "bcrypt";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
@@ -47,7 +47,10 @@ export const authOptions = {
     }),
   ],
   pages: {
-    signIn: "/sign-in",
+    signIn: "/login",
+    signOut: "/new-user",
+    error: "/error", // Error code passed in query string as ?error=
+    newUser: "/new-user",
   },
   debug: process.env.NODE_ENV === "development",
   session: {

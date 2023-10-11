@@ -1,9 +1,15 @@
-import Home from "./home/page"
+'use client'
+import { useSession } from "next-auth/react";
+import Home from "./home/page";
+import NewUser from "./(auth)/new-user/page";
 
-function page() {
+export default function page() {
+  const { data: session, status, update } = useSession();
   return (
-    <Home/>
-  )
-}
 
-export default page
+    <div>
+      {(session) && <Home/>}
+      {(!session) && <NewUser/>}
+      </div>
+  );
+}

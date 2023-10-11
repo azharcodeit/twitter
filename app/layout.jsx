@@ -1,27 +1,26 @@
-import SideBar from '@components/SideBar';
-import Provider from '@components/Provider';
-import SignInPage from './sign-in/page';
-import '@styles/globals.css';
+import SideBar from "@components/SideBar";
+import NextAuthProvider from "./Providers";
+import "@styles/globals.css";
 
 export const metadata = {
   title: `X. It's what's happening`,
-  description: 'From breaking news and entertainment to sports and politics, get the full story with all the live commentary.'
-}
- 
-const RootLayout = ({ children }) =>(
-  <Provider>
-  <html lang="en">
+  description:
+    "From breaking news and entertainment to sports and politics, get the full story with all the live commentary.",
+};
+const RootLayout = (props) => (
+  <html lang='en'>
     <body>
-      <div className='main'>
-      </div>
-      {/* <SignInPage /> */}
-      <main className='app'>
-        <SideBar/>
-        {children}
-      </main>
+      <NextAuthProvider>
+      <div className='main'></div>
+      {props.modal}
+        <main className='app'>
+          <SideBar />
+          {props.children}
+        </main>
+        
+      </NextAuthProvider>
     </body>
   </html>
-  </Provider>
-)
+);
 
-export default RootLayout
+export default RootLayout;

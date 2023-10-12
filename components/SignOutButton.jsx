@@ -1,5 +1,6 @@
 'use client'
 import { signOut } from 'next-auth/react'
+import {PiSignOut} from 'react-icons/pi'
 
 function SignOutButton() {
   return (
@@ -8,7 +9,7 @@ function SignOutButton() {
             signOut({
               callbackUrl: `/login`,
             })
-          }}>Sign Out</div>
+          }}><PiSignOut size={20}/></div>
   )
 }
 

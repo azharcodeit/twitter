@@ -2,8 +2,59 @@
 import Link from "next/link";
 import Image from "next/image";
 import SignOutButton from "@components/SignOutButton";
+import {
+  GoHome,
+  GoSearch,
+  GoBookmark,
+  GoPeople,
+  GoPerson,
+} from "react-icons/go";
+import { RiTwitterXFill, RiMoreLine } from "react-icons/ri";
+import { PiBell, PiEnvelopeSimple } from "react-icons/pi";
 import { useSession } from "next-auth/react";
 
+const NAVIGATION_ITEMS = [
+  {
+    title: "Twitter",
+    icon: RiTwitterXFill,
+  },
+  {
+    title: "Home",
+    icon: GoHome,
+  },
+  {
+    title: "Explore",
+    icon: GoSearch,
+  },
+  {
+    title: "Notifications",
+    icon: PiBell,
+  },
+  {
+    title: "Messages",
+    icon: PiEnvelopeSimple,
+  },
+  {
+    title: "Bookmarks",
+    icon: GoBookmark,
+  },
+  {
+    title: "Communities",
+    icon: GoPeople,
+  },
+  {
+    title: "Premium",
+    icon: RiTwitterXFill,
+  },
+  {
+    title: "Profile",
+    icon: GoPerson,
+  },
+  {
+    title: "More",
+    icon: RiMoreLine,
+  },
+];
 const SideBar = () => {
   const { data: session, status, update } = useSession();
   return (
@@ -11,110 +62,26 @@ const SideBar = () => {
       {session && (
         <nav className='sidebar xl:col-span-1 w-full h-screen flex flex-col justify-between pl-2 pr-2 sticky top-0'>
           <div className='flex flex-col max-xl:items-center '>
-            <Link href={"/home"}>
-              <Image
-                src={"/assets/images/logo.svg"}
-                alt='twitter'
-                width={30}
-                height={30}
-                className='m-3'
-              />
-            </Link>
-            <Link href={"/home"} className='flex items-center py-1 m-3'>
-              <Image
-                src={"/assets/icons/home.svg"}
-                alt='twitter'
-                width={25}
-                height={25}
-                className='font-bold'
-              />
-              <p className='hidden_xl text-xl mr-4 ml-5'>Home</p>
-            </Link>
-            <Link href={"/explore"} className='flex items-center py-1 m-3'>
-              <Image
-                src={"/assets/icons/search.svg"}
-                alt='twitter'
-                width={25}
-                height={25}
-              />
-              <p className='hidden_xl text-xl mr-4 ml-5'>Explore</p>
-            </Link>
-            <Link
-              href={"/notifications"}
-              className='flex items-center py-1 m-3'
-            >
-              <Image
-                src={"/assets/icons/notifications.svg"}
-                alt='twitter'
-                width={25}
-                height={25}
-              />
-              <p className='hidden_xl text-xl mr-4 ml-5'>Notifications</p>
-            </Link>
-            <Link href={"/messages"} className='flex items-center py-1 m-3'>
-              <Image
-                src={"/assets/icons/messages.svg"}
-                alt='twitter'
-                width={25}
-                height={25}
-              />
-              <p className='hidden_xl text-xl mr-4 ml-5'>Messages</p>
-            </Link>
-            <Link href={"/lists"} className='flex items-center py-1 m-3'>
-              <Image
-                src={"/assets/icons/lists.svg"}
-                alt='twitter'
-                width={25}
-                height={25}
-              />
-              <p className='hidden_xl text-xl mr-4 ml-5'>Lists</p>
-            </Link>
-            <Link href={"/bookmarks"} className='flex items-center py-1 m-3'>
-              <Image
-                src={"/assets/icons/bookmarks.svg"}
-                alt='twitter'
-                width={25}
-                height={25}
-              />
-              <p className='hidden_xl text-xl mr-4 ml-5'>Bookmarks</p>
-            </Link>
-            <Link href={"/communities"} className='flex items-center py-1 m-3'>
-              <Image
-                src={"/assets/icons/lists.svg"}
-                alt='twitter'
-                width={25}
-                height={25}
-              />
-              <p className='hidden_xl text-xl mr-4 ml-5'>Communities</p>
-            </Link>
-            <Link href={"/verified"} className='flex items-center py-1 m-3'>
-              <Image
-                src={"/assets/images/logo.svg"}
-                alt='twitter'
-                width={25}
-                height={25}
-              />
-              <p className='hidden_xl text-xl mr-4 ml-5'>Verified</p>
-            </Link>
-            <Link href={"/profile"} className='flex items-center py-1 m-3'>
-              <Image
-                src={"/assets/icons/profile.svg"}
-                alt='twitter'
-                width={25}
-                height={25}
-              />
-              <p className='hidden_xl text-xl mr-4 ml-5'>Profile</p>
-            </Link>
-            <Link href={"/more"} className='flex items-center py-1 m-3'>
-              <Image
-                src={"/assets/icons/more.svg"}
-                alt='twitter'
-                width={25}
-                height={25}
-              />
-              <p className='hidden_xl text-xl mr-4 ml-5'>More</p>
-            </Link>
-            <button className='flex items-center justify-content-center text-white bg-main-primary rounded-full xl:my-3 xl:h-[52px] xl:w-[92%]'>
+            {NAVIGATION_ITEMS.map((item) => (
+              <Link
+                key={item.title}
+                href={
+                  item.title.toLocaleLowerCase() === "home"
+                    ? "/"
+                    : item.title.toLocaleLowerCase() === "profile"
+                    ? session?.user?.name || "#"
+                    : `/${item.title.toLowerCase()}`
+                }
+                className='flex items-center hover:bg-black/10 focus:font-bold transition duration-200 flex items-center justify-start w-fit space-x-4 rounded-full py-3 my-1 px-3'
+              >
+                <item.icon size={item.title !== "Twitter" ? 25 : 30} />
+                {item.title !== "Twitter" && (
+                  <p className='hidden_xl text-xl mr-4 ml-5'>{item.title}</p>
+                )}
+              </Link>
+            ))}
+
+            <button className='flex items-center hover:bg-[#177cc0] transition duration-200 justify-content-center text-white bg-main-primary rounded-full xl:my-3 xl:h-[52px] xl:w-[92%]'>
               <Image
                 src={"/assets/icons/post-small.svg"}
                 alt='post-feather'
@@ -127,18 +94,12 @@ const SideBar = () => {
               </p>
             </button>
           </div>
-          <div className='flex items-center p-3 my-2'>
-            <Link href={"/janedoe"}>
-              <Image
-                // src={`${ status === 'authenticated' && session?.user?.image}`}
-                src={"/assets/images/logo"}
-                alt='twitter'
-                width={40}
-                height={40}
-              />
+          <div className='flex items-center hover:bg-black/10 focus:font-bold transition duration-200 flex items-center justify-start w-fit space-x-4 rounded-full my-2 py-2 px-3 max-w-[98%] overflow-hidden'>
+            <Link href={"/janedoe"} className="inline-block rounded-full">
+              <GoPerson size={35} color="gray"/>
             </Link>
-            <div className='flex flex-col items-start justify-items-start mx-3 hidden_xl'>
-              <div className='text-base font-semibold'>
+            <div className='flex flex-col items-start justify-items-start mx-3 hidden_xl  overflow-hidden'>
+              <div className='text-sm font-medium max-w-[90%] text-wrap'>
                 {status === "authenticated" && session?.user?.name}
               </div>
               <div className='text-sm'>

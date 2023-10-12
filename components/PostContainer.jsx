@@ -3,6 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import {RiMoreLine} from "react-icons/ri"
 
 function PostContainer() {
   let router = useRouter();
@@ -32,12 +33,7 @@ function PostContainer() {
               <h1> 5h </h1>
             </div>
           </div>
-          <Image
-            src={"/assets/icons/more-2.svg"}
-            alt='more'
-            width={18}
-            height={18}
-          />
+          <RiMoreLine size={15}/>
         </div>
         <div className='h-fit row-span-1'>
           BREAKING: Government refuses to guarantee second leg of HS2 to

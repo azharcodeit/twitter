@@ -20,9 +20,6 @@ function Feed() {
       <PostContainer/>
       <PostContainer/>
       <PostContainer/>
-      <PostContainer/>
-      <PostContainer/>
-
     </div>
   );
 }

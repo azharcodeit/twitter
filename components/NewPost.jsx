@@ -2,19 +2,22 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import Textarea from "./ui/Textarea";
+import {
+  GoHome,
+  GoSearch,
+  GoBookmark,
+  GoPeople,
+  GoPerson,
+} from "react-icons/go";
+import { RiTwitterXFill, RiMoreLine } from "react-icons/ri";
+import { PiBell, PiEnvelopeSimple } from "react-icons/pi";
 
 function NewPost() {
   return (
     <div className='grid grid-flow-col grid-cols-10 h-14 px-4 py-3 border-darker-gray-bg border-b h-fit'>
       <div className='flex w-full'>
         <Link href={"/home"}>
-          <Image
-            src={"/assets/icons/profile.svg"}
-            alt='twitter'
-            width={40}
-            height={40}
-            className='border rounded-xl'
-          />
+          <GoPerson size={30}/>
         </Link>
       </div>
       <div className='col-span-9 min-h-full'>

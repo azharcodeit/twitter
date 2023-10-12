@@ -3,13 +3,14 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { RiMoreLine } from "react-icons/ri";
 
 function PostContainer() {
   let router = useRouter();
   return (
     <div
       onClick={() => router.push("/reply", { scroll: false })}
-      className='grid grid-flow-col grid-cols-10 justify-items-center items-start h-14 px-4 py-3 border-darker-gray-bg border-b h-fit'
+      className='grid grid-flow-col grid-cols-10 justify-items-center items-start h-14 px-4 py-3 border-darker-gray-bg border-b h-fit hover:bg-black/5 transition duration-200 cursor-pointer'
     >
       <div className='flex w-full'>
         <Link href={"/home"}>
@@ -32,12 +33,7 @@ function PostContainer() {
               <h1> 5h </h1>
             </div>
           </div>
-          <Image
-            src={"/assets/icons/more-2.svg"}
-            alt='more'
-            width={18}
-            height={18}
-          />
+          <RiMoreLine size={15} />
         </div>
         <div className='h-fit row-span-1'>
           BREAKING: Government refuses to guarantee second leg of HS2 to

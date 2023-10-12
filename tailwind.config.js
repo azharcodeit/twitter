@@ -27,6 +27,8 @@ module.exports = {
         "main-primary": "#1c9bef",
         "main-secondary": "#0f141a",
         "secondary-text": "#536471",
+        "red-like": "#f91880",
+        "repost-green": "#00ba7c",
         "gray-bg": "#f8fafa",
         "darker-gray-bg": "#eff3f4",
       },

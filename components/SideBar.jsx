@@ -66,7 +66,7 @@ const SideBar = () => {
               <Link
                 key={item.title}
                 href={
-                  item.title.toLocaleLowerCase() === "home"
+                  item.title.toLocaleLowerCase() === "home" || item.title.toLocaleLowerCase() === "twitter"
                     ? "/"
                     : item.title.toLocaleLowerCase() === "profile"
                     ? session?.user?.name || "#"

@@ -5,41 +5,26 @@ import PostContainer from "@components/PostContainer";
 import NewPost from "@components/NewPost";
 import ProfileInfo from "@components/ui/ProfileInfo";
 import { useRouter } from "next/navigation";
-import { useCallback, useRef } from "react";
+import { GoArrowLeft, GoBookmark } from "react-icons/go";
+import {LuRepeat2} from "react-icons/lu";
+import {FaRegComment, FaRegHeart} from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 
 function Reply() {
-  const back = useRef(null);
-  const backIcon = useRef(null);
   const router = useRouter();
-
-  const onDismiss = useCallback(() => {
-    router.back();
-  }, [router]);
-
-  const onClick = useCallback(
-    (e) => {
-      if (e.target === back.current || e.target === backIcon.current) {
-        if (onDismiss) onDismiss();
-      }
-    },
-    [onDismiss, back, backIcon]
-  );
 
   return (
     <div className='feed border-darker-gray-bg border-x h-max'>
       <div className='sticky top-0 border-darker-gray-bg bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-80'>
-        <div className='flex px-4 h-14 font-semibold text-xl justify-items-center items-center'>
-          <div className='pr-[34px]' ref={back} onClick={onClick}>
-            <Image
-              src={"/assets/icons/back.svg"}
-              ref={backIcon}
-              alt='back'
-              width={20}
-              height={20}
-            />
-          </div>
+        <div className='flex pr-4 pl-3 h-14 font-semibold text-xl justify-items-center items-center'>
+          <button
+            type='button'
+            className='rounded-full hover:bg-darker-gray-bg mr-5 p-2'
+            onClick={() => router.back()}
+          >
+            <GoArrowLeft size={20} />
+          </button>
           <h1>Post</h1>
         </div>
       </div>
@@ -47,51 +32,41 @@ function Reply() {
         <ProfileInfo
           username={"Anytime fitness"}
           nickname={"anytimefitness"}
-          image={"/assets/icons/profile.svg"}
         />
         <div className='flex flex-col'>
           <div className='mt-3'>
-            We don’t know who needs to hear this but 📣 YOU CAN LIFT WEIGHTS WITHOUT GETTING BULKY 📣
-            <br/>
-            Today we’re breaking down bulking versus toning and the myths that could get in the way of results.</div>
+            We don’t know who needs to hear this but 📣 YOU CAN LIFT WEIGHTS
+            WITHOUT GETTING BULKY 📣
+            <br />
+            Today we’re breaking down bulking versus toning and the myths that
+            could get in the way of results.
+          </div>
           <div className='my-4 text-secondary-text'>
-            <Link href="/reply"  role="link" ><time datetime="2023-09-21T13:01:49.000Z">2:01 PM · Sep 21, 2023 ·</time></Link> <span className="text-main-secondary font-bold">32.2</span> Views</div>
+            <Link href='/reply' role='link'>
+              <time datetime='2023-09-21T13:01:49.000Z'>
+                2:01 PM · Sep 21, 2023 ·
+              </time>
+            </Link>{" "}
+            <span className='text-main-secondary font-bold'>32.2</span> Views
+          </div>
           <div className='flex justify-between h-12 border-y border-darker-gray-bg'>
-            <Link href={"/home"} className='flex items-center'>
-              <Image
-                src={"/assets/icons/reply.svg"}
-                alt='post'
-                width={15}
-                height={15}
-              />
-              <h1 className='mx-3 font-normal text-slate-500 text-sm'>20</h1>
-            </Link>
-            <Link href={"/home"} className='flex items-center'>
-              <Image
-                src={"/assets/icons/repost.svg"}
-                alt='post'
-                width={17}
-                height={15}
-              />
-              <h1 className='mx-3 font-normal text-slate-500 text-sm'>78</h1>
-            </Link>
-            <Link href={"/home"} className='flex items-center'>
-              <Image
-                src={"/assets/icons/like.svg"}
-                alt='post'
-                width={15}
-                height={15}
-              />
-              <h1 className='mx-3 font-normal text-slate-500 text-sm'>450</h1>
-            </Link>
-            <Link href={"/home"} className='flex items-center'>
-              <Image
-                src={"/assets/icons/share.svg"}
-                alt='post'
-                width={15}
-                height={15}
-              />
-            </Link>
+            <button className='flex items-center text-secondary-text  hover:text-main-primary'>
+              <div className="rounded-full p-2 hover:bg-main-primary/20"><FaRegComment size={20} /></div>
+              <h1 className='mx-3 font-normal text-sm '>20</h1>
+            </button>
+            <button className='flex items-center text-secondary-text hover:text-repost-green'>
+              <div className="rounded-full p-2 hover:bg-repost-green/20"><LuRepeat2 size={20} /></div>
+              <h1 className='mx-3 font-normal text-sm '>78</h1>
+            </button>
+            <button className='flex items-center text-secondary-text hover:text-red-like'>
+              <div className="rounded-full p-2 hover:bg-red-like/20"><FaRegHeart size={20} /></div>
+              <h1 className='mx-3 font-normal text-sm '>450</h1>
+            </button>
+            <button className='flex items-center text-secondary-text hover:text-main-primary'>
+              <div className="rounded-full p-2 hover:bg-main-primary/20"><GoBookmark size={20}/></div>
+              <h1 className='mx-3 font-normal text-sm '>5</h1>
+            </button>
+            
           </div>
         </div>
       </div>

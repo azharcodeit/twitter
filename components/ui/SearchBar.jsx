@@ -1,17 +1,13 @@
 import React from "react";
-import Image from "next/image";
-
+import {
+  GoSearch
+} from "react-icons/go";
 function SearchBar() {
   return (
     <form class='flex items-center'>
       <div class='relative w-full'>
         <div class='absolute inset-y-0 left-4 flex items-center  pointer-events-none'>
-          <Image
-            src={"/assets/icons/search.svg"}
-            alt='post'
-            width={17}
-            height={17}
-          />
+          <GoSearch size={15}/>
         </div>
         <input
           type='text'

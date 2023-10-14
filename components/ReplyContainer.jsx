@@ -40,30 +40,30 @@ function ReplyContainer() {
             BREAKING: Government refuses to guarantee second leg of HS2 to
             Manchester
           </div>
-          <div className="flex justify-between row-span-1 mt-3">
+          <div className="flex justify-between row-span-1 mt-2">
             <button className='flex items-center text-secondary-text  hover:text-main-primary'>
             <div className='rounded-full p-2 hover:bg-main-primary/20'>
               <FaRegComment size={20} />
             </div>
-            <h1 className='mx-3 font-normal text-sm '>20</h1>
+            <h1 className='mx-1 font-normal text-sm '>20</h1>
           </button>
           <button className='flex items-center text-secondary-text hover:text-repost-green'>
             <div className='rounded-full p-2 hover:bg-repost-green/20'>
               <LuRepeat2 size={20} />
             </div>
-            <h1 className='mx-3 font-normal text-sm '>78</h1>
+            <h1 className='mx-1 font-normal text-sm '>78</h1>
           </button>
           <button className='flex items-center text-secondary-text hover:text-red-like'>
             <div className='rounded-full p-2 hover:bg-red-like/20'>
               <FaRegHeart size={20} />
             </div>
-            <h1 className='mx-3 font-normal text-sm '>450</h1>
+            <h1 className='mx-1 font-normal text-sm '>450</h1>
           </button>
           <button className='flex items-center text-secondary-text hover:text-main-primary'>
             <div className='rounded-full p-2 hover:bg-main-primary/20'>
               <GoBookmark size={20} />
             </div>
-            <h1 className='mx-3 font-normal text-sm '>5</h1>
+            <h1 className='mx-1 font-normal text-sm '>5</h1>
           </button>
           </div>
         </div>

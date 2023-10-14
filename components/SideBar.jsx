@@ -9,7 +9,7 @@ import {
   GoPeople,
   GoPerson,
 } from "react-icons/go";
-import { RiTwitterXFill, RiMoreLine } from "react-icons/ri";
+import { RiTwitterXFill, RiMoreLine, RiQuillPenLine } from "react-icons/ri";
 import { PiBell, PiEnvelopeSimple } from "react-icons/pi";
 import { useSession } from "next-auth/react";
 
@@ -72,23 +72,18 @@ const SideBar = () => {
                     ? session?.user?.name || "#"
                     : `/${item.title.toLowerCase()}`
                 }
-                className='flex items-center hover:bg-black/10 focus:font-bold transition duration-200 flex items-center justify-start w-fit space-x-4 rounded-full py-3 my-1 px-3'
+                className='flex items-center hover:bg-black/10 focus:font-bold transition duration-200 flex items-center justify-start w-fit rounded-full py-3 my-1 px-3'
               >
                 <item.icon size={item.title !== "Twitter" ? 25 : 30} />
                 {item.title !== "Twitter" && (
-                  <p className='hidden_xl text-xl mr-4 ml-5'>{item.title}</p>
+                  <span className='mr-4 ml-5 hidden_xl text-xl '>{item.title}</span>
                 )}
               </Link>
             ))}
 
             <button className='flex items-center hover:bg-[#177cc0] transition duration-200 justify-content-center text-white bg-main-primary rounded-full xl:my-3 xl:h-[52px] xl:w-[92%]'>
-              <Image
-                src={"/assets/icons/post-small.svg"}
-                alt='post-feather'
-                width={25}
-                height={25}
-                className='block h-6 w-6 xl:hidden m-3 '
-              />
+              
+              <RiQuillPenLine size={25} className='block h-6 w-6 xl:hidden m-3 '/>
               <p className='flex flex-row w-full items-center justify-content-center hidden xl:block text-[17px] font-bold'>
                 Post
               </p>

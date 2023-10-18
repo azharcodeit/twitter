@@ -5,7 +5,7 @@ import { GoPerson } from "react-icons/go";
 
 function ProfileInfo({ image, username, nickname }) {
   return (
-    <Link href={`/${nickname}`} className='flex items-center'>
+    <div className='flex items-center'>
             <Link href={`/anytimefitness`}>
               {/* <Image src={image} alt='twitter' width={40} height={40} /> */}
               <GoPerson size={35} />
@@ -19,7 +19,7 @@ function ProfileInfo({ image, username, nickname }) {
               </Link>
               <div className='text-sm'>@{nickname}</div>
             </div>
-          </Link>
+          </div>
   );
 }
 

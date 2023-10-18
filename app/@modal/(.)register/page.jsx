@@ -60,7 +60,7 @@ export default function Login() {
       if (res.ok) {
         const form = e.target;
         form.reset();
-        router.push("/");
+        router.push("/login");
       } else {
         console.log("User registration failed.");
       }

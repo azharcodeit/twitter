@@ -46,20 +46,47 @@ export const authOptions = {
       },
     }),
   ],
+  // callbacks: {
+  //   async session({ session }) {
+  //     const sessionUser = await db.user?.findUnique({
+  //       where: {
+  //         email: profile.email,
+  //       },
+  //     });
+  //     session.user.id = sessionUser._id;
+  //     return session;
+  //   },
+  // async signIn({ profile }) {
+  //   console.log(profile);
+  //   try {
+  //     const userExists = await db.user?.findUnique({
+  //       where: {
+  //         email: profile.email,
+  //       },
+  //     });
+  //     if (!userExists) {
+  //       const user = await db.user.create({
+  //         data: {
+  //           email: profile.email,
+  //           name: profile.name,
+  //           image: profile.image,
+  //         },
+  //       });
+  //     }
+  //     return true;
+  //   } catch (error) {
+  //     console.log(error);
+  //     return false;
+  //   }
+  // },
+  // },
   pages: {
     signIn: "/login",
-    signOut: "/new-user",
-    error: "/error", // Error code passed in query string as ?error=
-    newUser: "/new-user",
   },
-  debug: process.env.NODE_ENV === "development",
   session: {
     strategy: "jwt",
   },
-  jwt: {
-    secret: process.env.NEXTAUTH_JWT_SECRET,
-  },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.SECRET,
 };
 
 const handler = NextAuth(authOptions);

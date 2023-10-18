@@ -1,32 +1,27 @@
 "use client";
 import { signIn } from "next-auth/react";
-import { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import Button from "@components/Button";
-import TextField from "@components/ui/TextField";
-import Image from "next/image";
-
 
 const SignInPage = () => {
   const router = useRouter();
   const loginWithGoogle = async (e) => {
     e.preventDefault();
     try {
-      await signIn('google');
-      
+      await signIn("google");
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'There was an error logging in with Google',
-        variant: 'destructive',
-      })
+        title: "Error",
+        description: "There was an error logging in with Google",
+        variant: "destructive",
+      });
     } finally {
-     router.replace("home");
+      router.replace("home");
     }
-  }
+  };
   return (
     <div className='flex min-h-full overflow-hidden pt-16 sm:py-28 w-screen'>
       <div className='mx-auto flex flex-col w-full px-4 sm:px-6 sm:flex-row p-5'>
@@ -60,14 +55,14 @@ const SignInPage = () => {
             <div className='mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400'>
               or
             </div>
-              <Button
-                type='submit'
-                variant='outline'
-                color='gray'
-                className='mt-3 w-full'
-                label='Create account'
-                onClick={()=>router.push("/register")}
-              />
+            <Button
+              type='submit'
+              variant='outline'
+              color='gray'
+              className='mt-3 w-full'
+              label='Create account'
+              onClick={() => router.push("/register")}
+            />
 
             <div
               className='

@@ -46,40 +46,6 @@ export const authOptions = {
       },
     }),
   ],
-  // callbacks: {
-  //   async session({ session }) {
-  //     const sessionUser = await db.user?.findUnique({
-  //       where: {
-  //         email: profile.email,
-  //       },
-  //     });
-  //     session.user.id = sessionUser._id;
-  //     return session;
-  //   },
-  // async signIn({ profile }) {
-  //   console.log(profile);
-  //   try {
-  //     const userExists = await db.user?.findUnique({
-  //       where: {
-  //         email: profile.email,
-  //       },
-  //     });
-  //     if (!userExists) {
-  //       const user = await db.user.create({
-  //         data: {
-  //           email: profile.email,
-  //           name: profile.name,
-  //           image: profile.image,
-  //         },
-  //       });
-  //     }
-  //     return true;
-  //   } catch (error) {
-  //     console.log(error);
-  //     return false;
-  //   }
-  // },
-  // },
   pages: {
     signIn: "/login",
   },

@@ -1,8 +1,7 @@
 "use client";
 import { useCallback, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { RiCloseFill } from "react-icons/ri"; 
-import Link from "next/link";
+import { RiCloseFill } from "react-icons/ri";
 
 export default function Modal({ children }) {
   const overlay = useRef(null);
@@ -45,7 +44,9 @@ export default function Modal({ children }) {
         ref={wrapper}
         className='absolute w-full sm:max-w-[90%] md:max-w-[70%] lg:max-w-[40%] p-6 bg-white rounded-3xl mx-auto'
       >
-          <button onClick={()=>router.back()}><RiCloseFill size={30}/></button>
+        <button onClick={() => router.back()}>
+          <RiCloseFill size={30} />
+        </button>
         {children}
       </div>
     </div>

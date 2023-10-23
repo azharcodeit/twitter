@@ -16,17 +16,19 @@ const Button = ({
         relative
         disabled:opacity-70
         disabled:cursor-not-allowed
-        rounded-3xl
         hover:opacity-80
         transition
-        w-full
+        font-semibold
+        rounded-3xl
         ${outline ? 'bg-white' : 'bg-main-primary'}
         ${outline ? 'border-black' : 'border-main-primary'}
         ${outline ? 'text-black' : 'text-white'}
-        ${small ? 'text-sm' : 'text-md'}
-        ${small ? 'py-1' : 'py-3'}
-        ${small ? 'font-light' : 'font-semibold'}
+        ${small ? 'w-fit' : 'w-full'}
+        ${small ? 'py-2' : 'py-3'}
         ${small ? 'border-[1px]' : 'border'}
+        ${small ? 'border-bg-gray' : 'border-black'}
+        ${small ? 'px-4' : ''}
+        ${small ? 'text-[15px]' : 'text-md'}
       `}
     >
       {Icon && (

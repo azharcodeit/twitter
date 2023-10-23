@@ -31,6 +31,8 @@ module.exports = {
         "repost-green": "#00ba7c",
         "gray-bg": "#f8fafa",
         "darker-gray-bg": "#eff3f4",
+        "bg-gray": "#cfd9de",
+        "gray-text": "#536471",
       },
     },
   },

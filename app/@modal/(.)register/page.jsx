@@ -1,8 +1,6 @@
 "use client";
-import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useCallback, useState } from "react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import Modal from "@components/ui/Modal";
 import Link from "next/link";
@@ -13,6 +11,7 @@ import Button from "@components/Button";
 
 export default function Login() {
   const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -38,20 +37,21 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!name || !email || !password) {
+    if (!name || !username || !email || !password) {
       setError("All fields are necessary.");
       return;
     }
 
     try {
 
-      const res = await fetch("api/register", {
+      const res = await fetch("api/user", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           name,
+          username,
           email,
           password,
         }),
@@ -99,6 +99,12 @@ export default function Login() {
                 id='name'
                 label='Name'
                 onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <Input
+                id='username'
+                label='Username'
+                onChange={(e) => setUsername(e.target.value)}
                 required
               />
               <Input

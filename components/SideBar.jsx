@@ -96,7 +96,7 @@ const SideBar = ({currentUser}) => {
             </button>
           </div>
           <div className='flex items-center hover:bg-black/10 focus:font-bold transition duration-200 flex items-center justify-start w-fit space-x-4 rounded-full my-2 py-2 px-3 w-[98%] overflow-hidden'>
-            <Link href={"/janedoe"} className='inline-block rounded-full'>
+            <Link href={`/${currentUser?.username}`} className='inline-block rounded-full'>
               <GoPerson size={35} color='gray' />
             </Link>
             <div className='flex flex-col items-start justify-items-start mx-3 hidden_xl  overflow-hidden'>

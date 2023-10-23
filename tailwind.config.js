@@ -32,6 +32,7 @@ module.exports = {
         "gray-bg": "#f8fafa",
         "darker-gray-bg": "#eff3f4",
         "bg-gray": "#cfd9de",
+        "gray-text": "#536471",
       },
     },
   },

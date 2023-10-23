@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import SideBar from "@components/SideBar";
 import NextAuthProvider from "./Providers";
+import { getCurrentUser } from '@app/actions/getCurrentUser';
 import "@styles/globals.css";
 
 export const metadata = {
@@ -9,8 +10,9 @@ export const metadata = {
   description:
     "From breaking news and entertainment to sports and politics, get the full story with all the live commentary.",
 };
-const RootLayout = async (props) => {
+export default async function(props){
   const session = await getServerSession(authOptions);
+  const currentUser = await getCurrentUser(session);
   return (
     <html lang='en'>
       <body>
@@ -18,7 +20,7 @@ const RootLayout = async (props) => {
           <div className='main'></div>
           {props.modal}
           <main className='app'>
-            <SideBar />
+            <SideBar currentUser={currentUser} session={session}/>
             {props.children}
           </main>
         </NextAuthProvider>
@@ -26,5 +28,3 @@ const RootLayout = async (props) => {
     </html>
   );
 };
-
-export default RootLayout;

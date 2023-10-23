@@ -1,8 +1,6 @@
 "use client";
-import axios from "axios";
 import { signIn } from "next-auth/react";
 import { useCallback, useState } from "react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import Modal from "@components/ui/Modal";
 import Link from "next/link";

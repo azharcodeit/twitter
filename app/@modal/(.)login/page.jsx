@@ -1,9 +1,7 @@
 "use client";
-import axios from "axios";
 import { signIn } from "next-auth/react";
-import { useCallback, useState } from "react";
-import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
-import { toast } from "react-hot-toast";
+import { useState, useEffect } from "react";
+import toast, {Toaster} from "react-hot-toast";
 import Modal from "@components/ui/Modal";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -16,26 +14,22 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loginSuccess, setLoginSuccess] = useState(false);
+
 
   const loginWithGoogle = async (e) => {
     e.preventDefault();
     try {
-      await signIn('google');
-      
+      await signIn("google");
     } catch (error) {
-      toast({
-        title: 'Error',
-        description: 'There was an error logging in with Google',
-        variant: 'destructive',
-      })
+      toast.error('There was an error while signing in with Google!');
     } finally {
-     router.replace("home");
+      router.replace("home");
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     try {
       const res = await signIn("credentials", {
         email,
@@ -47,12 +41,19 @@ export default function Login() {
         setError("Invalid Credentials");
         return;
       }
-
-      router.replace("home");
+       toast.success("Successfully logged in!");
+      setLoginSuccess(true);
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (loginSuccess) {
+      router.replace('/home');
+    }
+  }, [loginSuccess]);
+
   return (
     <Modal>
       <div className='mx-auto flex w-fit px-4 sm:px-6 p-5'>
@@ -73,7 +74,7 @@ export default function Login() {
               or
             </div>
             <div className='flex flex-col gap-4 mt-3'>
-              <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+              <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
                 <Input
                   id='email'
                   label='Email'
@@ -96,6 +97,7 @@ export default function Login() {
                   label='Log in'
                 />
               </form>
+              <Toaster/>
             </div>
             <div
               className='

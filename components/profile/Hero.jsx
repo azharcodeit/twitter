@@ -1,7 +1,7 @@
 'use client'
-function Hero({image}) {
+function Hero({user}) {
   return (
-    <div className={`bg-bg-gray overflow-hidden w-full h-[200px] bg-${!image ? 'bg-gray' : `[url(${image})]`}`}>
+    <div className={`bg-bg-gray overflow-hidden w-full h-[200px] bg-${!user?.image ? 'bg-gray' : `[url(${user?.image})]`}`}>
     </div>
   )
 }

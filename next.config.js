@@ -11,6 +11,17 @@ const nextConfig = {
     ],
     domains: ["uploadthing.com", "lh3.googleusercontent.com"],
   },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      // don't resolve 'fs' module on the client to prevent this error on build --> Error: Can't resolve 'fs'
+      config.resolve.fallback = {
+        fs: false,
+        child_process: false,
+      };
+    }
+
+    return config;
+  },
 };
 
 module.exports = nextConfig;

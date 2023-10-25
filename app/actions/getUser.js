@@ -1,6 +1,6 @@
 import prisma from "lib/prismadb";
 
-export async function getUserInfo(username) {
+export async function getUser(username) {
   try {
     if (!username) {
       return null;
@@ -11,6 +11,13 @@ export async function getUserInfo(username) {
         username,
       },
     });
+    const followersCount = await prisma.user.count({
+      where: {
+        followingUsers: {
+          has: username,
+        },
+      },
+    });
 
     if (!userInfo) {
       return null;
@@ -18,6 +25,7 @@ export async function getUserInfo(username) {
 
     return {
       ...userInfo,
+      followersCount,
       createdAt: userInfo.createdAt.toISOString(),
       updatedAt: userInfo.updatedAt.toISOString(),
       emailVerified: userInfo.emailVerified?.toISOString() || null,

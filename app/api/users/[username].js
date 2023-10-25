@@ -1,12 +1,9 @@
 import prisma from "@/lib/prismadb";
+import { NextResponse } from "next/server";
 
-export default async function handler(req, res) {
-  if (req.method !== "GET") {
-    return res.status(405).end();
-  }
-
+export default async function GET(req, { params }) {
   try {
-    const { username } = req.query;
+    const { username } = params;
 
     if (!username || typeof username !== "string") {
       throw new Error("Invalid username");
@@ -26,9 +23,9 @@ export default async function handler(req, res) {
       },
     });
 
-    return res.status(200).json({ ...existingUser, followersCount });
+    return NextResponse.status(200).json({ ...existingUser, followersCount });
   } catch (error) {
     console.log(error);
-    return res.status(400).end();
+    return NextResponse.status(400).end();
   }
 }

@@ -52,7 +52,7 @@ export default function Login() {
     if (loginSuccess) {
       router.replace('/home');
     }
-  }, [loginSuccess]);
+  }, [loginSuccess, router]);
 
   return (
     <Modal>

@@ -12,7 +12,7 @@ export const metadata = {
 };
 export default async function(props){
   const session = await getServerSession(authOptions);
-  const currentUser = await getCurrentUser(session);
+  const currentUser = await getCurrentUser();
   return (
     <html lang='en'>
       <body>

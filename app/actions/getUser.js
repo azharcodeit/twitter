@@ -4,7 +4,7 @@ import { getCurrentUser } from "@app/actions/getCurrentUser";
 export async function getUser(username) {
   try {
     const currentUser = await getCurrentUser();
-    if (!id) {
+    if (!username) {
       return null;
     }
 

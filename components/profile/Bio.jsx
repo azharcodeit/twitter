@@ -11,6 +11,7 @@ import useEditModal from "@/hooks/useEditModal";
 
 function Bio({ fetchedUser, currentUser, followingInit }) {
   const editModal = useEditModal();
+  const {username} = fetchedUser;
   const dateString = fetchedUser?.createdAt;
   const date = new Date(dateString);
   const year = date.getFullYear();
@@ -63,7 +64,7 @@ function Bio({ fetchedUser, currentUser, followingInit }) {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              username: fetchedUser?.username,
+              username,
               currentUser,
             }),
           })
@@ -72,8 +73,8 @@ function Bio({ fetchedUser, currentUser, followingInit }) {
                 // Request was successful
                 toast.success(
                   isFollowing
-                    ? "Unfollowed " + fetchedUser?.username
-                    : "Followed " + fetchedUser?.username
+                    ? "Unfollowed " + username
+                    : "Followed " + username
                 );
                 console.log("Post request was successful");
               } else {

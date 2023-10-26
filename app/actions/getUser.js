@@ -1,8 +1,10 @@
 import prisma from "lib/prismadb";
+import { getCurrentUser } from "@app/actions/getCurrentUser";
 
 export async function getUser(username) {
   try {
-    if (!username) {
+    const currentUser = await getCurrentUser();
+    if (!id) {
       return null;
     }
 
@@ -18,6 +20,21 @@ export async function getUser(username) {
         },
       },
     });
+    const postCount = await prisma.post.count({
+      where: {
+        userId: userInfo?.id,
+      },
+    });
+
+    const following =
+      (await prisma?.user?.findFirst({
+        where: {
+          username: currentUser?.username,
+          followingUsers: {
+            hasSome: [username],
+          },
+        },
+      })) || false;
 
     if (!userInfo) {
       return null;
@@ -26,6 +43,8 @@ export async function getUser(username) {
     return {
       ...userInfo,
       followersCount,
+      postCount,
+      following,
       createdAt: userInfo.createdAt.toISOString(),
       updatedAt: userInfo.updatedAt.toISOString(),
       emailVerified: userInfo.emailVerified?.toISOString() || null,

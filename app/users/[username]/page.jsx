@@ -1,4 +1,5 @@
 import { ClipLoader } from "react-spinners";
+import { Loader } from "lucide-react";
 import { getCurrentUser } from "@app/actions/getCurrentUser";
 import { getUser } from "@app/actions/getUser";
 import prisma from "@lib/prismadb";
@@ -15,22 +16,15 @@ const UserProfile = async ({ params }) => {
   const { username } = params;
   const currentUser = await getCurrentUser();
   const fetchedUser = await getUser(username);
-  const following = await prisma.user.findFirst({
-    where: {
-      username: currentUser?.username,
-      followingUsers: {
-        hasSome: [fetchedUser?.username],
-      },
-    },
-  });
+  
 
-  if (!fetchedUser) {
-    return (
-      <div className='flex justify-center items-center h-full w-[990px]'>
-        <ClipLoader color='lightblue' size={80} />
-      </div>
-    );
-  }
+  // if (!fetchedUser) {
+  //   return (
+  //     <div className='flex justify-center items-center h-full w-full'>
+  //       <Loader className='animate-spin w-20 h-20' />
+  //     </div>
+  //   );
+  // }
 
   return (
     <MainContainer>
@@ -43,7 +37,7 @@ const UserProfile = async ({ params }) => {
                 {fetchedUser?.name || "Name"}
               </h1>
               <p className='text-gray-text text-sm'>
-                {fetchedUser?.postCount || "0"} post(s)
+                {fetchedUser?.postCount || "0"} post{fetchedUser?.postCount>1?'s':''}
               </p>
             </div>
           </div>
@@ -52,13 +46,13 @@ const UserProfile = async ({ params }) => {
         <Bio
           fetchedUser={fetchedUser}
           currentUser={currentUser}
-          followingInit={following}
+          followingInit={fetchedUser?.following}
         />
         <Tabs />
         <ReplyContainer />
         <ReplyContainer />
       </div>
-      <TrendingBar />
+      <TrendingBar/>
     </MainContainer>
   );
 };

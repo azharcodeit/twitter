@@ -3,7 +3,11 @@ import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
 
 export const getAllUsers = async () => {
-  const users = await prisma.user.findMany({});
+  const users = await prisma.user.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
   return users;
 };
 
@@ -46,7 +50,7 @@ export async function PUT(request) {
   const { id, ...updateData } = body;
   const user = await prisma.user.update({
     where: {
-      id,
+      id: id,
     },
     data: {
       ...updateData,

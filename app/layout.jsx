@@ -3,6 +3,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import SideBar from "@components/SideBar";
 import NextAuthProvider from "./Providers";
 import { getCurrentUser } from '@app/actions/getCurrentUser';
+import EditModal from "@components/modals/EditModal"
 import "@styles/globals.css";
 
 export const metadata = {
@@ -16,9 +17,10 @@ export default async function(props){
   return (
     <html lang='en'>
       <body>
-        <NextAuthProvider session={session}>
+        <NextAuthProvider session={session} currentUser={currentUser}>
           <div className='main'></div>
           {props.modal}
+          <EditModal currentUser={currentUser} session={session}/>
           <main className='app'>
             <SideBar currentUser={currentUser} session={session}/>
             {props.children}

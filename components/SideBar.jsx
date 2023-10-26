@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import Image from "next/image";
 import SignOutButton from "@components/SignOutButton";
 import {
   GoHome,
@@ -11,7 +12,6 @@ import {
 import { RiTwitterXFill, RiMoreLine, RiQuillPenLine } from "react-icons/ri";
 import { PiBell, PiEnvelopeSimple } from "react-icons/pi";
 import { useSession } from "next-auth/react";
-
 
 const NAVIGATION_ITEMS = [
   {
@@ -56,7 +56,7 @@ const NAVIGATION_ITEMS = [
   },
 ];
 
-const SideBar = ({currentUser}) => {
+const SideBar = ({ currentUser }) => {
   const { status } = useSession();
 
   return (
@@ -97,16 +97,29 @@ const SideBar = ({currentUser}) => {
             </button>
           </div>
           <div className='flex items-center hover:bg-black/10 focus:font-bold transition duration-200 flex items-center justify-start w-fit space-x-4 rounded-full my-2 py-2 px-3 w-[98%] overflow-hidden'>
-            <Link href={`/users/${currentUser?.username}`} className='inline-block rounded-full'>
-              <GoPerson size={35} color='gray' />
+            <Link
+              href={`/users/${currentUser?.username}`}
+              className='inline-block rounded-full'
+            >
+              {currentUser?.profileImage ? (
+                <div className='overflow-hidden rounded-full border-[#ffffff]'>
+                  <Image
+                    src={currentUser.profileImage}
+                    className='scale-125'
+                    alt='twitter'
+                    width={40}
+                    height={40}
+                  />
+                </div>
+              ) : (
+                <GoPerson size={35} color='gray' />
+              )}
             </Link>
             <div className='flex flex-col items-start justify-items-start mx-3 hidden_xl  overflow-hidden'>
               <div className='text-sm font-medium w-[90%] text-wrap'>
-               {currentUser?.name}
+                {currentUser?.name}
               </div>
-              <div className='text-sm'>
-                {currentUser?.username}
-              </div>
+              <div className='text-sm'>{currentUser?.username}</div>
             </div>
             <SignOutButton />
           </div>

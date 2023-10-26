@@ -1,4 +1,3 @@
-import { getCurrentUser } from "@app/actions/getCurrentUser";
 import { NextResponse } from "next/server";
 
 import prisma from "@/lib/prismadb";
@@ -51,6 +50,23 @@ export async function POST(request) {
   let updatedFollowingUsers = [...(user.followingUsers || [])];
 
   updatedFollowingUsers.push(username);
+  // NOTIFICATION PART START
+  // const notification = await prisma.notification.create({
+  //   data: {
+  //     body: "Someone followed you!",
+  //     username,
+  //   },
+  // });
+
+  // const notifyUser = await prisma.user.update({
+  //   where: {
+  //     username: username,
+  //   },
+  //   data: {
+  //     hasNotification: true,
+  //   },
+  // });
+  // NOTIFICATION PART END
 
   const updatedUser = await prisma.user.update({
     where: {

@@ -11,7 +11,7 @@ import { RiMoreLine } from "react-icons/ri";
 function ReplyContainer() {
   let router = useRouter()
   return (
-    <div onClick={()=> router.push('/reply', { scroll: false })} className='grid grid-flow-col grid-cols-10 justify-items-center items-start h-14 px-4 py-3 border-darker-gray-bg border-b h-fit hover:bg-black/5 transition duration-200 cursor-pointer'>
+    <div onClick={()=> router.push('/posts', { scroll: false })} className='grid grid-flow-col grid-cols-10 justify-items-center items-start h-14 px-4 py-3 border-darker-gray-bg border-b h-fit hover:bg-black/5 transition duration-200 cursor-pointer'>
         <div className='flex w-full'>
           <Link href={"/home"} className='rounded-full bg-darker-gray'>
             {/* <Image

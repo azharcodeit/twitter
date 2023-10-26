@@ -7,12 +7,10 @@ import Button from "@components/Button";
 import { TfiLocationPin } from "react-icons/tfi";
 import { LiaCalendar } from "react-icons/lia";
 import { useState, useCallback } from "react";
-
-// import useEditModal from "@/hooks/useEditModal";
+import useEditModal from "@/hooks/useEditModal";
 
 function Bio({ fetchedUser, currentUser, followingInit }) {
-  // const editModal = useEditModal();
-  const { username } = fetchedUser;
+  const editModal = useEditModal();
   const dateString = fetchedUser?.createdAt;
   const date = new Date(dateString);
   const year = date.getFullYear();
@@ -65,7 +63,7 @@ function Bio({ fetchedUser, currentUser, followingInit }) {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              username,
+              username: fetchedUser?.username,
               currentUser,
             }),
           })
@@ -74,8 +72,8 @@ function Bio({ fetchedUser, currentUser, followingInit }) {
                 // Request was successful
                 toast.success(
                   isFollowing
-                    ? "Unfollowed " + username
-                    : "Followed " + username
+                    ? "Unfollowed " + fetchedUser?.username
+                    : "Followed " + fetchedUser?.username
                 );
                 console.log("Post request was successful");
               } else {
@@ -96,7 +94,15 @@ function Bio({ fetchedUser, currentUser, followingInit }) {
     }
     setLoading(false);
   }, [currentUser, isFollowing]);
-  
+
+  if (!fetchedUser) {
+    return (
+      <div className='flex w-[990px]'>
+        <Loader2 className='animate-spin w-20 h-20' />
+      </div>
+    );
+  }
+
   return (
     <div className='p-4 w-full'>
       <div className='flex flex-row justify-between '>
@@ -108,15 +114,15 @@ function Bio({ fetchedUser, currentUser, followingInit }) {
               outline
               label='Edit profile'
               small
-              // onClick={editModal.onOpen}
+              onClick={editModal.onOpen}
             />
           ) : (
             <>
               <Button
                 small
-                secondary={!isFollowing}
                 onClick={toggleFollow}
                 outline={isFollowing}
+                follow={!isFollowing}
                 label={
                   loading ? (
                     <Loader2 className='animate-spin w-4 h-4' />
@@ -151,10 +157,16 @@ function Bio({ fetchedUser, currentUser, followingInit }) {
       </div>
       <div className='flex items-center text-gray-text text-sm mb-5'>
         <div className='mr-3'>
-          <span className='text-main-secondary font-bold'>{fetchedUser?.followingUsers?.length}</span> Following
+          <span className='text-main-secondary font-bold'>
+            {fetchedUser?.followingUsers?.length}
+          </span>{" "}
+          Following
         </div>
         <div>
-          <span className='text-main-secondary font-bold'>{fetchedUser?.followersCount || 0}</span> Followers
+          <span className='text-main-secondary font-bold'>
+            {fetchedUser?.followersCount || 0}
+          </span>{" "}
+          Followers
         </div>
       </div>
     </div>

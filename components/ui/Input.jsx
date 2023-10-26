@@ -1,18 +1,15 @@
-'use client';
+"use client";
 
-const Input = ({
-  id,
-  label,
-  type = "text", 
-  onChange,
-}) => {
+const Input = ({ id, label, onChange, value, type = "text", disabled }) => {
   return (
-    <div className="w-full relative">
+    <div className='w-full relative'>
       <input
-        id={id}
-        placeholder=" "
-        type={type}
+        disabled={disabled}
         onChange={onChange}
+        value={value}
+        type={type}
+        id={id}
+        placeholder=' '
         className={`
           peer
           w-full
@@ -30,7 +27,7 @@ const Input = ({
           focus:border-black}
         `}
       />
-      <label 
+      <label
         className={`
           absolute 
           text-md
@@ -38,7 +35,7 @@ const Input = ({
           transform 
           -translate-y-3 
           top-4
-          z-10 
+          z-2
           origin-[0] 
           peer-placeholder-shown:scale-100 
           peer-placeholder-shown:translate-y-0 
@@ -51,7 +48,7 @@ const Input = ({
         {label}
       </label>
     </div>
-   );
-}
- 
+  );
+};
+
 export default Input;

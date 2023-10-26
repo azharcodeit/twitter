@@ -1,21 +1,72 @@
-import React from "react";
+'use client'
 import Link from "next/link";
 import Image from "next/image";
 import Textarea from "./ui/Textarea";
+import Button from "@components/Button";
 import { GoPerson } from "react-icons/go";
-import {MdOutlineImage, MdOutlineGifBox, MdOutlineSchedule, MdOutlineEmojiEmotions } from "react-icons/md";
+import toast, { Toaster } from "react-hot-toast";
+import {
+  MdOutlineImage,
+  MdOutlineGifBox,
+  MdOutlineSchedule,
+  MdOutlineEmojiEmotions,
+} from "react-icons/md";
+import { useState, useCallback } from "react";
 
-function NewPost() {
+
+function NewPost({currentUser}) {
+  const [body, setBody] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const onChange = (event) => setBody(event.target.value);
+
+  const handlePost = useCallback(async () => {
+    try {
+      setLoading(true);
+      const res = await fetch("http://localhost:3000/api/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          currentUser, body
+        }),
+      });
+
+      if (res.ok) {
+        setBody("")
+        toast.success('Tweet created');
+      } else {
+        console.log("User registration failed.");
+      }
+    } catch (error) {
+      console.log("Error during registration: ", error);
+    } finally {
+      setLoading(false)
+    }
+  },[body]);
   return (
     <div className='grid grid-flow-col grid-cols-10 h-14 px-4 py-3 border-darker-gray-bg border-b h-fit'>
       <div className='flex w-full'>
         <Link href={"/home"}>
-          <GoPerson size={30} />
+          {currentUser?.profileImage ? (
+            <div className='overflow-hidden rounded-full border-[#ffffff]'>
+              <Image
+                src={currentUser.profileImage}
+                className='scale-125'
+                alt='twitter'
+                width={40}
+                height={40}
+              />
+            </div>
+          ) : (
+            <GoPerson size={35} color='gray' />
+          )}
         </Link>
       </div>
       <div className='col-span-9 min-h-full'>
         <div className='flex items-center'>
-          <Textarea />
+          <Textarea onChange={onChange} value={body}/>
         </div>
         <div className='flex justify-between items-center'>
           <div className='flex gap-x-1'>
@@ -32,9 +83,14 @@ function NewPost() {
               <MdOutlineSchedule size={20} className='text-main-primary' />
             </button>
           </div>
-          <button className='text-white bg-main-primary rounded-3xl px-4 text-base h-9 w-fit font-semibold hover:bg-[#177cc0] transition duration-200'>
-            Post
-          </button>
+          <>
+              <Button
+                small
+                onClick={handlePost}
+                label={"Post"}
+              />
+              <Toaster />
+            </>
         </div>
       </div>
     </div>

@@ -1,9 +1,19 @@
-'use client'
-function Hero({image}) {
+"use client";
+import Image from "next/image";
+
+function Hero({ user }) {
   return (
-    <div className={`bg-bg-gray overflow-hidden w-full h-[200px] bg-${!image ? 'bg-gray' : `[url(${image})]`}`}>
+    <div className={`relative bg-bg-gray overflow-hidden w-full h-[200px]`}>
+      {user?.coverImage && (
+        <Image
+          src={user.coverImage}
+          fill
+          alt='Cover Image'
+          style={{ objectFit: "cover" }}
+        />
+      )}
     </div>
-  )
+  );
 }
 
-export default Hero
+export default Hero;

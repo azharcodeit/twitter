@@ -77,11 +77,11 @@ function Reply() {
       <NewPost />
       <ReplyContainer />
       <ReplyContainer />
-      <PostContainer />
+      {/* <PostContainer />
       <ReplyContainer />
       <PostContainer />
       <PostContainer />
-      <PostContainer />
+      <PostContainer /> */}
     </div>
   );
 }

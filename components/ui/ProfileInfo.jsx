@@ -3,21 +3,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { GoPerson } from "react-icons/go";
 
-function ProfileInfo({ image, username, nickname }) {
+function ProfileInfo({ image, name, username}) {
   return (
     <div className='flex items-center'>
-            <Link href={`/anytimefitness`}>
-              {/* <Image src={image} alt='twitter' width={40} height={40} /> */}
-              <GoPerson size={35} />
+            <Link href={`${username}`}>
+              <div className='overflow-hidden rounded-full border-[#ffffff]'>
+              <Image src={image} className="scale-125" alt='twitter' width={40} height={40} /></div>
+              {/* <GoPerson size={35} /> */}
             </Link>
             <div className='flex flex-col items-start justify-items-start mx-3'>
               <Link
-                href={`/anytimefitness`}
+                href={`users/${username}`}
                 className='text-base font-semibold'
               >
-                {username}
+                {name}
               </Link>
-              <div className='text-sm'>@{nickname}</div>
+              <div className='text-sm'>@{username}</div>
             </div>
           </div>
   );

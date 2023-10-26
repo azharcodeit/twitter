@@ -1,6 +1,6 @@
 "use client";
 import Reply from "./@reply/page";
-import Trending from "./@trending/page";
+import Trending from "@components/TrendingBar";
 import MainContainer from "@components/MainContainer";
 function Home() {
   return (

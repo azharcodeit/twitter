@@ -1,9 +1,11 @@
-import React from "react";
+import {getCurrentUser} from "@app/actions/getCurrentUser";
 import Header from "@components/Header";
 import PostContainer from "@components/PostContainer";
 import NewPost from "@components/NewPost";
 
-function Feed() {
+async function Feed () {
+  const currentUser = await getCurrentUser()
+
   return (
     <div className='feed border-darker-gray-bg border-x h-max'>
       <Header border={true}>
@@ -27,12 +29,8 @@ function Feed() {
           </div>
         </div>
       </Header>
-      <NewPost />
-      <PostContainer />
-      <PostContainer />
-      <PostContainer />
-      <PostContainer />
-      <PostContainer />
+      <NewPost currentUser={currentUser}/>
+      {/* <PostContainer /> */}
     </div>
   );
 }

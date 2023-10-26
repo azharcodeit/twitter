@@ -7,6 +7,7 @@ const Button = ({
   outline,
   small,
   icon: Icon,
+  follow
 }) => {
   return ( 
     <button
@@ -21,14 +22,15 @@ const Button = ({
         font-semibold
         rounded-3xl
         ${outline ? 'bg-white' : 'bg-main-primary'}
-        ${outline ? 'border-black' : 'border-main-primary'}
+        ${outline ? 'border-black' : ''}
+        ${outline ? 'border-[1px]' : ''}
         ${outline ? 'text-black' : 'text-white'}
-        ${small ? 'w-fit' : 'w-full'}
+        ${small ? 'w-fit min-w-[50px]' : 'w-full'}
         ${small ? 'py-2' : 'py-3'}
-        ${small ? 'border-[1px]' : 'border'}
-        ${small ? 'border-bg-gray' : 'border-black'}
+        ${small ? 'border-bg-gray' : ''}
         ${small ? 'px-4' : ''}
         ${small ? 'text-[15px]' : 'text-md'}
+        ${follow ? 'bg-main-secondary' : ''}
       `}
     >
       {Icon && (

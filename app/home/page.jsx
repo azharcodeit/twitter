@@ -1,32 +1,13 @@
-'use client'
-
-import { useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import Feed from "./@feed/page";
-import Trending from "./@trending/page";
+import Feed from "@components/home/Feed";
+import TrendingBar from "@components/TrendingBar";
 import MainContainer from "@components/MainContainer";
-import Login from "../(auth)/login/page";
 
-function Home() {
-  const router = useRouter();
-  const { status } = useSession();
-
-  if (status === "authenticated") {
-    router.push("/home");
-  } else {
-    router.push("/login");
-  }
+const Home = () => {
   return (
-    <>
-      {status === "authenticated" ? (
-        <MainContainer>
-          <Feed />
-          <Trending />
-        </MainContainer>
-      ) : (
-        <Login />
-      )}
-    </>
+    <MainContainer>
+      <Feed/>
+      <TrendingBar />
+    </MainContainer>
   );
 }
 

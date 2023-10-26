@@ -3,10 +3,8 @@ import React from "react";
 
 const MIN_TEXTAREA_HEIGHT = 30;
 
-export default function Textarea() {
+export default function Textarea({value, onChange}) {
   const textareaRef = React.useRef(null);
-  const [value, setValue] = React.useState("");
-  const onChange = (event) => setValue(event.target.value);
 
   React.useLayoutEffect(() => {
     // Reset height - important to shrink on delete

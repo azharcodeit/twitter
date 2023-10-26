@@ -1,9 +1,8 @@
-import React from "react";
 import SearchBar from "@components/ui/SearchBar";
+import Button from "@components/ui/Button"
 import TypographyTitle from "@components/ui/TypographyTitle";
 import TypographySubtitle from "@components/ui/TypographySubtitle";
-import Button from "@components/ui/Button";
-import ProfileInfo from '@components/ui/ProfileInfo'
+import WhoToFollow from "@components/WhoToFollow"
 import Footer from "@components/Footer";
 import Link from "next/link";
 import { RiMoreLine } from "react-icons/ri";
@@ -14,7 +13,8 @@ const TRENDING = [
   { country: "KZ", views: 2200 },
   { country: "China", views: 8800 },
 ];
-function Trending() {
+const Trending = () => {
+  
   return (
     <div className='trending sticky top-0 mr-2 hidden_tablet pb-14 h-fit'>
       <div className='sticky top-0 w-full bg-white py-1 mb-3'>
@@ -56,25 +56,7 @@ function Trending() {
           Show more
         </Link>
       </div>
-      <div className='flex flex-col bg-gray-bg rounded-2xl overflow-hidden mb-4'>
-        <h1 className='text-main-secondary font-bold text-xl pb-3 px-4 mt-3'>
-          Who to follow
-        </h1>
-        <div className='flex py-3 items-center justify-between px-4 hover:bg-black/5 transition duration-200 cursor-pointer'>
-          <ProfileInfo
-            username={"Anytime fitness"}
-            nickname={"anytimefitness"}
-            image={"/assets/icons/profile.svg"}
-          />
-          <Button text={"Follow"} />
-        </div>
-        <Link
-          href={"explore/tabs/for-you"}
-          className='py-3 text-main-primary px-4 hover:bg-black/5 transition duration-200 cursor-pointer'
-        >
-          Show more
-        </Link>
-      </div>
+      <WhoToFollow/>
       <Footer />
     </div>
   );

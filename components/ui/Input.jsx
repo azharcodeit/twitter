@@ -4,6 +4,7 @@ const Input = ({ id, label, onChange, value, type = "text", disabled }) => {
   return (
     <div className='w-full relative'>
       <input
+        required
         disabled={disabled}
         onChange={onChange}
         value={value}

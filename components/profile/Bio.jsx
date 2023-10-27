@@ -8,11 +8,15 @@ import { TfiLocationPin } from "react-icons/tfi";
 import { LiaCalendar } from "react-icons/lia";
 import { useState, useCallback } from "react";
 import useEditModal from "@/hooks/useEditModal";
+import { useSession } from "next-auth/react";
 
-function Bio({ fetchedUser, currentUser, followingInit }) {
+
+function Bio({ fetchedUser, followingInit }) {
+  const { data: session, status } = useSession();
   const editModal = useEditModal();
-  const {username} = fetchedUser;
+  const username  = fetchedUser?.username;
   const dateString = fetchedUser?.createdAt;
+  const currentUser = session?.user;
   const date = new Date(dateString);
   const year = date.getFullYear();
   const month = date.toLocaleString("default", { month: "long" });
@@ -21,10 +25,9 @@ function Bio({ fetchedUser, currentUser, followingInit }) {
   const [loading, setLoading] = useState(false);
 
   const toggleFollow = useCallback(async () => {
-    setLoading(true);
     try {
       let request;
-
+      setLoading(true);
       if (isFollowing) {
         request = () =>
           fetch("http://localhost:3000/api/follow", {
@@ -92,8 +95,9 @@ function Bio({ fetchedUser, currentUser, followingInit }) {
       await request();
     } catch (error) {
       toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   }, [currentUser, isFollowing]);
 
   if (!fetchedUser) {

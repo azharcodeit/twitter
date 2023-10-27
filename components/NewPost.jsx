@@ -12,11 +12,16 @@ import {
   MdOutlineEmojiEmotions,
 } from "react-icons/md";
 import { useState, useCallback } from "react";
+import { useSession } from "next-auth/react";
 
 
-function NewPost({currentUser}) {
+function NewPost() {
   const [body, setBody] = useState("");
   const [loading, setLoading] = useState(false);
+  const { data: session, status } = useSession();
+  const currentUser = session?.user
+  console.log(session)
+
 
   const onChange = (event) => setBody(event.target.value);
 

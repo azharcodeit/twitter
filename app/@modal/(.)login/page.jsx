@@ -1,7 +1,8 @@
 "use client";
 import { signIn } from "next-auth/react";
+import { Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
-import toast, {Toaster} from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import Modal from "@components/ui/Modal";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -15,14 +16,14 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loginSuccess, setLoginSuccess] = useState(false);
-
+  const [loading, setLoading] = useState(false);
 
   const loginWithGoogle = async (e) => {
     e.preventDefault();
     try {
       await signIn("google");
     } catch (error) {
-      toast.error('There was an error while signing in with Google!');
+      toast.error("There was an error while signing in with Google!");
     } finally {
       router.replace("home");
     }
@@ -30,27 +31,33 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
+      
       const res = await signIn("credentials", {
         email,
         password,
         redirect: false,
       });
-
       if (res.error) {
         setError("Invalid Credentials");
         return;
       }
-       toast.success("Successfully logged in!");
-      setLoginSuccess(true);
+      
     } catch (error) {
       console.log(error);
+    } finally {
+      
+      setLoading(false);
+      setLoginSuccess(true);
     }
   };
 
   useEffect(() => {
     if (loginSuccess) {
-      router.replace('/home');
+      toast.success("Successfully logged in!");
+      router.refresh();
+      router.replace("/home");
     }
   }, [loginSuccess, router]);
 
@@ -94,10 +101,18 @@ export default function Login() {
                   variant='outline'
                   color='gray'
                   className='mt-3 w-full'
-                  label='Log in'
+                  label={
+                    loading ? (
+                      <div className='flex w-full justify-center'>
+                        <Loader2 className=' animate-spin w-6 h-6' />
+                      </div>
+                    ) : (
+                      "Log in"
+                    )
+                  }
                 />
               </form>
-              <Toaster/>
+              <Toaster />
             </div>
             <div
               className='

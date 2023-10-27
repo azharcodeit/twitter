@@ -11,7 +11,7 @@ function SignOutButton() {
           callbackUrl: `/login`,
         });
       }}
-      className="hidden_xl"
+      className="hidden_xl cursor-pointer"
     >
       <PiSignOut size={20} />
     </div>

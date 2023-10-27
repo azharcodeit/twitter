@@ -37,7 +37,7 @@ export default function Modal({ children }) {
   return (
     <div
       ref={overlay}
-      className='fixed flex justify-center z-10 left-0 right-0 top-0 bottom-0 bg-black/60 p-[5%] '
+      className='fixed flex justify-center z-30 left-0 right-0 top-0 bottom-0 bg-black/60 p-[5%] '
       onClick={onClick}
     >
       <div

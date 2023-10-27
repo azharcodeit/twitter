@@ -2,15 +2,18 @@
 import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
-import { use, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import toast, {Toaster} from "react-hot-toast";
 import useEditModal from "@/hooks/useEditModal";
 import Input from "@components/ui/Input";
 import Modal from "@components/Modal";
 import ImageUpload from "@components/ImageUpload";
+import { useSession } from "next-auth/react";
 
 
-const EditModal = ({currentUser}) => {
+const EditModal = () => {
+  const { data: session, status } = useSession();
+  const currentUser = session?.user || null
   const editModal = useEditModal();
   const router = useRouter()
   const [profileImage, setProfileImage] = useState(currentUser?.profileImage);
@@ -63,7 +66,7 @@ const EditModal = ({currentUser}) => {
     } finally {
       setIsLoading(false);
       editModal.onClose();
-      router.push(`/${currentUser?.username}`)
+      router.replace(`http://localhost:3000/users/${currentUser?.username}`)
     }
   }, [editModal, name, username, bio, profileImage, coverImage, router]);
 
@@ -89,7 +92,7 @@ const EditModal = ({currentUser}) => {
       />
       <Input
         label='Username'
-        onChange={(e) => setUsername(e.target.value)}
+        onChange={(e) => {setUsername(e.target.value)}}
         value={username}
         disabled={isLoading}
       />

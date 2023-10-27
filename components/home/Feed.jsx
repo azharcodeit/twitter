@@ -1,11 +1,8 @@
-import {getCurrentUser} from "@app/actions/getCurrentUser";
 import Header from "@components/Header";
 import PostContainer from "@components/PostContainer";
 import NewPost from "@components/NewPost";
 
-async function Feed () {
-  const currentUser = await getCurrentUser()
-
+function Feed () {
   return (
     <div className='feed border-darker-gray-bg border-x h-max'>
       <Header border={true}>
@@ -29,7 +26,7 @@ async function Feed () {
           </div>
         </div>
       </Header>
-      <NewPost currentUser={currentUser}/>
+      <NewPost/>
       {/* <PostContainer /> */}
     </div>
   );

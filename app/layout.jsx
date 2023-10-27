@@ -1,9 +1,9 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import SideBar from "@components/SideBar";
-import NextAuthProvider from "./Providers";
-import { getCurrentUser } from '@app/actions/getCurrentUser';
-import EditModal from "@components/modals/EditModal"
+import NextAuthProvider from "@app/context/client-provider";
+import { getCurrentUser } from "@app/actions/getCurrentUser";
+import EditModal from "@components/modals/EditModal";
 import "@styles/globals.css";
 
 export const metadata = {
@@ -11,22 +11,22 @@ export const metadata = {
   description:
     "From breaking news and entertainment to sports and politics, get the full story with all the live commentary.",
 };
-export default async function(props){
+export default async function (props) {
   const session = await getServerSession(authOptions);
   const currentUser = await getCurrentUser();
   return (
     <html lang='en'>
       <body>
-        <NextAuthProvider session={session} currentUser={currentUser}>
+        <NextAuthProvider session={session}>
           <div className='main'></div>
           {props.modal}
-          <EditModal currentUser={currentUser} session={session}/>
+          <EditModal />
           <main className='app'>
-            <SideBar currentUser={currentUser} session={session}/>
+            {session && <SideBar />}
             {props.children}
           </main>
         </NextAuthProvider>
       </body>
     </html>
   );
-};
+}

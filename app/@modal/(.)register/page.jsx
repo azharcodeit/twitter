@@ -1,5 +1,6 @@
 "use client";
 import { signIn } from "next-auth/react";
+import { Loader2 } from "lucide-react";
 import { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
 import Modal from "@components/ui/Modal";
@@ -15,24 +16,24 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
   const loginWithGoogle = async (e) => {
     e.preventDefault();
     try {
-      await signIn('google');
-      
+      await signIn("google");
     } catch (error) {
       toast({
-        title: 'Error',
-        description: 'There was an error logging in with Google',
-        variant: 'destructive',
-      })
+        title: "Error",
+        description: "There was an error logging in with Google",
+        variant: "destructive",
+      });
     } finally {
-     router.replace("home");
+      router.replace("home");
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,7 +44,7 @@ export default function Login() {
     }
 
     try {
-
+      setLoading(true);
       const res = await fetch("api/user", {
         method: "POST",
         headers: {
@@ -66,6 +67,8 @@ export default function Login() {
       }
     } catch (error) {
       console.log("Error during registration: ", error);
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -88,43 +91,51 @@ export default function Login() {
               or
             </div>
             <div className='flex flex-col gap-4 mt-3'>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-              <Input
-                id='email'
-                label='Email'
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <Input
-                id='name'
-                label='Name'
-                onChange={(e) => setName(e.target.value)}
-                required
-              />
-              <Input
-                id='username'
-                label='Username'
-                onChange={(e) => setUsername(e.target.value)}
-                required
-              />
-              <Input
-                id='password'
-                label='Password'
-                type='password'
-                onChange={(e) => setPassword(e.target.value)}
-                required
-              />
-              <Button
-                type='submit'
-                variant='outline'
-                color='gray'
-                className='mt-3 w-full'
-                label='Sign up'
-              />
-                </form>
+              <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+                <Input
+                  id='email'
+                  label='Email'
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                />
+                <Input
+                  id='name'
+                  label='Name'
+                  onChange={(e) => setName(e.target.value)}
+                  required
+                />
+                <Input
+                  id='username'
+                  label='Username'
+                  onChange={(e) => setUsername(e.target.value)}
+                  required
+                />
+                <Input
+                  id='password'
+                  label='Password'
+                  type='password'
+                  onChange={(e) => setPassword(e.target.value)}
+                  required
+                />
+                <Button
+                  type='submit'
+                  disabled={loading}
+                  variant='outline'
+                  color='gray'
+                  className='mt-3 w-full'
+                  label={
+                    loading ? (
+                      <div className='flex w-full justify-center'>
+                        <Loader2 className=' animate-spin w-6 h-6' />
+                      </div>
+                    ) : (
+                      "Sign up"
+                    )
+                  }
+                />
+              </form>
             </div>
-          
-            
+
             <div
               className='
           text-main-secondary 
@@ -147,9 +158,7 @@ export default function Login() {
                 </Link>
               </p>
             </div>
-            
           </div>
-          
         </div>
       </div>
     </Modal>

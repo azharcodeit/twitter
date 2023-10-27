@@ -1,6 +1,4 @@
-import { ClipLoader } from "react-spinners";
 import { Loader } from "lucide-react";
-import { getCurrentUser } from "@app/actions/getCurrentUser";
 import { getUser } from "@app/actions/getUser";
 import prisma from "@lib/prismadb";
 import MainContainer from "@components/MainContainer";
@@ -14,17 +12,16 @@ import TrendingBar from "@components/TrendingBar";
 
 const UserProfile = async ({ params }) => {
   const { username } = params;
-  const currentUser = await getCurrentUser();
   const fetchedUser = await getUser(username);
   
 
-  // if (!fetchedUser) {
-  //   return (
-  //     <div className='flex justify-center items-center h-full w-full'>
-  //       <Loader className='animate-spin w-20 h-20' />
-  //     </div>
-  //   );
-  // }
+  if (!fetchedUser) {
+    return (
+      <div className='flex justify-center items-center h-full w-full'>
+        <Loader className='animate-spin w-20 h-20' />
+      </div>
+    );
+  }
 
   return (
     <MainContainer>
@@ -45,7 +42,6 @@ const UserProfile = async ({ params }) => {
         <Hero user={fetchedUser} />
         <Bio
           fetchedUser={fetchedUser}
-          currentUser={currentUser}
           followingInit={fetchedUser?.following}
         />
         <Tabs />

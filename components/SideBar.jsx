@@ -12,6 +12,7 @@ import {
 import { RiTwitterXFill, RiMoreLine, RiQuillPenLine } from "react-icons/ri";
 import { PiBell, PiEnvelopeSimple } from "react-icons/pi";
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 const NAVIGATION_ITEMS = [
   {
@@ -56,12 +57,12 @@ const NAVIGATION_ITEMS = [
   },
 ];
 
-const SideBar = ({ currentUser }) => {
-  const { status } = useSession();
+const SideBar = () => {
+  const { data: session, status } = useSession();
+  useEffect(()=>{},[session])
+  console.log(session)
 
   return (
-    <>
-      {status === "authenticated" && (
         <nav className='sidebar xl:col-span-1 w-full h-screen flex flex-col justify-between pl-2 pr-2 sticky top-0'>
           <div className='flex flex-col max-xl:items-center '>
             {NAVIGATION_ITEMS.map((item) => (
@@ -72,7 +73,7 @@ const SideBar = ({ currentUser }) => {
                   item.title.toLocaleLowerCase() === "twitter"
                     ? "/"
                     : item.title.toLocaleLowerCase() === "profile"
-                    ? `/users/${currentUser?.username}` || "#"
+                    ? `/users/${session?.user?.username}` || "#"
                     : `/${item.title.toLowerCase()}`
                 }
                 className='flex items-center hover:bg-black/10 focus:font-bold transition duration-200 flex items-center justify-start w-fit rounded-full py-3 my-1 px-3'
@@ -98,13 +99,13 @@ const SideBar = ({ currentUser }) => {
           </div>
           <div className='flex items-center hover:bg-black/10 focus:font-bold transition duration-200 flex items-center justify-start w-fit space-x-4 rounded-full my-2 py-2 px-3 w-[98%] overflow-hidden'>
             <Link
-              href={`/users/${currentUser?.username}`}
+              href={`/users/${session?.user?.username}`}
               className='inline-block rounded-full'
             >
-              {currentUser?.profileImage ? (
+              {session?.user?.profileImage ? (
                 <div className='overflow-hidden rounded-full border-[#ffffff]'>
                   <Image
-                    src={currentUser.profileImage}
+                    src={session?.user?.profileImage}
                     className='scale-125'
                     alt='twitter'
                     width={40}
@@ -117,15 +118,13 @@ const SideBar = ({ currentUser }) => {
             </Link>
             <div className='flex flex-col items-start justify-items-start mx-3 hidden_xl  overflow-hidden'>
               <div className='text-sm font-medium w-[90%] text-wrap'>
-                {currentUser?.name}
+                {session?.user?.name}
               </div>
-              <div className='text-sm'>{currentUser?.username}</div>
+              <div className='text-sm'>{session?.user?.username}</div>
             </div>
             <SignOutButton />
           </div>
         </nav>
-      )}
-    </>
   );
 };
 

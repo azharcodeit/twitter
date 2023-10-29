@@ -6,6 +6,7 @@ import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
 import Button from "@components/Button";
 import { useSession } from "next-auth/react";
+import { useEffect } from "react";
 
 const SignInPage = () => {
   const { status } = useSession();
@@ -14,6 +15,7 @@ const SignInPage = () => {
   if (status === "authenticated") {
     router.push("/");
   }
+  useEffect(() => {}, [status]);
 
   const loginWithGoogle = async (e) => {
     e.preventDefault();

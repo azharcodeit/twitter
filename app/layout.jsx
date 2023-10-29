@@ -22,8 +22,8 @@ export default async function (props) {
           {props.modal}
           <EditModal />
           <main className='app'>
-            {session && <SideBar />}
-            {props.children}
+            {!!session && <SideBar />}
+            { props.children}
           </main>
         </NextAuthProvider>
       </body>

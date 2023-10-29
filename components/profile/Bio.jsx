@@ -1,12 +1,11 @@
 "use client";
-import axios from "axios";
 import { Loader2 } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 import Avatar from "@components/profile/Avatar";
 import Button from "@components/Button";
 import { TfiLocationPin } from "react-icons/tfi";
 import { LiaCalendar } from "react-icons/lia";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import useEditModal from "@/hooks/useEditModal";
 import { useSession } from "next-auth/react";
 
@@ -99,6 +98,9 @@ function Bio({ fetchedUser, followingInit }) {
       setLoading(false);
     }
   }, [currentUser, isFollowing]);
+
+  useEffect(() => {}, [session, status]);
+
 
   if (!fetchedUser) {
     return (

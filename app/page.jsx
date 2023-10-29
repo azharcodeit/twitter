@@ -2,6 +2,7 @@
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import SignInPage from "./(auth)/login/page";
+import { useEffect } from "react";
 
 export default function page() {
   const { status } = useSession();
@@ -11,5 +12,6 @@ export default function page() {
   } else {
     router.push("/login");
   }
+  useEffect(() => {}, [status]);
   return <div>{status !== "authenticated" && <SignInPage />}</div>;
 }

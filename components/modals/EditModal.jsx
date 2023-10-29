@@ -35,6 +35,7 @@ const EditModal = () => {
     currentUser?.bio,
     currentUser?.profileImage,
     currentUser?.coverImage,
+    session, status
   ]);
 
   console.log(currentUser)

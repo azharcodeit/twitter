@@ -11,7 +11,7 @@ import {
   MdOutlineSchedule,
   MdOutlineEmojiEmotions,
 } from "react-icons/md";
-import { useState, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react";
 
 
@@ -24,6 +24,7 @@ function NewPost() {
 
 
   const onChange = (event) => setBody(event.target.value);
+  useEffect(() => {}, [session, status]);
 
   const handlePost = useCallback(async () => {
     try {

@@ -1,20 +1,21 @@
 import { Loader } from "lucide-react";
 import { getUser } from "@app/actions/getUser";
-import prisma from "@lib/prismadb";
+import { getPostsByUserId } from "@app/actions/getPostsByUserId";
 import MainContainer from "@components/MainContainer";
 import Header from "@components/Header";
 import Back from "@components/Back";
 import Bio from "@components/profile/Bio";
 import Hero from "@components/profile/Hero";
 import Tabs from "@components/profile/Tabs";
-import ReplyContainer from "@components/ReplyContainer";
+import PostContainer from "@components/PostContainer";
 import TrendingBar from "@components/TrendingBar";
 
 const UserProfile = async ({ params }) => {
   const { username } = params;
   const fetchedUser = await getUser(username);
-  
-
+  const fetchedPosts = await getPostsByUserId(fetchedUser?.id);
+  const postCount = `${fetchedUser?.postCount || 0} post${fetchedUser?.postCount === 1 ? '' : 's'}`
+  console.log(fetchedPosts)
   if (!fetchedUser) {
     return (
       <div className='flex justify-center items-center h-full w-full'>
@@ -25,7 +26,7 @@ const UserProfile = async ({ params }) => {
 
   return (
     <MainContainer>
-      <div className='feed border-darker-gray-bg border-x h-max'>
+      <div className='feed border-darker-gray-bg border-x h-inherit'>
         <Header>
           <div className='flex pr-4 pl-3 h-14 justify-items-center items-center'>
             <Back />
@@ -34,21 +35,22 @@ const UserProfile = async ({ params }) => {
                 {fetchedUser?.name || "Name"}
               </h1>
               <p className='text-gray-text text-sm'>
-                {fetchedUser?.postCount || "0"} post{fetchedUser?.postCount>1?'s':''}
+                {postCount}
               </p>
             </div>
           </div>
         </Header>
         <Hero user={fetchedUser} />
-        <Bio
-          fetchedUser={fetchedUser}
-          followingInit={fetchedUser?.following}
-        />
+        <Bio fetchedUser={fetchedUser} followingInit={fetchedUser?.following} />
         <Tabs />
-        <ReplyContainer />
-        <ReplyContainer />
+        {fetchedPosts.map((fetchedPost) => (
+          <PostContainer
+            key={fetchedPost?.id}
+            post={fetchedPost}
+          />
+        ))}
       </div>
-      <TrendingBar/>
+      <TrendingBar />
     </MainContainer>
   );
 };

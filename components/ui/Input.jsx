@@ -44,6 +44,7 @@ const Input = ({ id, label, onChange, value, type = "text", disabled }) => {
           peer-focus:-translate-y-4
           left-4
           text-zinc-400}
+          ${value ? 'scale-75':'scale-100'}
         `}
       >
         {label}

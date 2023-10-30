@@ -6,7 +6,7 @@ import Header from "@components/Header";
 import Back from "@components/Back";
 import Bio from "@components/profile/Bio";
 import Hero from "@components/profile/Hero";
-import Tabs from "@components/profile/Tabs";
+import { Tabs, Tab } from "@components/Tabs";
 import PostContainer from "@components/PostContainer";
 import TrendingBar from "@components/TrendingBar";
 
@@ -14,8 +14,10 @@ const UserProfile = async ({ params }) => {
   const { username } = params;
   const fetchedUser = await getUser(username);
   const fetchedPosts = await getPostsByUserId(fetchedUser?.id);
-  const postCount = `${fetchedUser?.postCount || 0} post${fetchedUser?.postCount === 1 ? '' : 's'}`
-  console.log(fetchedPosts)
+  const postCount = `${fetchedUser?.postCount || 0} post${
+    fetchedUser?.postCount === 1 ? "" : "s"
+  }`;
+  console.log(fetchedPosts);
   if (!fetchedUser) {
     return (
       <div className='flex justify-center items-center h-full w-full'>
@@ -34,21 +36,26 @@ const UserProfile = async ({ params }) => {
               <h1 className='font-semibold text-xl'>
                 {fetchedUser?.name || "Name"}
               </h1>
-              <p className='text-gray-text text-sm'>
-                {postCount}
-              </p>
+              <p className='text-gray-text text-sm'>{postCount}</p>
             </div>
           </div>
         </Header>
         <Hero user={fetchedUser} />
         <Bio fetchedUser={fetchedUser} followingInit={fetchedUser?.following} />
-        <Tabs />
-        {fetchedPosts.map((fetchedPost) => (
-          <PostContainer
-            key={fetchedPost?.id}
-            post={fetchedPost}
-          />
+        <Tabs>
+          <Tab label='Posts'>
+              {fetchedPosts.map((fetchedPost) => (
+          <PostContainer key={fetchedPost?.id} post={fetchedPost} />
         ))}
+          </Tab>
+          <Tab label='Replies'>
+            
+          </Tab>
+          <Tab label='Likes'>
+            
+          </Tab>
+        </Tabs>
+        
       </div>
       <TrendingBar />
     </MainContainer>

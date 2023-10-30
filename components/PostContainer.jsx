@@ -12,7 +12,7 @@ async function PostContainer({ post }) {
   const LikeIcon = FaRegHeart;
   const now = new Date();
   const date = new Date(post?.updatedAt);
-  // Define an array of month names
+  
   const monthNames = [
     "January",
     "February",
@@ -28,18 +28,10 @@ async function PostContainer({ post }) {
     "December",
   ];
 
-  // Extract the day, month, and year from the Date object
   const day = date.getDate();
   const month = monthNames[date.getMonth()];
-  const year = date.getFullYear();
-
-  // Create the desired date format
   const formattedDate = `${day} ${month.slice(0, 3)} `;
-
-  // Calculate the time difference in milliseconds
   const timeDifference = now - post?.updatedAt;
-
-  // Calculate seconds, minutes, and hours from the time difference
   const secondsPassed = Math.floor(timeDifference / 1000);
   const minutesPassed = Math.floor(timeDifference / (1000 * 60));
   const hoursPassed = Math.floor(timeDifference / (1000 * 60 * 60));

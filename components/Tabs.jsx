@@ -1,49 +1,57 @@
-import React from "react";
-import Link from "next/link";
+"use client";
+import React, { useState } from "react";
 
-const Tabs = ({ params: router }) => {
-  const {
-    query: { tab },
-  } = router;
+const Tabs = ({ children }) => {
+  const [activeTab, setActiveTab] = useState(children[0].props.label);
+  const handleClick = (e, newActiveTab) => {
+    e.preventDefault();
+    setActiveTab(newActiveTab);
+  };
 
-  const isTabOne = tab === "1" || tab == null;
-  const isTabTwo = tab === "2";
   return (
-    <div className='flex h-auto'>
-      <div>
-        <div
-          selected={isTabOne}
-          className='flex flex-col items-center w-[20%] hover:bg-black/10 transition duration-200 cursor-pointer'
-        >
-          <Link href={{ pathname: "/", query: { tab: "1" } }}>
-            <div>
-              <div className='py-4 font-semibold text-main-secondary'>
-                Posts
-              </div>
-              <div className='w-full h-[4px] bg-main-primary rounded-lg'></div>
+    <div className='flex flex-col h-auto w-full'>
+      <div className='flex flex-row w-full items-center'>
+        {children.map((child) => (
+          <div className={`flex w-full justify-center hover:bg-black/10 transition duration-200 cursor-pointer`}>
+            <div className={`{w-[${Math.round((1/children.length)*100)}%]}`}>
+              <button
+                key={child.props.label}
+                className={`${
+                  activeTab === child.props.label
+                    ? "font-semibold text-main-secondary"
+                    : "font-medium text-slate-500"
+                } py-4`}
+                onClick={(e) => handleClick(e, child.props.label)}
+              >
+                {child.props.label}
+              </button>
+              <div
+                className={`${
+                  activeTab === child.props.label
+                    ? "w-full h-[4px] bg-main-primary rounded-lg"
+                    : "h-[4px]"
+                }`}
+              ></div>
             </div>
-          </Link>
-        </div>
-        <div
-          className='flex flex-col items-center w-[20%] hover:bg-black/10 transition duration-200 cursor-pointer'
-          selected={isTabTwo}
-        >
-          <Link href={{ pathname: "/", query: { tab: "2" } }}>
-            <div>
-              <div className='py-4 font-semibold text-main-secondary'>
-                Likes
-              </div>
-              <div className='w-full h-[4px] bg-main-primary rounded-lg'></div>
-            </div>
-          </Link>
-        </div>
+          </div>
+        ))}
       </div>
-      <TabBody>
-        {isTabOne && <React.Fragment>This is tab one content</React.Fragment>}
-        {isTabTwo && <React.Fragment>This is tab two content</React.Fragment>}
-      </TabBody>
+      <div className='py-4 '>
+        {children.map((child) => {
+          if (child.props.label === activeTab) {
+            return <div key={child.props.label}>{child.props.children}</div>;
+          }
+          return null;
+        })}
+      </div>
     </div>
   );
 };
-
-export default Tabs;
+const Tab = ({ label, children }) => {
+  return (
+    <div label={label} className='hidden'>
+      {children}
+    </div>
+  );
+};
+export { Tabs, Tab };

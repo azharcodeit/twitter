@@ -29,8 +29,8 @@ async function PostContainer({ post }) {
   ];
 
   const day = date.getDate();
-  const month = monthNames[date.getMonth()];
-  const formattedDate = `${day} ${month.slice(0, 3)} `;
+  const month = monthNames[date?.getMonth()];
+  const formattedDate = `${day} ${month?.slice(0, 3)} `;
   const timeDifference = now - post?.updatedAt;
   const secondsPassed = Math.floor(timeDifference / 1000);
   const minutesPassed = Math.floor(timeDifference / (1000 * 60));
@@ -108,13 +108,13 @@ async function PostContainer({ post }) {
             <div className='rounded-full m-2 hover:bg-red-like/20'>
               <LikeIcon size={20} />
             </div>
-            <h1 className='mx-1 font-normal text-sm '>{post?.likedIds.length}</h1>
+            <h1 className='mx-1 font-normal text-sm '>{post?.likedIds?.length}</h1>
           </button>
           <button className='flex items-center text-secondary-text hover:text-main-primary'>
             <div className='rounded-full m-2 hover:bg-main-primary/20'>
               <GoBookmark size={20} />
             </div>
-            <h1 className='mx-1 font-normal text-sm '>{post?.bookmarkedIds.length}</h1>
+            <h1 className='mx-1 font-normal text-sm '>{post?.bookmarkedIds?.length}</h1>
           </button>
         </div>
       </div>

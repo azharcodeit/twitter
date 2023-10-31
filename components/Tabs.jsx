@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 
-const Tabs = ({ children }) => {
+const Tabs = ({ sticky, children }) => {
   const [activeTab, setActiveTab] = useState(children[0].props.label);
   const handleClick = (e, newActiveTab) => {
     e.preventDefault();
@@ -9,11 +9,20 @@ const Tabs = ({ children }) => {
   };
 
   return (
-    <div className='flex flex-col h-auto w-full'>
-      <div className='flex flex-row w-full items-center'>
+    <div className={`flex flex-col h-auto w-full `}>
+      <div className={`flex flex-row w-full items-center ${
+        sticky
+          ? "sticky z-20 top-14 bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-80"
+          : ""
+      }`}>
         {children.map((child) => (
-          <div className={`flex w-full justify-center hover:bg-black/10 transition duration-200 cursor-pointer`}>
-            <div className={`{w-[${Math.round((1/children.length)*100)}%]}`}>
+          <div
+            className={`flex w-full justify-center hover:bg-black/10 transition duration-200 cursor-pointer`}
+            onClick={(e) => handleClick(e, child.props.label)}
+          >
+            <div
+              className={`{w-[${Math.round((1 / children.length) * 100)}%]}`}
+            >
               <button
                 key={child.props.label}
                 className={`${
@@ -21,7 +30,6 @@ const Tabs = ({ children }) => {
                     ? "font-semibold text-main-secondary"
                     : "font-medium text-slate-500"
                 } py-4`}
-                onClick={(e) => handleClick(e, child.props.label)}
               >
                 {child.props.label}
               </button>
@@ -49,7 +57,10 @@ const Tabs = ({ children }) => {
 };
 const Tab = ({ label, children }) => {
   return (
-    <div label={label} className='hidden'>
+    <div
+      label={label}
+      className={`hidden `}
+    >
       {children}
     </div>
   );

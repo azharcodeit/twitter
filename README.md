@@ -17,7 +17,8 @@ This is a FullStack Twitter clone repository using Next.js](https://nextjs.org/)
 - Notification system
 - Vercel Deployment
 
-Twitter Clone Showcase:
+## Twitter Clone Showcase:
+
 **Pre-Login Page:**
 
 ![Screenshot of an onboarding page.](https://github.com/azharcodeit/twitter/blob/main/public/assets/images/screenshots/onboarding.png)

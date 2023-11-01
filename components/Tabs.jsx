@@ -17,7 +17,13 @@ const Tabs = ({ sticky, children }) => {
       }`}>
         {children.map((child) => (
           <div
-            className={`flex w-full justify-center hover:bg-black/10 transition duration-200 cursor-pointer`}
+          key={child.props.label}
+            className={`flex w-full justify-center hover:bg-black/10 transition duration-200 cursor-pointer
+            ${
+                  activeTab === child.props.label
+                    ? "bg-black/10"
+                    : ""
+                }`}
             onClick={(e) => handleClick(e, child.props.label)}
           >
             <div

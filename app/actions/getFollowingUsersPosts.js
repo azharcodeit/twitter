@@ -1,28 +1,24 @@
-import prisma from "@lib/prismadb";
+import prisma from "lib/prismadb";
 import { getCurrentUser } from "@app/actions/getCurrentUser";
 
 export async function getFollowingUsersPosts() {
   try {
     const currentUser = await getCurrentUser();
-    console.log("Current User:", currentUser);
 
-    const users = await Promise.all(
-      currentUser.followingUsers.map(async (user) => {
-        const foundUsers = await prisma.user.findMany({
-          where: {
-            username: user,
-          },
-        });
-        console.log("Found Users:", foundUsers);
-        return foundUsers[0]; // Assuming username is unique
-      })
-    );
+    const usernames = currentUser?.followingUsers;
+    const posts = [];
 
-    const posts = await Promise.all(
-      users.map(async (user) => {
-        return prisma.post.findMany({
+    for (const username of usernames) {
+      const users = await prisma.user.findMany({
+        where: {
+          username: username,
+        },
+      });
+
+      for (const user of users) {
+        const userPosts = await prisma.post.findMany({
           where: {
-            userId: user.id, // Assuming user.id is the correct field
+            userId: user.id,
           },
           include: {
             user: true,
@@ -32,13 +28,12 @@ export async function getFollowingUsersPosts() {
             createdAt: "desc",
           },
         });
-      })
-    );
-    console.log("Posts:", posts);
+        posts.push(...userPosts);
+      }
+    }
 
     return posts;
   } catch (error) {
     console.error("Error:", error);
-    return null;
   }
 }

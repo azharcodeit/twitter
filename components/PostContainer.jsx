@@ -49,7 +49,7 @@ async function PostContainer({ post }) {
   }
 
   return (
-    <PostWrapper postId={""}>
+    <PostWrapper postId={post?.id}>
       <div className='flex w-fit mr-3'>
         <Link href={"/home"}>
           {user?.profileImage ? (
@@ -70,7 +70,7 @@ async function PostContainer({ post }) {
           <div className='flex'>
             <h1 className='font-semibold'>{user?.name || "Name Surname"} </h1>
             <div className='flex text-slate-500 ml-1'>
-              <h1> @{user?.username}</h1>
+              <Link href={`users/${user?.username}`}><h1>@{user?.username}</h1></Link>
               <span className='mx-1'> · </span>
               <h1> {postedTime} </h1>
             </div>

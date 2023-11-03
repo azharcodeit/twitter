@@ -23,13 +23,13 @@ const WhoToFollow = () => {
 
       if (res.ok) {
         setUsersList(users);
-        setLoading(false)
       } else {
         console.log("User registration failed.");
-        setLoading(false)
       }
     } catch (error) {
       console.log("Error during registration: ", error);
+    } finally {
+      setLoading(false)
     }
   };
   // Use useEffect to fetch the data when the component mounts

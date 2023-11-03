@@ -1,6 +1,7 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { Loader2 } from "lucide-react";
+import { NextResponse } from "next/server";
 import { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Modal from "@components/ui/Modal";
@@ -12,10 +13,8 @@ import Button from "@components/Button";
 
 export default function Login() {
   let router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loginSuccess, setLoginSuccess] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const loginWithGoogle = async (e) => {
@@ -29,37 +28,32 @@ export default function Login() {
     }
   };
 
+  const handleRefresh = () => {
+    window.location.replace("/home")
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      
       const res = await signIn("credentials", {
         email,
         password,
         redirect: false,
       });
       if (res.error) {
-        setError("Invalid Credentials");
+        toast.error("Invalid credentials");
         return;
+      } else {
+        handleRefresh()
+        toast.success("Successfully logged in!");
       }
-      
     } catch (error) {
+      toast.error("Something went wrong. Please try again later");
       console.log(error);
     } finally {
-      
       setLoading(false);
-      setLoginSuccess(true);
     }
   };
-
-  useEffect(() => {
-    if (loginSuccess) {
-      toast.success("Successfully logged in!");
-      router.refresh();
-      router.replace("/home");
-    }
-  }, [loginSuccess, router]);
 
   return (
     <Modal>

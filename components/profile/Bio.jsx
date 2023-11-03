@@ -47,6 +47,7 @@ function Bio({ fetchedUser, followingInit }) {
                     ? "Unfollowed " + username
                     : "Followed " + username
                 );
+                setIsFollowing(false);
                 console.log("Delete request was successful");
               } else {
                 // Request failed, handle the error here
@@ -57,7 +58,7 @@ function Bio({ fetchedUser, followingInit }) {
               // Handle network errors here
               console.error("Network error:", error);
             });
-        setIsFollowing(false);
+        
       } else {
         request = () =>
           fetch("http://localhost:3000/api/follow", {
@@ -78,17 +79,20 @@ function Bio({ fetchedUser, followingInit }) {
                     ? "Unfollowed " + username
                     : "Followed " + username
                 );
+                setIsFollowing(true);
                 console.log("Post request was successful");
               } else {
                 // Request failed, handle the error here
+                toast.error('Something went wrong. Please try again later.')
                 console.error("Post request failed");
               }
             })
             .catch((error) => {
               // Handle network errors here
               console.error("Network error:", error);
+              toast.error('Server is not responding. Please try again later.')
             });
-        setIsFollowing(true);
+        
       }
 
       await request();

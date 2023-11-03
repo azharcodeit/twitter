@@ -15,7 +15,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react";
 
 
-function NewPost() {
+function NewPost({placeholder}) {
   const [body, setBody] = useState("");
   const [loading, setLoading] = useState(false);
   const { data: session, status } = useSession();
@@ -52,7 +52,7 @@ function NewPost() {
     }
   },[body]);
   return (
-    <div className='grid grid-flow-col grid-cols-10 h-14 px-4 py-3 border-darker-gray-bg border-b h-fit'>
+    <div className='grid z-10 grid-flow-col grid-cols-10 h-14 px-4 py-3 border-darker-gray-bg border-b h-fit'>
       <div className='flex w-full'>
         <Link href={"/home"}>
           {currentUser?.profileImage ? (
@@ -72,7 +72,7 @@ function NewPost() {
       </div>
       <div className='col-span-9 min-h-full'>
         <div className='flex items-center'>
-          <Textarea onChange={onChange} value={body}/>
+          <Textarea placeholder={placeholder} onChange={onChange} value={body}/>
         </div>
         <div className='flex justify-between items-center'>
           <div className='flex gap-x-1'>

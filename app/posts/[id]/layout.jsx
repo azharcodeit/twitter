@@ -1,7 +1,5 @@
-"use client";
 
-function layout({children
-}) {
+async function layout({children}) {
   return (
     <div>{children}</div>
   )

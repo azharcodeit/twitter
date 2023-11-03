@@ -1,9 +1,13 @@
-'use client'
+"use client";
 import React from "react";
 
 const MIN_TEXTAREA_HEIGHT = 30;
 
-export default function Textarea({value, onChange}) {
+export default function Textarea({
+  value,
+  placeholder = "What's happening?!",
+  onChange,
+}) {
   const textareaRef = React.useRef(null);
 
   React.useLayoutEffect(() => {
@@ -18,7 +22,7 @@ export default function Textarea({value, onChange}) {
 
   return (
     <textarea
-      placeholder="What's happening?!"
+      placeholder={placeholder}
       onChange={onChange}
       ref={textareaRef}
       className={`textarea w-full min-w-0 min-h-[${MIN_TEXTAREA_HEIGHT}px] bg-transparent resize-none text-lg outline-none`}

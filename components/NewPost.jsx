@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import Textarea from "./ui/Textarea";
@@ -13,15 +13,14 @@ import {
 } from "react-icons/md";
 import { useState, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react";
+import { Loader2 } from "lucide-react";
 
-
-function NewPost({placeholder}) {
+function NewPost({ placeholder }) {
   const [body, setBody] = useState("");
   const [loading, setLoading] = useState(false);
   const { data: session, status } = useSession();
-  const currentUser = session?.user
-  console.log(session)
-
+  const currentUser = session?.user;
+  console.log(session);
 
   const onChange = (event) => setBody(event.target.value);
   useEffect(() => {}, [session, status]);
@@ -35,22 +34,23 @@ function NewPost({placeholder}) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          currentUser, body
+          currentUser,
+          body,
         }),
       });
 
       if (res.ok) {
-        setBody("")
-        toast.success('Tweet created');
+        setBody("");
+        toast.success("Tweet created");
       } else {
         console.log("User registration failed.");
       }
     } catch (error) {
       console.log("Error during registration: ", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  },[body]);
+  }, [body]);
   return (
     <div className='grid z-10 grid-flow-col grid-cols-10 h-14 px-4 py-3 border-darker-gray-bg border-b h-fit'>
       <div className='flex w-full'>
@@ -72,7 +72,11 @@ function NewPost({placeholder}) {
       </div>
       <div className='col-span-9 min-h-full'>
         <div className='flex items-center'>
-          <Textarea placeholder={placeholder} onChange={onChange} value={body}/>
+          <Textarea
+            placeholder={placeholder}
+            onChange={onChange}
+            value={body}
+          />
         </div>
         <div className='flex justify-between items-center'>
           <div className='flex gap-x-1'>
@@ -90,13 +94,14 @@ function NewPost({placeholder}) {
             </button>
           </div>
           <>
-              <Button
-                small
-                onClick={handlePost}
-                label={"Post"}
-              />
-              <Toaster />
-            </>
+            <Button
+              small
+              onClick={handlePost}
+              disabled={loading}
+              label={loading ? <Loader2 /> : "Post"}
+            />
+            <Toaster />
+          </>
         </div>
       </div>
     </div>

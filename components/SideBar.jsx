@@ -13,6 +13,8 @@ import { RiTwitterXFill, RiMoreLine, RiQuillPenLine } from "react-icons/ri";
 import { PiBell, PiEnvelopeSimple } from "react-icons/pi";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
+import usePostModal from "@/hooks/usePostModal";
+
 
 const NAVIGATION_ITEMS = [
   {
@@ -60,6 +62,8 @@ const NAVIGATION_ITEMS = [
 const SideBar = () => {
   const { data: session, status } = useSession();
   useEffect(() => {}, [session, status]);
+  const postModal = usePostModal();
+
 
   return (
     <nav className='sidebar xl:col-span-1 w-full h-screen flex flex-col justify-between pl-2 pr-2 sticky top-0'>
@@ -84,7 +88,7 @@ const SideBar = () => {
           </Link>
         ))}
 
-        <button className='flex items-center hover:bg-[#177cc0] transition duration-200 justify-content-center text-white bg-main-primary rounded-full xl:my-3 xl:h-[52px] xl:w-[92%]'>
+        <button onClick={postModal.onOpen} className='flex items-center hover:bg-[#177cc0] transition duration-200 justify-content-center text-white bg-main-primary rounded-full xl:my-3 xl:h-[52px] xl:w-[92%]'>
           <RiQuillPenLine size={25} className='block h-6 w-6 xl:hidden m-3 ' />
           <p className='flex flex-row w-full items-center justify-content-center hidden xl:block text-[17px] font-bold'>
             Post

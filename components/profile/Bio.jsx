@@ -103,16 +103,8 @@ function Bio({ fetchedUser, followingInit }) {
     }
   }, [currentUser, isFollowing]);
 
-  useEffect(() => {}, [session, status]);
+  useEffect(() => {}, [session?.user, status, fetchedUser]);
 
-
-  if (!fetchedUser) {
-    return (
-      <div className='flex w-[990px]'>
-        <Loader2 className='animate-spin w-20 h-20' />
-      </div>
-    );
-  }
 
   return (
     <div className='p-4 w-full'>

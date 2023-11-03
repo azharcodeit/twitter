@@ -2,12 +2,20 @@ import { useCallback } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import Button from "@components/Button";
 
-const Modal= ({ isOpen, onClose, onSubmit, title, body, actionLabel, footer, disabled }) => {
+const Modal = ({
+  isOpen,
+  onClose,
+  onSubmit,
+  title,
+  body,
+  actionLabel,
+  footer,
+  disabled,
+}) => {
   const handleClose = useCallback(() => {
     if (disabled) {
       return;
     }
-  
     onClose();
   }, [onClose, disabled]);
 
@@ -26,7 +34,7 @@ const Modal= ({ isOpen, onClose, onSubmit, title, body, actionLabel, footer, dis
   return (
     <>
       <div
-        className="
+        className='
           justify-center 
           items-center 
           flex 
@@ -39,11 +47,12 @@ const Modal= ({ isOpen, onClose, onSubmit, title, body, actionLabel, footer, dis
           focus:outline-none
           bg-neutral-800
           bg-opacity-70
-        "
+        '
       >
-        <div className="relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto">
+        <div className='relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto'>
           {/*content*/}
-          <div className="
+          <div
+            className='
             h-full
             lg:h-auto
             border-0 
@@ -56,48 +65,58 @@ const Modal= ({ isOpen, onClose, onSubmit, title, body, actionLabel, footer, dis
             bg-white 
             outline-none 
             focus:outline-none
-            "
+            '
           >
             {/*header*/}
-            <div className="
+
+            <div
+              className='
               flex 
               items-center 
               justify-between 
-              p-10 
+              p-4
               rounded-t
-              "
+              '
             >
-              <h3 className="text-3xl font-semibold text-black">
-                {title}
-              </h3>
+              {title && (
+                <h3 className='text-3xl font-semibold text-black'>{title}</h3>
+              )}
               <button
-                className="
+                className='
                   p-1 
                   ml-auto
                   border-0 
                   text-black 
                   hover:opacity-70
                   transition
-                "
+                '
                 onClick={handleClose}
               >
                 <AiOutlineClose size={20} />
               </button>
             </div>
+
             {/*body*/}
-            <div className="relative p-10 flex-auto">
-              {body}
-            </div>
+            <div className='relative p-4 pt-0 flex-auto'>{body}</div>
             {/*footer*/}
-            <div className="flex flex-col gap-2 p-10">
-              <Button disabled={disabled} label={actionLabel} secondary fullWidth large onClick={handleSubmit} />
-              {footer}
-            </div>
+            {footer && onSubmit && (
+              <div className='flex flex-col gap-2 p-4'>
+                <Button
+                  disabled={disabled}
+                  label={actionLabel}
+                  secondary
+                  fullWidth
+                  large
+                  onClick={handleSubmit}
+                />
+                {footer}
+              </div>
+            )}
           </div>
         </div>
       </div>
     </>
   );
-}
+};
 
 export default Modal;

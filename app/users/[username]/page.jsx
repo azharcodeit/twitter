@@ -1,4 +1,3 @@
-import { Loader } from "lucide-react";
 import { getUser } from "@app/actions/getUser";
 import { getPostsByUserId } from "@app/actions/getPostsByUserId";
 import MainContainer from "@components/MainContainer";
@@ -17,14 +16,6 @@ const UserProfile = async ({ params }) => {
   const postCount = `${fetchedUser?.postCount || 0} post${
     fetchedUser?.postCount === 1 ? "" : "s"
   }`;
-  console.log(fetchedPosts);
-  if (!fetchedUser) {
-    return (
-      <div className='flex justify-center items-center h-full w-full'>
-        <Loader className='animate-spin w-20 h-20' />
-      </div>
-    );
-  }
 
   return (
     <MainContainer>
@@ -44,18 +35,13 @@ const UserProfile = async ({ params }) => {
         <Bio fetchedUser={fetchedUser} followingInit={fetchedUser?.following} />
         <Tabs>
           <Tab label='Posts'>
-              {fetchedPosts.map((fetchedPost) => (
-          <PostContainer key={fetchedPost?.id} post={fetchedPost} />
-        ))}
+            {fetchedPosts.map((fetchedPost) => (
+              <PostContainer key={fetchedPost?.id} post={fetchedPost} />
+            ))}
           </Tab>
-          <Tab label='Replies'>
-            
-          </Tab>
-          <Tab label='Likes'>
-            
-          </Tab>
+          <Tab label='Replies'></Tab>
+          <Tab label='Likes'></Tab>
         </Tabs>
-        
       </div>
       <TrendingBar />
     </MainContainer>

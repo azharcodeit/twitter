@@ -1,5 +1,4 @@
 "use client";
-import { Loader } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
@@ -105,13 +104,6 @@ const EditModal = () => {
       />
     </div>
   );
-  if (isLoading) {
-    return (
-      <div className='flex justify-center items-center h-full w-full'>
-        <Loader className='animate-spin w-20 h-20' />
-      </div>
-    );
-  }
 
   return (
     <>

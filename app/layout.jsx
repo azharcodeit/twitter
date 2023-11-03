@@ -3,6 +3,7 @@ import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import SideBar from "@components/SideBar";
 import NextAuthProvider from "@app/context/client-provider";
 import EditModal from "@components/modals/EditModal";
+import PostModal from "@components/modals/PostModal";
 import "@styles/globals.css";
 
 export const metadata = {
@@ -19,6 +20,7 @@ export default async function (props) {
           <div className='main'></div>
           {props.modal}
           <EditModal />
+          <PostModal />
           <main className='app'>
             {!!session?.user && <SideBar />}
             { props.children}

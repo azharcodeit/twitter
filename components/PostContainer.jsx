@@ -4,7 +4,7 @@ import Image from "next/image";
 import PostWrapper from "@components/PostWrapper";
 import toast, { Toaster } from "react-hot-toast";
 import { RiMoreLine } from "react-icons/ri";
-import { GoPerson, GoBookmark } from "react-icons/go";
+import { GoPerson, GoBookmark, GoBookmarkFill } from "react-icons/go";
 import { LuRepeat2 } from "react-icons/lu";
 import { FaRegComment, FaRegHeart, FaHeart } from "react-icons/fa";
 import { useState, useCallback, useEffect } from "react";
@@ -16,8 +16,11 @@ function PostContainer({ post, user }) {
   const currentUser = session?.user;
   const [loading, setLoading] = useState(false);
   const [hasLiked, setHasLiked] = useState(post?.likedIds?.includes(currentUser?.id) || false);
+  const [hasBookmarked, setHasBookmarked] = useState(post?.bookmarkedIds?.includes(currentUser?.id) || false);
   const [likeCount, setLikeCount] = useState(post?.likedIds?.length || 0);
+  const [bookmarkCount, setBookmarkCount] = useState(post?.bookmarkedIds?.length || 0);
   const LikeIcon = hasLiked ? FaHeart : FaRegHeart;
+  const BookmarkIcon = hasBookmarked ? GoBookmarkFill : GoBookmark;
   const postId = post?.id;
 
   const monthNames = [
@@ -102,6 +105,52 @@ function PostContainer({ post, user }) {
   }
 },[hasLiked, currentUser]);
 
+
+const toggleBookmark = useCallback(async () => {
+  try {
+    let request;
+    setLoading(true);
+
+    if (hasBookmarked) {
+      request = () =>
+        fetch("http://localhost:3000/api/bookmark", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ postId, currentUser }),
+        });
+    } else {
+      request = () =>
+        fetch("http://localhost:3000/api/bookmark", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ postId, currentUser }),
+        });
+    }
+
+    const response = await request();
+
+    if (response.ok) {
+      // Request was successful
+      setHasBookmarked((prevHasBookmarked) => !prevHasBookmarked);
+      setBookmarkCount((prevCount) => (hasBookmarked ? prevCount - 1 : prevCount + 1));
+      toast.success(hasBookmarked ? "Unbookmarked " + user?.username : "Bookmarked " + user?.username);
+    } else {
+      // Request failed, handle the error here
+      toast.error(hasBookmarked ? "Failed to unbookmark" : "Failed to bookmark");
+      console.error(hasBookmarked ? "Unbookmark request failed" : "Bookmark request failed");
+    }
+  } catch (error) {
+    // Handle other errors (not network-related)
+    toast.error("Something went wrong");
+  } finally {
+    setLoading(false);
+  }
+},[hasBookmarked, currentUser]);
+
   useEffect((
   ) => {}, [session?.user, status, user, post, post?.likedIds]);
 
@@ -176,12 +225,14 @@ function PostContainer({ post, user }) {
               {likeCount}
             </h1>
           </button>
-          <button className='flex items-center text-secondary-text hover:text-main-primary'>
+          <button
+          onClick={toggleBookmark}
+           className='flex items-center text-secondary-text hover:text-main-primary'>
             <div className='rounded-full m-2 hover:bg-main-primary/20'>
-              <GoBookmark size={20} />
+              <BookmarkIcon color={hasBookmarked ? "#1c9bef" : ""} size={20} />
             </div>
-            <h1 className='mx-1 font-normal text-sm '>
-              {post?.bookmarkedIds?.length}
+            <h1 className={`mx-1 font-normal text-sm ${hasBookmarked ? 'text-main-primary' : ''}`}>
+              {bookmarkCount}
             </h1>
           </button>
           <Toaster />

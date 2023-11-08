@@ -14,7 +14,8 @@ import { Loader2 } from "lucide-react";
 function PostContainer({ post, user }) {
   const { data: session, status } = useSession();
   const currentUser = session?.user;
-  const [loading, setLoading] = useState(false);
+  const [loadingLike, setLoadingLike] = useState(false);
+  const [loadingBookmark, setLoadingBookmark] = useState(false);
   const [hasLiked, setHasLiked] = useState(post?.likedIds?.includes(currentUser?.id) || false);
   const [hasBookmarked, setHasBookmarked] = useState(post?.bookmarkedIds?.includes(currentUser?.id) || false);
   const [likeCount, setLikeCount] = useState(post?.likedIds?.length || 0);
@@ -63,7 +64,7 @@ function PostContainer({ post, user }) {
   const toggleLike = useCallback(async () => {
   try {
     let request;
-    setLoading(true);
+    setLoadingLike(true);
 
     if (hasLiked) {
       request = () =>
@@ -101,7 +102,7 @@ function PostContainer({ post, user }) {
     // Handle other errors (not network-related)
     toast.error("Something went wrong");
   } finally {
-    setLoading(false);
+    setLoadingLike(false);
   }
 },[hasLiked, currentUser]);
 
@@ -109,7 +110,7 @@ function PostContainer({ post, user }) {
 const toggleBookmark = useCallback(async () => {
   try {
     let request;
-    setLoading(true);
+    setLoadingBookmark(true);
 
     if (hasBookmarked) {
       request = () =>
@@ -147,7 +148,7 @@ const toggleBookmark = useCallback(async () => {
     // Handle other errors (not network-related)
     toast.error("Something went wrong");
   } finally {
-    setLoading(false);
+    setLoadingBookmark(false);
   }
 },[hasBookmarked, currentUser]);
 
@@ -216,6 +217,7 @@ const toggleBookmark = useCallback(async () => {
           </button>
           <button
             onClick={toggleLike}
+            disabled={loadingLike}
             className='flex items-center text-secondary-text hover:text-red-like'
           >
             <div className='rounded-full m-2 hover:bg-red-like/20'>
@@ -227,6 +229,7 @@ const toggleBookmark = useCallback(async () => {
           </button>
           <button
           onClick={toggleBookmark}
+            disabled={loadingBookmark}
            className='flex items-center text-secondary-text hover:text-main-primary'>
             <div className='rounded-full m-2 hover:bg-main-primary/20'>
               <BookmarkIcon color={hasBookmarked ? "#1c9bef" : ""} size={20} />

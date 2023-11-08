@@ -1,17 +1,24 @@
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import PostWrapper from "@components/PostWrapper";
-import { getUserById } from "@app/actions/getUserById";
+import toast, { Toaster } from "react-hot-toast";
 import { RiMoreLine } from "react-icons/ri";
 import { GoPerson, GoBookmark } from "react-icons/go";
 import { LuRepeat2 } from "react-icons/lu";
 import { FaRegComment, FaRegHeart, FaHeart } from "react-icons/fa";
+import { useState, useCallback, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { Loader2 } from "lucide-react";
 
-async function PostContainer({ post }) {
-  const user = await getUserById(post?.userId);
-  const LikeIcon = FaRegHeart;
-  const now = new Date();
-  const date = new Date(post?.updatedAt);
+function PostContainer({ post, user }) {
+  const { data: session, status } = useSession();
+  const currentUser = session?.user;
+  const [loading, setLoading] = useState(false);
+  const [hasLiked, setHasLiked] = useState(post?.likedIds?.includes(currentUser?.id) || false);
+  const [likeCount, setLikeCount] = useState(post?.likedIds?.length || 0);
+  const LikeIcon = hasLiked ? FaHeart : FaRegHeart;
+  const postId = post?.id;
 
   const monthNames = [
     "January",
@@ -28,10 +35,12 @@ async function PostContainer({ post }) {
     "December",
   ];
 
+  const now = new Date();
+  const date = new Date(post?.createdAt);
   const day = date.getDate();
   const month = monthNames[date?.getMonth()];
   const formattedDate = `${day} ${month?.slice(0, 3)} `;
-  const timeDifference = now - post?.updatedAt;
+  const timeDifference = now - date;
   const secondsPassed = Math.floor(timeDifference / 1000);
   const minutesPassed = Math.floor(timeDifference / (1000 * 60));
   const hoursPassed = Math.floor(timeDifference / (1000 * 60 * 60));
@@ -47,6 +56,54 @@ async function PostContainer({ post }) {
   } else {
     postedTime = formattedDate;
   }
+
+  const toggleLike = useCallback(async () => {
+  try {
+    let request;
+    setLoading(true);
+
+    if (hasLiked) {
+      request = () =>
+        fetch("http://localhost:3000/api/like", {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ postId, currentUser }),
+        });
+    } else {
+      request = () =>
+        fetch("http://localhost:3000/api/like", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ postId, currentUser }),
+        });
+    }
+
+    const response = await request();
+
+    if (response.ok) {
+      // Request was successful
+      setHasLiked((prevHasLiked) => !prevHasLiked);
+      setLikeCount((prevCount) => (hasLiked ? prevCount - 1 : prevCount + 1));
+      toast.success(hasLiked ? "Unliked " + user?.username : "Liked " + user?.username);
+    } else {
+      // Request failed, handle the error here
+      toast.error(hasLiked ? "Failed to unlike" : "Failed to like");
+      console.error(hasLiked ? "Unlike request failed" : "Like request failed");
+    }
+  } catch (error) {
+    // Handle other errors (not network-related)
+    toast.error("Something went wrong");
+  } finally {
+    setLoading(false);
+  }
+},[hasLiked, currentUser]);
+
+  useEffect((
+  ) => {}, [session?.user, status, user, post, post?.likedIds]);
 
   return (
     <div className='flex felx-col z-0 items-start h-14 px-4 py-3 border-darker-gray-bg border-b h-fit hover:bg-black/5 transition duration-200 cursor-pointer'>
@@ -108,12 +165,15 @@ async function PostContainer({ post }) {
             </div>
             <h1 className='mx-1 font-normal text-sm '>78</h1>
           </button>
-          <button className='flex items-center text-secondary-text hover:text-red-like'>
+          <button
+            onClick={toggleLike}
+            className='flex items-center text-secondary-text hover:text-red-like'
+          >
             <div className='rounded-full m-2 hover:bg-red-like/20'>
-              <LikeIcon size={20} />
+              <LikeIcon color={hasLiked ? "#f91880" : ""} size={20} />
             </div>
-            <h1 className='mx-1 font-normal text-sm '>
-              {post?.likedIds?.length}
+            <h1 className={`mx-1 font-normal text-sm ${hasLiked ? 'text-red-like' : ''}`}>
+              {likeCount}
             </h1>
           </button>
           <button className='flex items-center text-secondary-text hover:text-main-primary'>
@@ -124,6 +184,7 @@ async function PostContainer({ post }) {
               {post?.bookmarkedIds?.length}
             </h1>
           </button>
+          <Toaster />
         </div>
       </div>
     </div>

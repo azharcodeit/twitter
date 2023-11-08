@@ -8,6 +8,7 @@ import Hero from "@components/profile/Hero";
 import { Tabs, Tab } from "@components/Tabs";
 import PostContainer from "@components/PostContainer";
 import TrendingBar from "@components/TrendingBar";
+import { getUserById } from "@app/actions/getUserById";
 
 const UserProfile = async ({ params }) => {
   const { username } = params;
@@ -35,9 +36,10 @@ const UserProfile = async ({ params }) => {
         <Bio fetchedUser={fetchedUser} followingInit={fetchedUser?.following} />
         <Tabs>
           <Tab label='Posts'>
-            {fetchedPosts.map((fetchedPost) => (
-              <PostContainer key={fetchedPost?.id} post={fetchedPost} />
-            ))}
+            {fetchedPosts.map(async(fetchedPost) => {
+                const userById = await getUserById(fetchedPost?.userId)
+                return <PostContainer key={fetchedPost?.id} post={fetchedPost} user={userById}/>
+              })}
           </Tab>
           <Tab label='Replies'></Tab>
           <Tab label='Likes'></Tab>

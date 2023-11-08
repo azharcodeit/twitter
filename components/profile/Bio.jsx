@@ -9,11 +9,10 @@ import { useState, useCallback, useEffect } from "react";
 import useEditModal from "@/hooks/useEditModal";
 import { useSession } from "next-auth/react";
 
-
 function Bio({ fetchedUser, followingInit }) {
   const { data: session, status } = useSession();
   const editModal = useEditModal();
-  const username  = fetchedUser?.username;
+  const username = fetchedUser?.username;
   const dateString = fetchedUser?.createdAt;
   const currentUser = session?.user;
   const date = new Date(dateString);
@@ -27,38 +26,16 @@ function Bio({ fetchedUser, followingInit }) {
     try {
       let request;
       setLoading(true);
+
       if (isFollowing) {
         request = () =>
           fetch("http://localhost:3000/api/follow", {
-            method: "DELETE", // Use "DELETE" as the HTTP method for a DELETE request
+            method: "DELETE",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-              username,
-              currentUser,
-            }),
-          })
-            .then((response) => {
-              if (response.ok) {
-                // Request was successful
-                toast.success(
-                  isFollowing
-                    ? "Unfollowed " + username
-                    : "Followed " + username
-                );
-                setIsFollowing(false);
-                console.log("Delete request was successful");
-              } else {
-                // Request failed, handle the error here
-                console.error("Delete request failed");
-              }
-            })
-            .catch((error) => {
-              // Handle network errors here
-              console.error("Network error:", error);
-            });
-        
+            body: JSON.stringify({ username, currentUser }),
+          });
       } else {
         request = () =>
           fetch("http://localhost:3000/api/follow", {
@@ -66,37 +43,27 @@ function Bio({ fetchedUser, followingInit }) {
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({
-              username,
-              currentUser,
-            }),
-          })
-            .then((response) => {
-              if (response.ok) {
-                // Request was successful
-                toast.success(
-                  isFollowing
-                    ? "Unfollowed " + username
-                    : "Followed " + username
-                );
-                setIsFollowing(true);
-                console.log("Post request was successful");
-              } else {
-                // Request failed, handle the error here
-                toast.error('Something went wrong. Please try again later.')
-                console.error("Post request failed");
-              }
-            })
-            .catch((error) => {
-              // Handle network errors here
-              console.error("Network error:", error);
-              toast.error('Server is not responding. Please try again later.')
-            });
-        
+            body: JSON.stringify({ username, currentUser }),
+          });
       }
 
-      await request();
+      const response = await request();
+
+      if (response.ok) {
+        // Request was successful
+        setIsFollowing((prevIsFollowing) => !prevIsFollowing);
+        toast.success(
+          isFollowing ? "Unfollowed " + username : "Followed " + username
+        );
+      } else {
+        // Request failed, handle the error here
+        toast.error(isFollowing ? "Failed to unfollow" : "Failed to follow");
+        console.error(
+          isFollowing ? "Unfollow request failed" : "Follow request failed"
+        );
+      }
     } catch (error) {
+      // Handle other errors (not network-related)
       toast.error("Something went wrong");
     } finally {
       setLoading(false);
@@ -104,7 +71,6 @@ function Bio({ fetchedUser, followingInit }) {
   }, [currentUser, isFollowing]);
 
   useEffect(() => {}, [session?.user, status, fetchedUser]);
-
 
   return (
     <div className='p-4 w-full'>

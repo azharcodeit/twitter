@@ -19,8 +19,6 @@ export async function GET(request) {
   const body = await request.json();
   const { userId } = body;
 
-  console.log({ userId });
-
   let posts;
 
   if (userId && typeof userId === "string") {

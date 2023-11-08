@@ -77,11 +77,6 @@ function Reply() {
       <NewPost />
       <ReplyContainer />
       <ReplyContainer />
-      {/* <PostContainer />
-      <ReplyContainer />
-      <PostContainer />
-      <PostContainer />
-      <PostContainer /> */}
     </div>
   );
 }

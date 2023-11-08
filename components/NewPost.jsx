@@ -14,11 +14,13 @@ import {
 import { useState, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { Loader2 } from "lucide-react";
+import usePostModal from "@hooks/usePostModal";
 
 function NewPost({ placeholder }) {
   const [body, setBody] = useState("");
   const [loading, setLoading] = useState(false);
   const { data: session, status } = useSession();
+  const postModal = usePostModal();
   const currentUser = session?.user;
   console.log(session);
 
@@ -42,6 +44,7 @@ function NewPost({ placeholder }) {
       if (res.ok) {
         setBody("");
         toast.success("Tweet created");
+        postModal.onClose()
       } else {
         console.log("User registration failed.");
       }
@@ -50,7 +53,9 @@ function NewPost({ placeholder }) {
     } finally {
       setLoading(false);
     }
-  }, [body]);
+    
+  }, [body, postModal]);
+  
   return (
     <div className='grid z-10 grid-flow-col grid-cols-10 h-14 px-4 py-3 border-darker-gray-bg border-b h-fit'>
       <div className='flex w-full'>

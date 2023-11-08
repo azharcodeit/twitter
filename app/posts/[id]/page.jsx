@@ -5,10 +5,12 @@ import Header from "@components/Header";
 import Back from "@components/Back";
 import PostContainer from "@components/PostContainer";
 import NewPost from "@components/NewPost";
+import { getUserById } from "@app/actions/getUserById";
 
 async function Post({ params }) {
   const { id } = params;
   const post = await getPost(id);
+  const fetchedUser = await getUserById(post?.userId)
 
   return (
     <MainContainer>
@@ -21,7 +23,7 @@ async function Post({ params }) {
             </div>
           </div>
         </Header>
-        <PostContainer post={post} />
+        <PostContainer post={post} user={fetchedUser}/>
         <NewPost placeholder={"Post your reply"}/>
          <div className='flex px-4 h-14'>Comments...</div>
       </div>

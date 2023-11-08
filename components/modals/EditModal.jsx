@@ -37,8 +37,6 @@ const EditModal = () => {
     session, status
   ]);
 
-  console.log(currentUser)
-
   const id  = currentUser?.id;
 
   const onSubmit = useCallback(async () => {

@@ -5,10 +5,12 @@ import { getFollowingUsersPosts } from "@app/actions/getFollowingUsersPosts";
 import PostContainer from "@components/PostContainer";
 import { Tabs, Tab } from "@components/Tabs";
 import NewPost from "@components/NewPost";
+import { getUserById } from "@app/actions/getUserById";
 
 async function Feed() {
   const fetchedPosts = await getPosts();
   const fetchedFollowingUsersPosts = await getFollowingUsersPosts();
+  
 
   return (
     <div className='feed border-darker-gray-bg border-x h-inherit'>
@@ -25,9 +27,11 @@ async function Feed() {
           <Tab label='For you' sticky>
             <NewPost />
             {fetchedPosts ? (
-              fetchedPosts.map((fetchedPost) => (
-                <PostContainer key={fetchedPost?.id} post={fetchedPost} />
-              ))
+              fetchedPosts.map(async(fetchedPost) => {
+                const fetchedUser = await getUserById(fetchedPost?.userId)
+                if (!fetchedPost){return <>Loading...</>}
+                return <PostContainer key={fetchedPost?.id} post={fetchedPost} user={fetchedUser}/>
+              })
             ) : (
               <div className='flex w-full h-[100%] justify-center'>
                 <Loader2 className='animate-spin w-6 h-6 text-main-primary' />
@@ -37,9 +41,11 @@ async function Feed() {
           <Tab label='Following' sticky>
             <NewPost />
             {fetchedFollowingUsersPosts ? (
-              fetchedFollowingUsersPosts.map((fetchedPost) => (
-                <PostContainer key={fetchedPost?.id} post={fetchedPost} />
-              ))
+              fetchedFollowingUsersPosts.map(async(fetchedPost) => {
+                const fetchedUser = await getUserById(fetchedPost?.userId)
+                if (!fetchedPost){return <>Loading...</>}
+                return <PostContainer key={fetchedPost?.id} post={fetchedPost} user={fetchedUser}/>
+              })
             ) : (
               <div className='flex w-full h-[100%] justify-center'>
                 <Loader2 className='animate-spin w-6 h-6 text-main-primary' />

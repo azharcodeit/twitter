@@ -9,21 +9,18 @@ const Tabs = ({ sticky, children }) => {
   };
 
   return (
-    <div className={`flex flex-col h-auto w-full `}>
-      <div className={`flex flex-row w-full items-center ${
-        sticky
-          ? "sticky z-20 top-14 bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-80"
-          : ""
-      }`}>
+    <div className={`flex flex-col h-auto w-full`}>
+      <div
+        className={`flex flex-row w-full items-center border-b border-darker-gray-bg ${
+          sticky
+            ? "sticky z-20 top-14 bg-white bg-clip-padding backdrop-filter backdrop-blur-xl bg-opacity-80"
+            : ""
+        }`}
+      >
         {children.map((child) => (
           <div
-          key={child.props.label}
-            className={`flex w-full justify-center hover:bg-black/10 transition duration-200 cursor-pointer
-            ${
-                  activeTab === child.props.label
-                    ? "bg-black/10"
-                    : ""
-                }`}
+            key={child.props.label}
+            className={`flex w-full justify-center hover:bg-black/10 transition duration-200 cursor-pointer`}
             onClick={(e) => handleClick(e, child.props.label)}
           >
             <div
@@ -50,7 +47,7 @@ const Tabs = ({ sticky, children }) => {
           </div>
         ))}
       </div>
-      <div className='py-4 '>
+      <div className='py-4'>
         {children.map((child) => {
           if (child.props.label === activeTab) {
             return <div key={child.props.label}>{child.props.children}</div>;
@@ -63,10 +60,7 @@ const Tabs = ({ sticky, children }) => {
 };
 const Tab = ({ label, children }) => {
   return (
-    <div
-      label={label}
-      className={`hidden `}
-    >
+    <div label={label} className={`hidden `}>
       {children}
     </div>
   );

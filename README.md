@@ -9,11 +9,12 @@ This is a FullStack Twitter clone repository using Next.js](https://nextjs.org/)
 - 1 To Many Relations (User - Post)
 - Many To Many Relations (Post - Comment)
 - Following functionality
+- Likes functionality
+- Bookmarks functionality
 
 ## To Be included:
 
 - Comments / Replies
-- Likes functionality
 - Notification system
 - Vercel Deployment
 

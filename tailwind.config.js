@@ -17,11 +17,11 @@ module.exports = {
         xl: "1265px",
       },
       fontFamily: {
-        "twitter-chirp": ["TwitterChirpRegular", "sans-serif"],
-        "twitter-chirp-extended-heavy": [
-          "TwitterChirpExtendedHeavy",
-          "sans-serif",
-        ],
+        "twitter-chirp-regular": ["TwitterChirpRegular"],
+        "twitter-chirp-medium": ["TwitterChirpMedium"],
+        "twitter-chirp-bold": ["TwitterChirpBold"],
+        "twitter-chirp-heavy": ["TwitterChirpHeavy"],
+        "twitter-chirp-extended-heavy": ["TwitterChirpExtendedHeavy"],
       },
       colors: {
         "main-primary": "#1c9bef",

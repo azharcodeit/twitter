@@ -19,7 +19,7 @@ async function Post({ params }) {
           <div className='flex pr-4 pl-3 h-14 justify-items-center items-center'>
             <Back />
             <div>
-              <h1 className='font-semibold text-xl'>{"Post"}</h1>
+              <h1 className='font-twitter-chirp-bold text-xl'>{"Post"}</h1>
             </div>
           </div>
         </Header>

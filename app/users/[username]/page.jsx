@@ -25,7 +25,7 @@ const UserProfile = async ({ params }) => {
           <div className='flex pr-4 pl-3 h-14 justify-items-center items-center'>
             <Back />
             <div>
-              <h1 className='font-semibold text-xl'>
+              <h1 className='font-twitter-chirp-bold text-xl'>
                 {fetchedUser?.name || "Name"}
               </h1>
               <p className='text-gray-text text-sm'>{postCount}</p>

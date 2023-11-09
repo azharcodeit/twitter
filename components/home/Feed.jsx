@@ -15,7 +15,7 @@ async function Feed() {
   return (
     <div className='feed border-darker-gray-bg border-x h-inherit'>
       <Header>
-        <div className='flex px-4 h-14 font-semibold text-xl justify-items-center items-center'>
+        <div className='flex px-4 h-14 font-twitter-chirp-bold text-xl justify-items-center items-center'>
           <h1>Home</h1>
         </div>
       </Header>

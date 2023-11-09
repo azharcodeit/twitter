@@ -79,7 +79,7 @@ const Modal = ({
               '
             >
               {title && (
-                <h3 className='text-3xl font-semibold text-black'>{title}</h3>
+                <h3 className='text-3xl font-twitter-chirp-bold text-black'>{title}</h3>
               )}
               <button
                 className='

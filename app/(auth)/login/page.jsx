@@ -80,7 +80,7 @@ const SignInPage = () => {
                 className='
           text-main-secondary 
           mt-4 
-          font-normal
+          twitter-chirp-regular
         '
               >
                 <p>

@@ -12,7 +12,7 @@ async function Notifications() {
         <Header>
           <div className='flex pl-3 h-14 items-center'>
             <div>
-              <h1 className='font-semibold text-lg'>{"Notifications"}</h1>
+              <h1 className='font-twitter-chirp-bold text-lg'>{"Notifications"}</h1>
             </div>
           </div>
         </Header>

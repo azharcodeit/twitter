@@ -28,16 +28,16 @@ const SideBar = () => {
                 ? `/users/${session?.user?.username}` || "#"
                 : `/${item.title.toLowerCase()}`
             }
-            className='flex items-center hover:bg-black/10 focus:font-bold transition duration-200 flex items-center justify-start w-fit rounded-full py-3 my-1 px-3'
+            className={`flex items-center hover:bg-black/10 focus:font-twitter-chirp-bold transition duration-200 flex items-center justify-start w-fit rounded-full p-3 ${item.title !== "Twitter" ? 'my-1' : 'mt-[2px]'}`}
           >
             {item.title === "Notifications" &&
             session?.user?.hasNotification ? (
               <div className='relative'>
-                <item.icon size={item.title !== "Twitter" ? 25 : 30} />
+                <item.icon size={item.title !== "Twitter" ? 26 : 30} />
                 <div className='absolute top-[-4px] right-[1px] w-[7px] h-[7px] bg-main-primary rounded-full'></div>
               </div>
             ) : (
-              <item.icon size={item.title !== "Twitter" ? 25 : 30} />
+              <item.icon size={item.title !== "Twitter" ? 26 : 30} />
             )}
             {item.title !== "Twitter" && (
               <span className='mr-4 ml-5 hidden_xl text-xl '>{item.title}</span>
@@ -50,12 +50,12 @@ const SideBar = () => {
           className='flex items-center hover:bg-[#177cc0] transition duration-200 justify-content-center text-white bg-main-primary rounded-full xl:my-3 xl:h-[52px] xl:w-[92%]'
         >
           <RiQuillPenLine size={25} className='block h-6 w-6 xl:hidden m-3 ' />
-          <p className='flex flex-row w-full items-center justify-content-center hidden xl:block text-[17px] font-bold'>
+          <p className='flex flex-row w-full items-center justify-content-center hidden xl:block text-[17px] font-twitter-chirp-bold'>
             Post
           </p>
         </button>
       </div>
-      <div className='flex items-center hover:bg-black/10 focus:font-bold transition duration-200 flex items-center justify-start w-fit space-x-4 rounded-full my-2 py-2 px-3 w-[98%] overflow-hidden'>
+      <div className='flex items-center hover:bg-black/10 focus:font-twitter-chirp-heavy transition duration-200 w-full rounded-full my-3 p-3 w-[98%] overflow-hidden'>
         <Link
           href={`/users/${session?.user?.username}`}
           className='inline-block rounded-full'
@@ -74,13 +74,15 @@ const SideBar = () => {
             <GoPerson size={35} color='gray' />
           )}
         </Link>
-        <div className='flex flex-col items-start justify-items-start mx-3 hidden_xl  overflow-hidden'>
-          <div className='text-sm font-medium w-[90%] text-wrap'>
+        <div className="flex w-full justify-between items-center">
+        <div className='flex flex-col items-start mx-3 hidden_xl overflow-hidden'>
+          <div className='text-[15px] font-twitter-chirp-bold w-[90%] text-wrap'>
             {session?.user?.name}
           </div>
-          <div className='text-sm'>{session?.user?.username}</div>
+          <div className='text-[15px]'>@{session?.user?.username}</div>
         </div>
         <SignOutButton />
+        </div>
       </div>
     </nav>
   );

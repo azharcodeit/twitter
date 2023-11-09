@@ -19,7 +19,7 @@ const Button = ({
         disabled:cursor-not-allowed
         hover:opacity-80
         transition
-        font-semibold
+        font-twitter-chirp-bold
         rounded-3xl
         ${outline ? 'bg-white' : 'bg-main-primary'}
         ${outline ? 'border-black' : ''}

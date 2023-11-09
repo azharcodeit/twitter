@@ -16,11 +16,11 @@ body {
 
 /* Tailwind Styles */
 .html {
-  @apply font-twitter-chirp;
+  @apply font-twitter-chirp-regular;
 }
 .app {
   /* @apply grid xl:grid-cols-5 max-w-[1265px] mx-auto; */
-  @apply font-twitter-chirp flex flex-row mx-auto xl:w-[1260px] max-xl:max-w-[1100px];
+  @apply font-twitter-chirp-regular flex flex-row mx-auto xl:w-[1260px] max-xl:max-w-[1100px];
 }
 
 .sidebar {

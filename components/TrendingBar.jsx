@@ -32,7 +32,7 @@ const Trending = () => {
         <Button text={"Subscribe"} />
       </div>
       <div className='flex flex-col bg-gray-bg rounded-2xl overflow-hidden mb-4'>
-        <h1 className='text-main-secondary font-bold text-xl pb-3 px-4 mt-3'>
+        <h1 className='text-main-secondary font-twitter-chirp-heavy text-xl pb-3 px-4 mt-3'>
           What's happening
         </h1>
         {TRENDING.map((trend) => (

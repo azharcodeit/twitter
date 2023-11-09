@@ -15,7 +15,7 @@ async function Bookmarks() {
         <Header>
           <div className='flex flex-col pl-3 pt-2 h-16 align-items-center'>
             <div>
-              <h1 className='font-semibold text-lg'>{"Bookmarks"}</h1>
+              <h1 className='font-twitter-chirp-bold text-lg'>{"Bookmarks"}</h1>
             </div>
             <div className='flex text-slate-500 pb-1'>@{currentUser?.username}</div>
           </div>

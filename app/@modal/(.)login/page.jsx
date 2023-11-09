@@ -59,7 +59,7 @@ export default function Login() {
     <Modal>
       <div className='mx-auto flex w-fit px-4 sm:px-6 p-5'>
         <div className='w-full flex flex-col sm:justify-center'>
-          <div className='relative font-twitter-chirp-extended-heavy font-black'>
+          <div className='relative font-twitter-chirp-heavy font-black'>
             <h1 className='sm:text-3xl sm:mb-8 mb-5 text-xl tracking-tight text-gray-900'>
               Sign in to X
             </h1>
@@ -112,7 +112,7 @@ export default function Login() {
               className='
           text-main-secondary 
           mt-4 
-          font-normal
+          twitter-chirp-regular
         '
             >
               <p>

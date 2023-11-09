@@ -159,7 +159,7 @@ function PostContainer({ post, user }) {
       <div className='w-full'>
         <div className='flex justify-between h-fit row-span-1'>
           <div className='flex'>
-            <h1 className='font-semibold'>{user?.name || "Name Surname"} </h1>
+            <h1 className='font-twitter-chirp-bold'>{user?.name || "Name Surname"} </h1>
             <div className='flex text-slate-500 ml-1'>
               <Link href={`users/${user?.username}`}>
                 <h1>@{user?.username}</h1>
@@ -191,13 +191,13 @@ function PostContainer({ post, user }) {
             <div className='rounded-full mr-2 hover:bg-main-primary/20'>
               <FaRegComment size={20} />
             </div>
-            <h1 className='mx-1 font-normal text-sm '>20</h1>
+            <h1 className='mx-1 twitter-chirp-regular text-sm '>20</h1>
           </button>
           <button className='flex items-center text-secondary-text hover:text-repost-green'>
             <div className='rounded-full m-2 hover:bg-repost-green/20'>
               <LuRepeat2 size={20} />
             </div>
-            <h1 className='mx-1 font-normal text-sm '>78</h1>
+            <h1 className='mx-1 twitter-chirp-regular text-sm '>78</h1>
           </button>
           <button
             onClick={toggleLike}
@@ -208,7 +208,7 @@ function PostContainer({ post, user }) {
               <LikeIcon color={hasLiked ? "#f91880" : ""} size={20} />
             </div>
             <h1
-              className={`mx-1 font-normal text-sm ${
+              className={`mx-1 twitter-chirp-regular text-sm ${
                 hasLiked ? "text-red-like" : ""
               }`}
             >
@@ -224,7 +224,7 @@ function PostContainer({ post, user }) {
               <BookmarkIcon color={hasBookmarked ? "#1c9bef" : ""} size={20} />
             </div>
             <h1
-              className={`mx-1 font-normal text-sm ${
+              className={`mx-1 twitter-chirp-regular text-sm ${
                 hasBookmarked ? "text-main-primary" : ""
               }`}
             >

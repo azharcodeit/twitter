@@ -30,8 +30,8 @@ const Tabs = ({ sticky, children }) => {
                 key={child.props.label}
                 className={`${
                   activeTab === child.props.label
-                    ? "font-semibold text-main-secondary"
-                    : "font-medium text-slate-500"
+                    ? "font-twitter-chirp-bold text-main-secondary"
+                    : "font-twitter-chirp text-slate-500"
                 } py-4`}
               >
                 {child.props.label}

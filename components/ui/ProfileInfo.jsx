@@ -14,7 +14,7 @@ function ProfileInfo({ image, name, username}) {
             <div className='flex flex-col items-start justify-items-start mx-3'>
               <Link
                 href={`users/${username}`}
-                className='text-base font-semibold'
+                className='text-base font-twitter-chirp-bold'
               >
                 {name}
               </Link>

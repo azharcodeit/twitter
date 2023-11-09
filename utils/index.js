@@ -75,28 +75,28 @@ export const NAVIGATION_ITEMS = [
     title: "Notifications",
     icon: PiBell,
   },
-  {
-    title: "Messages",
-    icon: PiEnvelopeSimple,
-  },
+  // {
+  //   title: "Messages",
+  //   icon: PiEnvelopeSimple,
+  // },
   {
     title: "Bookmarks",
     icon: GoBookmark,
   },
-  {
-    title: "Communities",
-    icon: GoPeople,
-  },
-  {
-    title: "Premium",
-    icon: RiTwitterXFill,
-  },
+  // {
+  //   title: "Communities",
+  //   icon: GoPeople,
+  // },
+  // {
+  //   title: "Premium",
+  //   icon: RiTwitterXFill,
+  // },
   {
     title: "Profile",
     icon: GoPerson,
   },
-  {
-    title: "More",
-    icon: RiMoreLine,
-  },
+  // {
+  //   title: "More",
+  //   icon: RiMoreLine,
+  // },
 ];

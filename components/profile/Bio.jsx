@@ -108,7 +108,7 @@ function Bio({ fetchedUser, followingInit }) {
         </div>
       </div>
       <div className='mt-1 mb-3'>
-        <h1 className='font-semibold text-xl'>{fetchedUser?.name || "Name"}</h1>
+        <h1 className='font-twitter-chirp-bold text-xl'>{fetchedUser?.name || "Name"}</h1>
         <p className='text-gray-text'>@{fetchedUser?.username}</p>
       </div>
       <div className='mb-3'>{fetchedUser?.bio || "This is a profile bio"}</div>
@@ -126,13 +126,13 @@ function Bio({ fetchedUser, followingInit }) {
       </div>
       <div className='flex items-center text-gray-text text-sm mb-5'>
         <div className='mr-3'>
-          <span className='text-main-secondary font-bold'>
+          <span className='text-main-secondary font-twitter-chirp-bold'>
             {fetchedUser?.followingUsers?.length}
           </span>{" "}
           Following
         </div>
         <div>
-          <span className='text-main-secondary font-bold'>
+          <span className='text-main-secondary font-twitter-chirp-bold'>
             {fetchedUser?.followersCount || 0}
           </span>{" "}
           Followers

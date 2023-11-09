@@ -1,6 +1,7 @@
 import prisma from "lib/prismadb";
 
 export async function getUserById(id) {
+  "use server";
   try {
     const userInfo = await prisma.user.findUnique({
       where: {

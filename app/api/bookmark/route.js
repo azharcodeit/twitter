@@ -43,6 +43,29 @@ export async function POST(request) {
 
   updatedBookmarkedIds.push(currentUser?.id);
 
+  // NOTIFICATION PART START
+  try {
+    if (post?.userId) {
+      await prisma.notification.create({
+        data: {
+          body: `${currentUser?.name} bookmarked your tweet`,
+          userId: post?.userId,
+        },
+      });
+
+      await prisma.user.update({
+        where: {
+          id: post?.userId,
+        },
+        data: {
+          hasNotification: true,
+        },
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+  // NOTIFICATION PART END
   const updatedPost = await prisma.post.update({
     where: {
       id: postId,

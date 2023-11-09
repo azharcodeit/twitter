@@ -44,33 +44,35 @@ export async function POST(request) {
   updatedLikedIds.push(currentUser?.id);
 
   // NOTIFICATION PART START
-  // try {
-  //   const post = await prisma.post.findUnique({
-  //     where: {
-  //       id: postId,
-  //     },
-  //   });
+  try {
+    if (post?.userId) {
+      await prisma.notification.create({
+        data: {
+          body: `${currentUser?.name} liked your tweet`,
+          userId: post?.userId,
+        },
+      });
+      await prisma.notification.update({
+        where: {
+          userId: post?.userId,
+        },
+        data: {
+          actionUserId: currentUser?.id,
+        },
+      });
 
-  //   if (post?.userId) {
-  //     await prisma.notification.create({
-  //       data: {
-  //         body: "Someone liked your tweet!",
-  //         userId: post.userId,
-  //       },
-  //     });
-
-  //     await prisma.user.update({
-  //       where: {
-  //         id: post.userId,
-  //       },
-  //       data: {
-  //         hasNotification: true,
-  //       },
-  //     });
-  //   }
-  // } catch (error) {
-  //   console.log(error);
-  // }
+      await prisma.user.update({
+        where: {
+          id: post?.userId,
+        },
+        data: {
+          hasNotification: true,
+        },
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
   // NOTIFICATION PART END
   const updatedPost = await prisma.post.update({
     where: {

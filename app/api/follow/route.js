@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { getUser } from "@app/actions/getUser";
 
 import prisma from "@/lib/prismadb";
 
@@ -36,6 +37,7 @@ export async function DELETE(request) {
 export async function POST(request) {
   const body = await request.json();
   const { username, currentUser } = body;
+  const notifiedUser = await getUser(username);
 
   const user = await prisma.user.findFirst({
     where: {
@@ -51,21 +53,25 @@ export async function POST(request) {
 
   updatedFollowingUsers.push(username);
   // NOTIFICATION PART START
-  // const notification = await prisma.notification.create({
-  //   data: {
-  //     body: "Someone followed you!",
-  //     username,
-  //   },
-  // });
+  try {
+    await prisma.notification.create({
+      data: {
+        body: `${currentUser?.name} followed you`,
+        userId: notifiedUser?.id,
+      },
+    });
 
-  // const notifyUser = await prisma.user.update({
-  //   where: {
-  //     username: username,
-  //   },
-  //   data: {
-  //     hasNotification: true,
-  //   },
-  // });
+    await prisma.user.update({
+      where: {
+        id: notifiedUser?.id,
+      },
+      data: {
+        hasNotification: true,
+      },
+    });
+  } catch (error) {
+    console.log(error);
+  }
   // NOTIFICATION PART END
 
   const updatedUser = await prisma.user.update({

@@ -103,6 +103,7 @@ export const authOptions = {
         createdAt: dbUser.createdAt,
         updatedAt: dbUser.updatedAt,
         followingUsers: dbUser.followingUsers,
+        hasNotification: dbUser.hasNotification,
         posts: dbUser.posts,
         comments: dbUser.posts,
         notifications: dbUser.notifications,

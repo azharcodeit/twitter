@@ -25,9 +25,9 @@ function NewPost({ placeholder }) {
   console.log(session);
 
   const onChange = (event) => setBody(event.target.value);
-  useEffect(() => {}, [session, status]);
+  
 
-  const handlePost = useCallback(async () => {
+  const onSubmit = useCallback(async () => {
     try {
       setLoading(true);
       const res = await fetch("http://localhost:3000/api/posts", {
@@ -54,7 +54,10 @@ function NewPost({ placeholder }) {
       setLoading(false);
     }
     
-  }, [body, postModal]);
+  }, [body, postModal, currentUser]);
+
+  useEffect(() => {
+  }, [onSubmit, loading]);
   
   return (
     <div className='grid z-10 grid-flow-col grid-cols-10 h-14 px-4 py-3 border-darker-gray-bg border-b h-fit'>
@@ -101,7 +104,7 @@ function NewPost({ placeholder }) {
           <>
             <Button
               small
-              onClick={handlePost}
+              onClick={onSubmit}
               disabled={loading}
               label={loading ? <Loader2 /> : "Post"}
             />

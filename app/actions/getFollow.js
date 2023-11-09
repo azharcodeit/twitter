@@ -1,4 +1,3 @@
-"use client";
 import { useCallback, useState } from "react";
 import { toast } from "react-hot-toast";
 import prisma from "@lib/prismadb";

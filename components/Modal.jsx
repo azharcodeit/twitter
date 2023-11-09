@@ -36,7 +36,7 @@ const Modal = ({
       <div
         className='
           justify-center 
-          items-center 
+          items-start 
           flex 
           overflow-x-hidden 
           overflow-y-auto 
@@ -47,71 +47,59 @@ const Modal = ({
           focus:outline-none
           bg-neutral-800
           bg-opacity-70
+          p-[5%]
         '
       >
-        <div className='relative w-full lg:w-3/6 my-6 mx-auto lg:max-w-3xl h-full lg:h-auto'>
+        <div className='relative w-full sm:max-w-[90%] md:max-w-[70%] lg:max-w-[40%] bg-white rounded-2xl mx-auto'>
           {/*content*/}
-          <div
-            className='
-            h-full
-            lg:h-auto
-            border-0 
-            rounded-lg 
-            shadow-lg 
-            relative 
-            flex 
-            flex-col 
-            w-full 
-            bg-white 
-            outline-none 
-            focus:outline-none
-            '
-          >
+          <div>
             {/*header*/}
 
             <div
               className='
               flex 
-              items-center 
               justify-between 
               p-4
-              rounded-t
+              items-center
               '
             >
-              {title && (
-                <h3 className='text-3xl font-twitter-chirp-bold text-black'>{title}</h3>
-              )}
-              <button
-                className='
-                  p-1 
+              <div className='flex'>
+                <button
+                  className='
                   ml-auto
                   border-0 
                   text-black 
                   hover:opacity-70
                   transition
+                  w-[56px]
+                  h-[30px]
                 '
-                onClick={handleClose}
-              >
-                <AiOutlineClose size={20} />
-              </button>
+                  onClick={handleClose}
+                >
+                  <AiOutlineClose size={20} />
+                </button>
+                {title && (
+                  <h3 className='text-xl font-twitter-chirp-bold text-black'>
+                    {title}
+                  </h3>
+                )}
+              </div>
+
+              {onSubmit && (
+                <Button
+                  disabled={disabled}
+                  label={actionLabel}
+                  secondary
+                  small
+                  onClick={handleSubmit}
+                />
+              )}
             </div>
 
             {/*body*/}
             <div className='relative p-4 pt-0 flex-auto'>{body}</div>
             {/*footer*/}
-            {(footer || onSubmit) && (
-              <div className='flex flex-col gap-2 p-4'>
-                <Button
-                  disabled={disabled}
-                  label={actionLabel}
-                  secondary
-                  fullWidth
-                  large
-                  onClick={handleSubmit}
-                />
-                {footer}
-              </div>
-            )}
+            {footer && <div className='flex flex-col gap-2 p-4'>{footer}</div>}
           </div>
         </div>
       </div>

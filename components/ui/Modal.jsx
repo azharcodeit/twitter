@@ -42,7 +42,7 @@ export default function Modal({ children }) {
     >
       <div
         ref={wrapper}
-        className='absolute w-full sm:max-w-[90%] md:max-w-[70%] lg:max-w-[40%] p-6 bg-white rounded-3xl mx-auto'
+        className='absolute w-full sm:max-w-[90%] md:max-w-[70%] lg:max-w-[40%] p-6 bg-white rounded-2xl mx-auto'
       >
         <button onClick={() => router.back()}>
           <RiCloseFill size={30} />

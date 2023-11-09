@@ -7,7 +7,8 @@ const Button = ({
   outline,
   small,
   icon: Icon,
-  follow
+  follow,
+  secondary
 }) => {
   return ( 
     <button
@@ -31,6 +32,8 @@ const Button = ({
         ${small ? 'px-4' : ''}
         ${small ? 'text-[15px]' : 'text-md'}
         ${follow ? 'bg-main-secondary' : ''}
+        ${secondary ? 'bg-main-secondary' : ''}
+        ${secondary ? 'py-1' : ''}
       `}
     >
       {Icon && (

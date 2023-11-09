@@ -34,7 +34,7 @@ const Input = ({ id, label, onChange, value, type = "text", disabled }) => {
           text-md
           duration-150 
           transform 
-          -translate-y-3 
+          -translate-y-3
           top-4
           z-2
           origin-[0] 
@@ -44,7 +44,7 @@ const Input = ({ id, label, onChange, value, type = "text", disabled }) => {
           peer-focus:-translate-y-4
           left-4
           text-zinc-400}
-          ${value ? 'scale-75':'scale-100'}
+          ${value || onChange ? "scale-75" : "scale-100"}
         `}
       >
         {label}

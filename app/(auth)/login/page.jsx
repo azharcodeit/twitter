@@ -49,10 +49,10 @@ const SignInPage = () => {
           </div>
           <div className='sm:grow-0 sm:w-[70%] w-full flex flex-col sm:justify-center'>
             <div className='relative font-twitter-chirp-extended-heavy font-black'>
-              <h1 className='sm:text-7xl sm:my-15 my-12 text-6xl tracking-tight text-gray-900'>
+              <h1 className='sm:text-6xl sm:my-15 my-12 text-6xl tracking-tight text-gray-900'>
                 Happening now
               </h1>
-              <h1 className='sm:text-5xl sm:mb-8 mb-5 text-3xl tracking-tight text-gray-900'>
+              <h1 className='sm:text-4xl sm:mb-8 mb-5 text-3xl tracking-tight text-gray-900'>
                 Join today.
               </h1>
             </div>

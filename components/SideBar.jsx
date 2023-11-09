@@ -14,7 +14,7 @@ import { PiBell, PiEnvelopeSimple } from "react-icons/pi";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import usePostModal from "@/hooks/usePostModal";
-
+import { useRouter } from "next/navigation";
 
 const NAVIGATION_ITEMS = [
   {
@@ -61,10 +61,9 @@ const NAVIGATION_ITEMS = [
 
 const SideBar = () => {
   const { data: session, status } = useSession();
-  useEffect(() => {}, [session, status]);
+  const router = useRouter()
+  useEffect(() => {});
   const postModal = usePostModal();
-
-
   return (
     <nav className='sidebar xl:col-span-1 w-full h-screen flex flex-col justify-between pl-2 pr-2 sticky top-0'>
       <div className='flex flex-col max-xl:items-center '>
@@ -81,14 +80,25 @@ const SideBar = () => {
             }
             className='flex items-center hover:bg-black/10 focus:font-bold transition duration-200 flex items-center justify-start w-fit rounded-full py-3 my-1 px-3'
           >
-            <item.icon size={item.title !== "Twitter" ? 25 : 30} />
+            {item.title === "Notifications" &&
+            session?.user?.hasNotification ? (
+              <div className='relative'>
+                <item.icon size={item.title !== "Twitter" ? 25 : 30} />
+                <div className='absolute top-[-4px] right-[1px] w-[7px] h-[7px] bg-main-primary rounded-full'></div>
+              </div>
+            ) : (
+              <item.icon size={item.title !== "Twitter" ? 25 : 30} />
+            )}
             {item.title !== "Twitter" && (
               <span className='mr-4 ml-5 hidden_xl text-xl '>{item.title}</span>
             )}
           </Link>
         ))}
 
-        <button onClick={postModal.onOpen} className='flex items-center hover:bg-[#177cc0] transition duration-200 justify-content-center text-white bg-main-primary rounded-full xl:my-3 xl:h-[52px] xl:w-[92%]'>
+        <button
+          onClick={postModal.onOpen}
+          className='flex items-center hover:bg-[#177cc0] transition duration-200 justify-content-center text-white bg-main-primary rounded-full xl:my-3 xl:h-[52px] xl:w-[92%]'
+        >
           <RiQuillPenLine size={25} className='block h-6 w-6 xl:hidden m-3 ' />
           <p className='flex flex-row w-full items-center justify-content-center hidden xl:block text-[17px] font-bold'>
             Post

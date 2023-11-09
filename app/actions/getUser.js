@@ -2,6 +2,7 @@ import prisma from "lib/prismadb";
 import { getCurrentUser } from "@app/actions/getCurrentUser";
 
 export async function getUser(username) {
+  "use server";
   try {
     const currentUser = await getCurrentUser();
     if (!username) {

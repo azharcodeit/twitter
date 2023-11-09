@@ -99,7 +99,7 @@ const Modal = ({
             {/*body*/}
             <div className='relative p-4 pt-0 flex-auto'>{body}</div>
             {/*footer*/}
-            {footer && onSubmit && (
+            {(footer || onSubmit) && (
               <div className='flex flex-col gap-2 p-4'>
                 <Button
                   disabled={disabled}

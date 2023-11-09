@@ -1,6 +1,7 @@
 import prisma from "lib/prismadb";
 
 export async function getPost(id) {
+  "use server";
   try {
     if (!id) {
       return null;

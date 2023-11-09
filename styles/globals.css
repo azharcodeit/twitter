@@ -1,11 +1,8 @@
-@import url('./fonts.css');
+@import url("./fonts.css");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* 
-  Note: The styles for this gradient grid background is heavily inspired by the creator of this amazing site (https://dub.sh) – all credits go to them! 
-*/
 html {
   overflow: hidden;
   height: 100%;
@@ -17,10 +14,9 @@ body {
   overflow: auto;
 }
 
-
 /* Tailwind Styles */
-.html{
-  @apply font-twitter-chirp
+.html {
+  @apply font-twitter-chirp;
 }
 .app {
   /* @apply grid xl:grid-cols-5 max-w-[1265px] mx-auto; */
@@ -65,7 +61,3 @@ body {
   font-family: inherit;
   font-size: inherit;
 }
-/* Feed Component */
-/* Form Component */
-/* Nav Component */
-/* PromptCard Component */

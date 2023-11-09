@@ -2,68 +2,18 @@
 import Link from "next/link";
 import Image from "next/image";
 import SignOutButton from "@components/SignOutButton";
-import {
-  GoHome,
-  GoSearch,
-  GoBookmark,
-  GoPeople,
-  GoPerson,
-} from "react-icons/go";
-import { RiTwitterXFill, RiMoreLine, RiQuillPenLine } from "react-icons/ri";
-import { PiBell, PiEnvelopeSimple } from "react-icons/pi";
+import { GoPerson } from "react-icons/go";
+import { RiQuillPenLine } from "react-icons/ri";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import usePostModal from "@/hooks/usePostModal";
-import { useRouter } from "next/navigation";
-
-const NAVIGATION_ITEMS = [
-  {
-    title: "Twitter",
-    icon: RiTwitterXFill,
-  },
-  {
-    title: "Home",
-    icon: GoHome,
-  },
-  {
-    title: "Explore",
-    icon: GoSearch,
-  },
-  {
-    title: "Notifications",
-    icon: PiBell,
-  },
-  {
-    title: "Messages",
-    icon: PiEnvelopeSimple,
-  },
-  {
-    title: "Bookmarks",
-    icon: GoBookmark,
-  },
-  {
-    title: "Communities",
-    icon: GoPeople,
-  },
-  {
-    title: "Premium",
-    icon: RiTwitterXFill,
-  },
-  {
-    title: "Profile",
-    icon: GoPerson,
-  },
-  {
-    title: "More",
-    icon: RiMoreLine,
-  },
-];
+import { NAVIGATION_ITEMS } from "@utils";
 
 const SideBar = () => {
-  const { data: session, status } = useSession();
-  const router = useRouter()
+  const { data: session } = useSession();
   useEffect(() => {});
   const postModal = usePostModal();
+
   return (
     <nav className='sidebar xl:col-span-1 w-full h-screen flex flex-col justify-between pl-2 pr-2 sticky top-0'>
       <div className='flex flex-col max-xl:items-center '>

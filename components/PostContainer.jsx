@@ -31,6 +31,10 @@ function PostContainer({ post, user }) {
   const postId = post?.id;
   const postedTime = getPostedTime(post?.createdAt);
 
+  const handleComment = useCallback(async () => {
+    alert("Comment clicked");
+  }, [currentUser]);
+
   const toggleLike = useCallback(async () => {
     try {
       let request;
@@ -137,7 +141,7 @@ function PostContainer({ post, user }) {
     }
   }, [hasBookmarked, currentUser]);
 
-  useEffect(() => {}, [session?.user, status, user, post, post?.likedIds]);
+  // useEffect(() => {}, [session?.user, status, user, post, post?.likedIds]);
 
   return (
     <div className='flex felx-col z-0 items-start h-14 px-4 py-3 border-darker-gray-bg border-b h-fit hover:bg-black/5 transition duration-200 cursor-pointer'>
@@ -159,7 +163,9 @@ function PostContainer({ post, user }) {
       <div className='w-full'>
         <div className='flex justify-between h-fit row-span-1'>
           <div className='flex'>
-            <h1 className='font-twitter-chirp-bold'>{user?.name || "Name Surname"} </h1>
+            <h1 className='font-twitter-chirp-bold'>
+              {user?.name || "Name Surname"}{" "}
+            </h1>
             <div className='flex text-slate-500 ml-1'>
               <Link href={`users/${user?.username}`}>
                 <h1>@{user?.username}</h1>
@@ -187,7 +193,10 @@ function PostContainer({ post, user }) {
           )}
         </PostWrapper>
         <div className='flex justify-between  mt-2'>
-          <button className='flex items-center text-secondary-text  hover:text-main-primary'>
+          <button
+            onClick={handleComment}
+            className='flex items-center text-secondary-text  hover:text-main-primary'
+          >
             <div className='rounded-full mr-2 hover:bg-main-primary/20'>
               <FaRegComment size={20} />
             </div>

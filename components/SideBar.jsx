@@ -11,7 +11,6 @@ import { NAVIGATION_ITEMS } from "@utils";
 
 const SideBar = () => {
   const { data: session } = useSession();
-  useEffect(() => {});
   const postModal = usePostModal();
 
   return (

@@ -6,11 +6,12 @@ import Back from "@components/Back";
 import PostContainer from "@components/PostContainer";
 import NewPost from "@components/NewPost";
 import { getUserById } from "@app/actions/getUserById";
+import CommentFeed from "@components/post/CommentFeed";
 
 async function Post({ params }) {
   const { id } = params;
   const post = await getPost(id);
-  const fetchedUser = await getUserById(post?.userId)
+  const fetchedUser = await getUserById(post?.userId);
 
   return (
     <MainContainer>
@@ -23,9 +24,9 @@ async function Post({ params }) {
             </div>
           </div>
         </Header>
-        <PostContainer post={post} user={fetchedUser}/>
-        <NewPost placeholder={"Post your reply"}/>
-         <div className='flex px-4 h-14'>Comments...</div>
+        <PostContainer post={post} user={fetchedUser} />
+        <NewPost placeholder={"Post your reply"} />
+        <CommentFeed comments={fetchedUser?.comments} />
       </div>
       <TrendingBar />
     </MainContainer>

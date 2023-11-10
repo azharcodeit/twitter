@@ -105,7 +105,7 @@ export const authOptions = {
         followingUsers: dbUser.followingUsers,
         hasNotification: dbUser.hasNotification,
         posts: dbUser.posts,
-        comments: dbUser.posts,
+        comments: dbUser.comments,
         notifications: dbUser.notifications,
       };
     },

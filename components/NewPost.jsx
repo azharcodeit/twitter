@@ -16,7 +16,7 @@ import { useSession } from "next-auth/react";
 import { Loader2 } from "lucide-react";
 import usePostModal from "@hooks/usePostModal";
 
-function NewPost({ placeholder }) {
+function NewPost({ placeholder, isComment, postId }) {
   const [body, setBody] = useState("");
   const [loading, setLoading] = useState(false);
   const { data: session, status } = useSession();
@@ -25,26 +25,40 @@ function NewPost({ placeholder }) {
   console.log(session);
 
   const onChange = (event) => setBody(event.target.value);
-  
 
   const onSubmit = useCallback(async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3000/api/posts", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          currentUser,
-          body,
-        }),
-      });
+      let res;
+      if (isComment) {
+        res = await fetch("http://localhost:3000/api/comments", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            postId,
+            body,
+            currentUser
+          }),
+        });
+      } else {
+        res = await fetch("http://localhost:3000/api/posts", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            currentUser,
+            body,
+          }),
+        });
+      }
 
       if (res.ok) {
         setBody("");
         toast.success("Tweet created");
-        postModal.onClose()
+        postModal.onClose();
       } else {
         console.log("User registration failed.");
       }
@@ -53,12 +67,9 @@ function NewPost({ placeholder }) {
     } finally {
       setLoading(false);
     }
-    
-  }, [body, postModal, currentUser]);
+  }, [body, postModal, currentUser, isComment, postId]);
 
-  useEffect(() => {
-  }, [onSubmit, loading]);
-  
+
   return (
     <div className='grid z-10 grid-flow-col grid-cols-10 h-14 px-4 py-3 border-darker-gray-bg border-b h-fit'>
       <div className='flex w-full'>

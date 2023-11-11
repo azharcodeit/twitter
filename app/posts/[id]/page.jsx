@@ -13,6 +13,7 @@ async function Post({ params }) {
   const post = await getPost(id);
   const fetchedUser = await getUserById(post?.userId);
 
+  console.log(post?.comments)
   return (
     <MainContainer>
       <div className='feed border-darker-gray-bg border-x h-inherit'>
@@ -25,8 +26,8 @@ async function Post({ params }) {
           </div>
         </Header>
         <PostContainer post={post} user={fetchedUser} />
-        <NewPost placeholder={"Post your reply"} />
-        <CommentFeed comments={fetchedUser?.comments} />
+        <NewPost isComment postId={post?.id} placeholder={"Post your reply"} />
+        <CommentFeed comments={post?.comments} />
       </div>
       <TrendingBar />
     </MainContainer>

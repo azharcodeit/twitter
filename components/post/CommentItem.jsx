@@ -1,27 +1,28 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from 'next/navigation';
+import { useRouter } from "next/navigation";
 import { RiMoreLine } from "react-icons/ri";
 import { GoPerson } from "react-icons/go";
 import { getPostedTime } from "@utils";
-import { useCallback } from 'react';
+import { useCallback } from "react";
 
-function CommentItem({ data }) {
+function CommentItem({data}) {
   const router = useRouter();
 
-  const goToUser = useCallback((e) => {
-    e.stopPropagation();
+  console.log(data)
+  const goToUser = useCallback(
+    (e) => {
+      e.stopPropagation();
 
-    router.push(`/users/${data.user.username}`)
-  }, [router, data.user.username]);
+      router.push(`/users/${data.user.username}`);
+    },
+    [router, data?.user?.username]
+  );
 
   const postedTime = getPostedTime(data?.createdAt);
   return (
-    // <div className='flex pl-3 h-14 items-center border-darker-gray-bg border-b'>
-    //     <div>{data?.body}</div>
-    // </div>
-    <div className='flex felx-col z-0 items-start h-14 px-4 py-3 border-darker-gray-bg border-b h-fit hover:bg-black/5 transition duration-200 cursor-pointer'>
+    <div className='flex z-0 items-start h-14 px-4 py-3 border-darker-gray-bg border-b h-fit hover:bg-black/5 transition duration-200 cursor-pointer'>
       <div className='flex w-fit mr-3'>
         <div onClick={goToUser}>
           {data?.user?.profileImage ? (

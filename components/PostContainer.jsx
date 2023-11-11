@@ -35,6 +35,8 @@ function PostContainer({ post, user }) {
     alert("Comment clicked");
   }, [currentUser]);
 
+  console.log(post?.comments)
+
   const toggleLike = useCallback(async () => {
     try {
       let request;
@@ -200,7 +202,7 @@ function PostContainer({ post, user }) {
             <div className='rounded-full mr-2 hover:bg-main-primary/20'>
               <FaRegComment size={20} />
             </div>
-            <h1 className='mx-1 twitter-chirp-regular text-sm '>20</h1>
+            <h1 className='mx-1 twitter-chirp-regular text-sm '>{post?.comments?.length || 0}</h1>
           </button>
           <button className='flex items-center text-secondary-text hover:text-repost-green'>
             <div className='rounded-full m-2 hover:bg-repost-green/20'>

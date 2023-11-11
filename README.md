@@ -12,10 +12,10 @@ This is a FullStack Twitter clone repository using Next.js](https://nextjs.org/)
 - Likes functionality
 - Bookmarks functionality
 - Notification system
+- Comments / Replies
 
 ## To Be included:
-
-- Comments / Replies
+- Loaders, optimization
 - Vercel Deployment
 
 ## Twitter Clone Showcase:

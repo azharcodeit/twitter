@@ -35,8 +35,6 @@ function PostContainer({ post, user }) {
     alert("Comment clicked");
   }, [currentUser]);
 
-  console.log(post?.comments)
-
   const toggleLike = useCallback(async () => {
     try {
       let request;

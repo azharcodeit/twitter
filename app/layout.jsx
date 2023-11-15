@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 import SideBar from "@components/SideBar";
-import NextAuthProvider from "@app/context/client-provider";
+import NextAuthProvider from "@context/client-provider";
 import EditModal from "@components/modals/EditModal";
 import PostModal from "@components/modals/PostModal";
 import "@styles/globals.css";

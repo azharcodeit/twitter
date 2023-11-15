@@ -1,16 +1,13 @@
 import { getBookmarkedPosts } from "@app/actions/getBookmarkedPosts";
 import { getCurrentUser } from "@app/actions/getCurrentUser";
-import TrendingBar from "@components/TrendingBar";
-import MainContainer from "@components/MainContainer";
 import Header from "@components/Header";
 import PostContainer from "@components/PostContainer";
 import { getUserById } from "@app/actions/getUserById";
 
-async function Bookmarks() {
+async function Page() {
   const fetchedBookmarkedPosts = await getBookmarkedPosts();
   const currentUser = await getCurrentUser();
   return (
-    <MainContainer>
       <div className='feed border-darker-gray-bg border-x h-inherit'>
         <Header>
           <div className='flex flex-col pl-3 pt-2 h-16 align-items-center'>
@@ -34,9 +31,7 @@ async function Bookmarks() {
           );
         })}
       </div>
-      <TrendingBar />
-    </MainContainer>
   );
 }
 
-export default Bookmarks;
+export default Page;

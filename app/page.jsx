@@ -1,7 +1,7 @@
 "use client";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import SignInPage from "./(auth)/login/page";
+import SignInPage from "@app/(routes)/(auth)/login/page"
 import { useEffect } from "react";
 
 export default function page() {

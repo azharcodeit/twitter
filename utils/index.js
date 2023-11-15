@@ -1,12 +1,6 @@
-import {
-  GoHome,
-  GoSearch,
-  GoBookmark,
-  GoPeople,
-  GoPerson,
-} from "react-icons/go";
-import { RiTwitterXFill, RiMoreLine } from "react-icons/ri";
-import { PiBell, PiEnvelopeSimple } from "react-icons/pi";
+import { GoHome, GoSearch, GoBookmark, GoPerson } from "react-icons/go";
+import { RiTwitterXFill } from "react-icons/ri";
+import { PiBell } from "react-icons/pi";
 
 export const monthNames = [
   "January",

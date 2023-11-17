@@ -1,15 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  parallelRoutes: [
-    "/feed",
-    "/trending",
-    "/explore",
-    "/notifications",
-    "/bookmarksFeed",
-  ],
-  experimental: {
-    serverActions: true,
-  },
   images: {
     remotePatterns: [
       {

@@ -47,7 +47,7 @@ const Tabs = ({ sticky, children }) => {
           </div>
         ))}
       </div>
-      <div className='py-4'>
+      <div> 
         {children.map((child) => {
           if (child.props.label === activeTab) {
             return <div key={child.props.label}>{child.props.children}</div>;

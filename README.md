@@ -13,9 +13,9 @@ This is a FullStack Twitter clone repository using Next.js](https://nextjs.org/)
 - Bookmarks functionality
 - Notification system
 - Comments / Replies
+- Loaders
 
 ## To Be included:
-- Loaders, optimization
 - Vercel Deployment
 
 ## Twitter Clone Showcase:

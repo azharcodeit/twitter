@@ -153,7 +153,7 @@ function PostContainer({ post, user }) {
               alt='avatar'
               width={40}
               height={40}
-              className='border rounded-xl'
+              className='rounded-3xl'
             />
           ) : (
             <GoPerson size={30} />

@@ -2,6 +2,7 @@
 import { signIn } from "next-auth/react";
 import { Loader2 } from "lucide-react";
 import { useCallback, useState } from "react";
+import {useForm} from 'react-hook-form'
 import { toast } from "react-hot-toast";
 import Modal from "@components/ui/Modal";
 import Link from "next/link";
@@ -17,6 +18,8 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const { register, handleSubmit } = useForm();
+
 
   const router = useRouter();
 
@@ -35,7 +38,7 @@ export default function Login() {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     if (!name || !username || !email || !password) {
@@ -91,24 +94,27 @@ export default function Login() {
               or
             </div>
             <div className='flex flex-col gap-4 mt-3'>
-              <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+              <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
                 <Input
                   id='email'
                   label='Email'
                   onChange={(e) => setEmail(e.target.value)}
                   required
+                  {...register('email')}
                 />
                 <Input
                   id='name'
                   label='Name'
                   onChange={(e) => setName(e.target.value)}
                   required
+                  {...register('name', { minLength: 2 })}
                 />
                 <Input
                   id='username'
                   label='Username'
                   onChange={(e) => setUsername(e.target.value)}
                   required
+                  {...register('username', { minLength: 2 })}
                 />
                 <Input
                   id='password'
@@ -116,6 +122,7 @@ export default function Login() {
                   type='password'
                   onChange={(e) => setPassword(e.target.value)}
                   required
+                  {...register('password', { minLength: 8 })}
                 />
                 <Button
                   type='submit'

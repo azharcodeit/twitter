@@ -14,8 +14,10 @@ This is a FullStack Twitter clone repository using Next.js](https://nextjs.org/)
 - Notification system
 - Comments / Replies
 - Loaders
+- Validation
 
 ## To Be included:
+
 - Vercel Deployment
 
 ## Twitter Clone Showcase:

@@ -17,17 +17,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const loginWithGoogle = async (e) => {
-    e.preventDefault();
-    try {
-      await signIn("google");
-    } catch (error) {
-      toast.error("There was an error while signing in with Google!");
-    } finally {
-      router.replace("home");
-    }
-  };
-
   const handleRefresh = () => {
     window.location.replace("/home")
   };
@@ -69,7 +58,7 @@ export default function Login() {
               outline
               label='Continue with Google'
               icon={FcGoogle}
-              onClick={loginWithGoogle}
+              onClick={()=>signIn("google")}
             />
             <div className='mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400'>
               or

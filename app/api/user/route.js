@@ -2,6 +2,8 @@ import prisma from "@lib/prismadb";
 import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
 
+import { Prisma } from "@prisma/client";
+
 export const getAllUsers = async () => {
   const users = await prisma.user.findMany({
     orderBy: {
@@ -27,21 +29,44 @@ export async function GET(request) {
 }
 
 export async function POST(request) {
-  const body = await request.json();
-  const { email, name, username, password } = body;
+  try {
+    const body = await request.json();
+    const { email, name, username, password } = body;
+    console.log("PARAMETERS ARE: ", email, name, username, password);
 
-  const hashedPassword = await bcrypt.hash(password, 12);
-
-  const user = await prisma.user.create({
-    data: {
-      email,
-      name,
-      username,
-      hashedPassword,
-    },
-  });
-
-  return NextResponse.json(user);
+    const hashedPassword = await bcrypt.hash(password, 12);
+    console.log("HASHED PASSWORD IS: ", hashedPassword);
+    const user = await prisma.user.create({
+      data: {
+        email,
+        name,
+        username,
+        hashedPassword,
+      },
+    });
+    console.log("CREATED SUCCESSFULLY");
+    return NextResponse.json(user);
+  } catch (e) {
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      console.log("ERROR OCCURED");
+      // The .code property can be accessed in a type-safe manner
+      if (e.code === "P2002") {
+        console.log("SPECIFIC P2002 ERROR OCCURED");
+        console.log(
+          "[NURBEK] There is a unique constraint violation, a new user cannot be created with this email"
+        );
+        return NextResponse.json(
+          {
+            message: "This e-mail is already taken.",
+          },
+          {
+            status: 409,
+          }
+        );
+      }
+    }
+    return { error: { message: error.message } };
+  }
 }
 
 export async function PUT(request) {

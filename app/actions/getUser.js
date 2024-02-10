@@ -50,6 +50,6 @@ export async function getUser(username) {
       emailVerified: userInfo.emailVerified?.toISOString() || null,
     };
   } catch (error) {
-    return null;
+    return error;
   }
 }

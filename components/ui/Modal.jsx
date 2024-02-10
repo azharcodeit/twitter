@@ -19,7 +19,7 @@ export default function Modal({ children }) {
         if (onDismiss) onDismiss();
       }
     },
-    [onDismiss, overlay, closeIcon]
+    [onDismiss, overlay, ]
   );
 
   const onKeyDown = useCallback(

@@ -11,7 +11,8 @@ export const metadata = {
   description:
     "From breaking news and entertainment to sports and politics, get the full story with all the live commentary.",
 };
-export default async function (props) {
+
+export default async function layout(props){
   const session = await getServerSession(authOptions);
   return (
     <html lang='en'>

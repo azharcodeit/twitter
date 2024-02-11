@@ -29,8 +29,9 @@ function Bio({ fetchedUser, followingInit }) {
 
       if (isFollowing) {
         request = () =>
-          fetch("http://localhost:3000/api/follow", {
+          fetch("/api/follow", {
             method: "DELETE",
+            cache: "force-cache",
             headers: {
               "Content-Type": "application/json",
             },
@@ -38,8 +39,9 @@ function Bio({ fetchedUser, followingInit }) {
           });
       } else {
         request = () =>
-          fetch("http://localhost:3000/api/follow", {
+          fetch("/api/follow", {
             method: "POST",
+            cache: "force-cache",
             headers: {
               "Content-Type": "application/json",
             },

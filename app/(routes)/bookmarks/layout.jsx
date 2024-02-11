@@ -4,6 +4,7 @@ import Header from "@components/Header";
 import { useSession } from "next-auth/react";
 
 function layout({ bookmarksFeed, trending }) {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const { data: session } = useSession();
   return (
     <MainContainer>

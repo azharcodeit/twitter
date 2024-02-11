@@ -1,33 +1,21 @@
-"use client";
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { RiMoreLine } from "react-icons/ri";
 import { GoPerson } from "react-icons/go";
 import { getPostedTime } from "@utils";
-import { useCallback } from "react";
+import { getUserById } from "@app/actions/getUserById";
 
-function CommentItem({data}) {
-  const router = useRouter();
-
-  console.log(data)
-  const goToUser = useCallback(
-    (e) => {
-      e.stopPropagation();
-
-      router.push(`/users/${data.user.username}`);
-    },
-    [router, data?.user?.username]
-  );
+async function CommentItem({data}) {
+  const fetchedUser = await getUserById(data?.userId);
 
   const postedTime = getPostedTime(data?.createdAt);
   return (
-    <div className='flex z-0 items-start h-14 px-4 py-3 border-darker-gray-bg border-b h-fit hover:bg-black/5 transition duration-200 cursor-pointer'>
+    <div className='flex z-0 items-start h-fit px-4 py-3 border-darker-gray-bg border-b hover:bg-black/5 transition duration-200 cursor-pointer'>
       <div className='flex w-fit mr-3'>
-        <div onClick={goToUser}>
-          {data?.user?.profileImage ? (
+        <div >
+          {fetchedUser?.profileImage ? (
             <Image
-              src={data?.user?.profileImage}
+              src={fetchedUser?.profileImage}
               alt='avatar'
               width={40}
               height={40}
@@ -42,11 +30,11 @@ function CommentItem({data}) {
         <div className='flex justify-between h-fit row-span-1'>
           <div className='flex'>
             <h1 className='font-twitter-chirp-bold'>
-              {data?.user?.name || "Name Surname"}{" "}
+              {fetchedUser?.name || "Name Surname"}{" "}
             </h1>
             <div className='flex text-slate-500 ml-1'>
-              <Link href={`users/${data?.user?.username}`}>
-                <h1>@{data?.user?.username}</h1>
+              <Link href={`users/${fetchedUser?.username}`}>
+                <h1>@{fetchedUser?.username}</h1>
               </Link>
               <span className='mx-1'> · </span>
               <h1> {postedTime} </h1>

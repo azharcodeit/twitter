@@ -31,7 +31,7 @@ function NewPost({ placeholder, isComment, postId }) {
       setLoading(true);
       let res;
       if (isComment) {
-        res = await fetch("http://localhost:3000/api/comments", {
+        res = await fetch("/api/comments", {
           method: "POST",
           cache: "force-cache",
           headers: {
@@ -44,7 +44,7 @@ function NewPost({ placeholder, isComment, postId }) {
           }),
         });
       } else {
-        res = await fetch("http://localhost:3000/api/posts", {
+        res = await fetch("/api/posts", {
           method: "POST",
           cache: "force-cache",
           headers: {

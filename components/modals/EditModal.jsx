@@ -43,7 +43,7 @@ const EditModal = () => {
     try {
       setIsLoading(true);
 
-      const res = await axios.put("http://localhost:3000/api/user", {
+      const res = await axios.put("/api/user", {
         id,
         name,
         username,
@@ -64,7 +64,7 @@ const EditModal = () => {
     } finally {
       setIsLoading(false);
       editModal.onClose();
-      router.replace(`http://localhost:3000/users/${currentUser?.username}`)
+      router.replace(`/users/${currentUser?.username}`)
     }
   }, [editModal, name, username, bio, profileImage, coverImage, router]);
 

@@ -42,7 +42,7 @@ function PostContainer({ post, user }) {
 
       if (hasLiked) {
         request = () =>
-          fetch("http://localhost:3000/api/like", {
+          fetch("/api/like", {
             method: "DELETE",
             cache: "force-cache",
             headers: {
@@ -52,7 +52,7 @@ function PostContainer({ post, user }) {
           });
       } else {
         request = () =>
-          fetch("http://localhost:3000/api/like", {
+          fetch("/api/like", {
             method: "POST",
             cache: "force-cache",
             headers: {
@@ -93,7 +93,7 @@ function PostContainer({ post, user }) {
 
       if (hasBookmarked) {
         request = () =>
-          fetch("http://localhost:3000/api/bookmark", {
+          fetch("/api/bookmark", {
             method: "DELETE",
             cache: "force-cache",
             headers: {
@@ -103,7 +103,7 @@ function PostContainer({ post, user }) {
           });
       } else {
         request = () =>
-          fetch("http://localhost:3000/api/bookmark", {
+          fetch("/api/bookmark", {
             method: "POST",
             cache: "force-cache",
             headers: {

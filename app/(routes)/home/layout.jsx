@@ -1,15 +1,6 @@
 import MainContainer from "@components/MainContainer";
 import Header from "@components/Header";
 
-const title = "Home";
-
-export const metadata = {
-  title,
-  openGraph: {
-    title,
-  },
-};
-
 export default function Layout({ feed, trending }) {
   return (
     <MainContainer>

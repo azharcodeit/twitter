@@ -33,6 +33,7 @@ export default function Login() {
       setLoading(true);
       const res = await fetch("api/user", {
         method: "POST",
+        cache: "force-cache",
         headers: {
           "Content-type": "application/json; charset=UTF-8",
         },

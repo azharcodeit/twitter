@@ -44,6 +44,7 @@ function PostContainer({ post, user }) {
         request = () =>
           fetch("http://localhost:3000/api/like", {
             method: "DELETE",
+            cache: "force-cache",
             headers: {
               "Content-Type": "application/json",
             },
@@ -53,6 +54,7 @@ function PostContainer({ post, user }) {
         request = () =>
           fetch("http://localhost:3000/api/like", {
             method: "POST",
+            cache: "force-cache",
             headers: {
               "Content-Type": "application/json",
             },
@@ -93,6 +95,7 @@ function PostContainer({ post, user }) {
         request = () =>
           fetch("http://localhost:3000/api/bookmark", {
             method: "DELETE",
+            cache: "force-cache",
             headers: {
               "Content-Type": "application/json",
             },
@@ -102,6 +105,7 @@ function PostContainer({ post, user }) {
         request = () =>
           fetch("http://localhost:3000/api/bookmark", {
             method: "POST",
+            cache: "force-cache",
             headers: {
               "Content-Type": "application/json",
             },

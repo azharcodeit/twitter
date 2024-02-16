@@ -1,13 +1,11 @@
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import { getPosts } from "@app/actions/getPosts";
 import { getFollowingUsersPosts } from "@app/actions/getFollowingUsersPosts";
 import PostContainer from "@components/PostContainer";
 import { Tabs, Tab } from "@components/Tabs";
 import NewPost from "@components/NewPost";
 import { getUserById } from "@app/actions/getUserById";
-import PostLoading from "@components/post/PostLoading";
-
-export const revalidate = 0;
+import ErrorBoundary from '@components/ErrorBoundary'
 
 async function Feed() {
   const fetchedPosts = await getPosts();
@@ -35,16 +33,21 @@ async function Feed() {
       />
     );
   });
+  const LoadingComponent = lazy(() => import('@components/post/PostLoading'));
 
   return (
     <Tabs sticky>
       <Tab label='For you' sticky>
         <NewPost />
-        <Suspense fallback={<PostLoading />}>{postsAll}</Suspense>
+        <ErrorBoundary>
+        <Suspense fallback={<LoadingComponent />}>{postsAll}</Suspense>
+        </ErrorBoundary>
       </Tab>
       <Tab label='Following' sticky>
         <NewPost />
-        <Suspense fallback={<PostLoading />}>{postsFollowing}</Suspense>
+        <ErrorBoundary>
+        <Suspense fallback={<LoadingComponent />}>{postsFollowing}</Suspense>
+        </ErrorBoundary>
       </Tab>
     </Tabs>
   );

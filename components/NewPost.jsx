@@ -1,4 +1,6 @@
 "use client";
+import { Suspense, lazy } from "react";
+import ErrorBoundary from "@components/ErrorBoundary";
 import Link from "next/link";
 import Image from "next/image";
 import Textarea from "./ui/Textarea";
@@ -40,7 +42,7 @@ function NewPost({ placeholder, isComment, postId }) {
           body: JSON.stringify({
             postId,
             body,
-            currentUser
+            currentUser,
           }),
         });
       } else {
@@ -71,61 +73,69 @@ function NewPost({ placeholder, isComment, postId }) {
     }
   }, [body, postModal, currentUser, isComment, postId]);
 
+  const LoadingComponent = lazy(() => import("@components/post/PostLoading"));
 
   return (
-    <div className='grid z-10 grid-flow-col grid-cols-10 h-14 px-4 py-3 border-darker-gray-bg border-b h-fit'>
-      <div className='flex w-full'>
-        <Link href={"/home"}>
-          {currentUser?.profileImage ? (
-            <div className='overflow-hidden rounded-full border-[#ffffff]'>
-              <Image
-                src={currentUser.profileImage}
-                className='scale-125'
-                alt='twitter'
-                width={40}
-                height={40}
+    <ErrorBoundary>
+      <Suspense fallback={<LoadingComponent />}>
+        <div className='grid z-10 grid-flow-col grid-cols-10 h-14 px-4 py-3 border-darker-gray-bg border-b h-fit'>
+          <div className='flex w-full'>
+            <Link href={"/home"}>
+              {currentUser?.profileImage ? (
+                <div className='overflow-hidden rounded-full border-[#ffffff]'>
+                  <Image
+                    src={currentUser.profileImage}
+                    className='scale-125'
+                    alt='twitter'
+                    width={40}
+                    height={40}
+                  />
+                </div>
+              ) : (
+                <GoPerson size={35} color='gray' />
+              )}
+            </Link>
+          </div>
+          <div className='col-span-9 min-h-full'>
+            <div className='flex items-center'>
+              <Textarea
+                placeholder={placeholder}
+                onChange={onChange}
+                value={body}
               />
             </div>
-          ) : (
-            <GoPerson size={35} color='gray' />
-          )}
-        </Link>
-      </div>
-      <div className='col-span-9 min-h-full'>
-        <div className='flex items-center'>
-          <Textarea
-            placeholder={placeholder}
-            onChange={onChange}
-            value={body}
-          />
-        </div>
-        <div className='flex justify-between items-center'>
-          <div className='flex gap-x-1'>
-            <button className='rounded-full hover:bg-main-primary/20 p-2'>
-              <MdOutlineImage size={20} className='text-main-primary' />
-            </button>
-            <button className='rounded-full hover:bg-main-primary/20 p-2'>
-              <MdOutlineGifBox size={20} className='text-main-primary' />
-            </button>
-            <button className='rounded-full hover:bg-main-primary/20 p-2'>
-              <MdOutlineEmojiEmotions size={20} className='text-main-primary' />
-            </button>
-            <button className='rounded-full hover:bg-main-primary/20 p-2'>
-              <MdOutlineSchedule size={20} className='text-main-primary' />
-            </button>
+            <div className='flex justify-between items-center'>
+              <div className='flex gap-x-1'>
+                <button className='rounded-full hover:bg-main-primary/20 p-2'>
+                  <MdOutlineImage size={20} className='text-main-primary' />
+                </button>
+                <button className='rounded-full hover:bg-main-primary/20 p-2'>
+                  <MdOutlineGifBox size={20} className='text-main-primary' />
+                </button>
+                <button className='rounded-full hover:bg-main-primary/20 p-2'>
+                  <MdOutlineEmojiEmotions
+                    size={20}
+                    className='text-main-primary'
+                  />
+                </button>
+                <button className='rounded-full hover:bg-main-primary/20 p-2'>
+                  <MdOutlineSchedule size={20} className='text-main-primary' />
+                </button>
+              </div>
+              <>
+                <Button
+                  small
+                  onClick={onSubmit}
+                  disabled={loading}
+                  label={loading ? <Loader2 /> : "Post"}
+                />
+                <Toaster />
+              </>
+            </div>
           </div>
-          <>
-            <Button
-              small
-              onClick={onSubmit}
-              disabled={loading}
-              label={loading ? <Loader2 /> : "Post"}
-            />
-            <Toaster />
-          </>
         </div>
-      </div>
-    </div>
+      </Suspense>
+    </ErrorBoundary>
   );
 }
 

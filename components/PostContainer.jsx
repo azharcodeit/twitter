@@ -1,4 +1,6 @@
 "use client";
+import { Suspense, lazy } from "react";
+import ErrorBoundary from "@components/ErrorBoundary";
 import Link from "next/link";
 import Image from "next/image";
 import PostWrapper from "@components/PostWrapper";
@@ -147,107 +149,120 @@ function PostContainer({ post, user }) {
 
   // useEffect(() => {}, [session?.user, status, user, post, post?.likedIds]);
 
+  const LoadingComponent = lazy(() => import("@components/post/PostLoading"));
+
   return (
-    <div className='flex felx-col z-0 items-start h-14 px-4 py-3 border-darker-gray-bg border-b h-fit hover:bg-black/5 transition duration-200 cursor-pointer'>
-      <div className='flex w-fit mr-3'>
-        <Link href={`users/${user?.username}`}>
-          {user?.profileImage ? (
-            <Image
-              src={user.profileImage}
-              alt='avatar'
-              width={40}
-              height={40}
-              className='rounded-3xl'
-            />
-          ) : (
-            <GoPerson size={30} />
-          )}
-        </Link>
-      </div>
-      <div className='w-full'>
-        <div className='flex justify-between h-fit row-span-1'>
-          <div className='flex'>
-            <h1 className='font-twitter-chirp-bold'>
-              {user?.name || "Name Surname"}{" "}
-            </h1>
-            <div className='flex text-slate-500 ml-1'>
-              <Link href={`users/${user?.username}`}>
-                <h1>@{user?.username}</h1>
-              </Link>
-              <span className='mx-1'> · </span>
-              <h1> {postedTime} </h1>
+    <ErrorBoundary>
+      <Suspense fallback={<LoadingComponent />}>
+        <div className='flex felx-col z-0 items-start h-14 px-4 py-3 border-darker-gray-bg border-b h-fit hover:bg-black/5 transition duration-200 cursor-pointer'>
+          <div className='flex w-fit mr-3'>
+            <Link href={`users/${user?.username}`}>
+              {user?.profileImage ? (
+                <Image
+                  src={user.profileImage}
+                  alt='avatar'
+                  width={40}
+                  height={40}
+                  className='rounded-3xl'
+                />
+              ) : (
+                <GoPerson size={30} />
+              )}
+            </Link>
+          </div>
+          <div className='w-full'>
+            <div className='flex justify-between h-fit row-span-1'>
+              <div className='flex'>
+                <h1 className='font-twitter-chirp-bold'>
+                  {user?.name || "Name Surname"}{" "}
+                </h1>
+                <div className='flex text-slate-500 ml-1'>
+                  <Link href={`users/${user?.username}`}>
+                    <h1>@{user?.username}</h1>
+                  </Link>
+                  <span className='mx-1'> · </span>
+                  <h1> {postedTime} </h1>
+                </div>
+              </div>
+              <RiMoreLine size={15} />
+            </div>
+            <PostWrapper postId={post?.id}>
+              <div className='h-fit row-span-1'>
+                {post?.body || "Post Text"}
+              </div>
+              {post?.image && (
+                <div className='w-fit f-fit overflow-hidden mt-3'>
+                  <Link href={"/home"}>
+                    <Image
+                      src={post.image}
+                      alt='post'
+                      height={504}
+                      width={504}
+                      className='rounded-xl border'
+                    />
+                  </Link>
+                </div>
+              )}
+            </PostWrapper>
+            <div className='flex justify-between  mt-2'>
+              <button
+                onClick={handleComment}
+                className='flex items-center text-secondary-text  hover:text-main-primary'
+              >
+                <div className='rounded-full mr-2 hover:bg-main-primary/20'>
+                  <FaRegComment size={20} />
+                </div>
+                <h1 className='mx-1 twitter-chirp-regular text-sm '>
+                  {post?.comments?.length || 0}
+                </h1>
+              </button>
+              <button className='flex items-center text-secondary-text hover:text-repost-green'>
+                <div className='rounded-full m-2 hover:bg-repost-green/20'>
+                  <LuRepeat2 size={20} />
+                </div>
+                <h1 className='mx-1 twitter-chirp-regular text-sm '>78</h1>
+              </button>
+              <button
+                onClick={toggleLike}
+                disabled={loadingLike}
+                className='flex items-center text-secondary-text hover:text-red-like'
+              >
+                <div className='rounded-full m-2 hover:bg-red-like/20'>
+                  <LikeIcon color={hasLiked ? "#f91880" : ""} size={20} />
+                </div>
+                <h1
+                  className={`mx-1 twitter-chirp-regular text-sm ${
+                    hasLiked ? "text-red-like" : ""
+                  }`}
+                >
+                  {likeCount}
+                </h1>
+              </button>
+              <button
+                onClick={toggleBookmark}
+                disabled={loadingBookmark}
+                className='flex items-center text-secondary-text hover:text-main-primary'
+              >
+                <div className='rounded-full m-2 hover:bg-main-primary/20'>
+                  <BookmarkIcon
+                    color={hasBookmarked ? "#1c9bef" : ""}
+                    size={20}
+                  />
+                </div>
+                <h1
+                  className={`mx-1 twitter-chirp-regular text-sm ${
+                    hasBookmarked ? "text-main-primary" : ""
+                  }`}
+                >
+                  {bookmarkCount}
+                </h1>
+              </button>
+              <Toaster />
             </div>
           </div>
-          <RiMoreLine size={15} />
         </div>
-        <PostWrapper postId={post?.id}>
-          <div className='h-fit row-span-1'>{post?.body || "Post Text"}</div>
-          {post?.image && (
-            <div className='w-fit f-fit overflow-hidden mt-3'>
-              <Link href={"/home"}>
-                <Image
-                  src={post.image}
-                  alt='post'
-                  height={504}
-                  width={504}
-                  className='rounded-xl border'
-                />
-              </Link>
-            </div>
-          )}
-        </PostWrapper>
-        <div className='flex justify-between  mt-2'>
-          <button
-            onClick={handleComment}
-            className='flex items-center text-secondary-text  hover:text-main-primary'
-          >
-            <div className='rounded-full mr-2 hover:bg-main-primary/20'>
-              <FaRegComment size={20} />
-            </div>
-            <h1 className='mx-1 twitter-chirp-regular text-sm '>{post?.comments?.length || 0}</h1>
-          </button>
-          <button className='flex items-center text-secondary-text hover:text-repost-green'>
-            <div className='rounded-full m-2 hover:bg-repost-green/20'>
-              <LuRepeat2 size={20} />
-            </div>
-            <h1 className='mx-1 twitter-chirp-regular text-sm '>78</h1>
-          </button>
-          <button
-            onClick={toggleLike}
-            disabled={loadingLike}
-            className='flex items-center text-secondary-text hover:text-red-like'
-          >
-            <div className='rounded-full m-2 hover:bg-red-like/20'>
-              <LikeIcon color={hasLiked ? "#f91880" : ""} size={20} />
-            </div>
-            <h1
-              className={`mx-1 twitter-chirp-regular text-sm ${
-                hasLiked ? "text-red-like" : ""
-              }`}
-            >
-              {likeCount}
-            </h1>
-          </button>
-          <button
-            onClick={toggleBookmark}
-            disabled={loadingBookmark}
-            className='flex items-center text-secondary-text hover:text-main-primary'
-          >
-            <div className='rounded-full m-2 hover:bg-main-primary/20'>
-              <BookmarkIcon color={hasBookmarked ? "#1c9bef" : ""} size={20} />
-            </div>
-            <h1
-              className={`mx-1 twitter-chirp-regular text-sm ${
-                hasBookmarked ? "text-main-primary" : ""
-              }`}
-            >
-              {bookmarkCount}
-            </h1>
-          </button>
-          <Toaster />
-        </div>
-      </div>
-    </div>
+      </Suspense>
+    </ErrorBoundary>
   );
 }
 

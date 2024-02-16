@@ -1,5 +1,6 @@
 import Header from "@components/Header";
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
+import ErrorBoundary from "@components/ErrorBoundary";
 import { Loader2 } from "lucide-react";
 import { getPosts } from "@app/actions/getPosts";
 import { getFollowingUsersPosts } from "@app/actions/getFollowingUsersPosts";
@@ -7,8 +8,6 @@ import PostContainer from "@components/PostContainer";
 import { Tabs, Tab } from "@components/Tabs";
 import NewPost from "@components/NewPost";
 import { getUserById } from "@app/actions/getUserById";
-
-export const revalidate = 0;
 
 async function Feed() {
   const fetchedPosts = await getPosts();
@@ -36,6 +35,7 @@ async function Feed() {
       />
     );
   });
+  const LoadingComponent = lazy(() => import("@components/post/PostLoading"));
 
   return (
     <div className='feed border-darker-gray-bg border-x h-inherit'>
@@ -47,11 +47,17 @@ async function Feed() {
       <Tabs sticky>
         <Tab label='For you' sticky>
           <NewPost />
-          <Suspense fallback={<Loading />}>{postsAll}</Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<LoadingComponent />}>{postsAll}</Suspense>
+          </ErrorBoundary>
         </Tab>
         <Tab label='Following' sticky>
           <NewPost />
-          <Suspense fallback={<Loading />}>{postsFollowing}</Suspense>
+          <ErrorBoundary>
+            <Suspense fallback={<LoadingComponent />}>
+              {postsFollowing}
+            </Suspense>
+          </ErrorBoundary>
         </Tab>
       </Tabs>
     </div>

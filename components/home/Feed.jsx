@@ -8,6 +8,8 @@ import { Tabs, Tab } from "@components/Tabs";
 import NewPost from "@components/NewPost";
 import { getUserById } from "@app/actions/getUserById";
 
+export const revalidate = 0;
+
 async function Feed() {
   const fetchedPosts = await getPosts();
   const fetchedFollowingUsersPosts = await getFollowingUsersPosts();

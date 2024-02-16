@@ -12,6 +12,8 @@ import Skeleton from "@components/Skeleton";
 import BioLoading from "@components/profile/BioLoading";
 import PostLoading from "@components/post/PostLoading";
 import HeroLoading from "@components/profile/HeroLoading";
+ 
+export const revalidate = 0;
 
 const UserProfile = async ({ params }) => {
   const { username } = params;

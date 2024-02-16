@@ -7,6 +7,8 @@ import NewPost from "@components/NewPost";
 import { getUserById } from "@app/actions/getUserById";
 import PostLoading from "@components/post/PostLoading";
 
+export const revalidate = 0;
+
 async function Feed() {
   const fetchedPosts = await getPosts();
   const fetchedFollowingUsersPosts = await getFollowingUsersPosts();

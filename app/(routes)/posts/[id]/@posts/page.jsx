@@ -5,6 +5,8 @@ import { getUserById } from "@app/actions/getUserById";
 import CommentFeed from "@components/post/CommentFeed";
 import { Suspense } from "react";
 import PostLoading from "@components/post/PostLoading";
+ 
+export const revalidate = 0;
 
 async function Post({ params }) {
   const { id } = params;

@@ -52,7 +52,7 @@ export default function Login() {
         router.push("/login");
       } else if (res.status == 409) {
         setErrorMsg("This email is already taken, try another one");
-        toast(errorMsg);
+        toast("This email is already taken, try another one");
       } 
     } catch (err) {
       console.log("caught error catch");

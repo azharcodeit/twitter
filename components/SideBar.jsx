@@ -10,7 +10,7 @@ import usePostModal from "@/hooks/usePostModal";
 import { NAVIGATION_ITEMS } from "@utils";
 
 const SideBar = () => {
-  const { data: session } = useSession();
+  const { data: session } = useSession({ required: true });
   const postModal = usePostModal();
 
   return (
@@ -22,7 +22,7 @@ const SideBar = () => {
             href={
               item.title.toLocaleLowerCase() === "home" ||
               item.title.toLocaleLowerCase() === "twitter"
-                ? "/"
+                ? "/home"
                 : item.title.toLocaleLowerCase() === "profile"
                 ? `/users/${session?.user?.username}` || "#"
                 : `/${item.title.toLowerCase()}`

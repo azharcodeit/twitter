@@ -7,9 +7,10 @@ function SignOutButton() {
     <div
       onClick={(event) => {
         event.preventDefault();
-        signOut({
+        signOut({ 
           callbackUrl: `/login`,
         });
+        sessionStorage.clear();
       }}
       className="hidden_xl cursor-pointer"
     >

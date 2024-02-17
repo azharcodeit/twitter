@@ -1,6 +1,6 @@
-This is a FullStack Twitter clone repository using Next.js](https://nextjs.org/), TailwindCSS, Prisma & MongoDB Atlas.
+This is a FullStack Twitter clone repository using Next.js (https://nextjs.org/), TailwindCSS, Prisma & MongoDB Atlas.
 
-## Current functionality
+## Current functionality includes:
 
 - Authentication system
 - Image Upload using Base64 strings
@@ -17,9 +17,10 @@ This is a FullStack Twitter clone repository using Next.js](https://nextjs.org/)
 - Validation
 - Vercel Deployment at https://social-media-app-bay-kappa.vercel.app/
 
-## Working on:
+## Coming soon:
+
 - Search and Explore Feed
 - Form Validation improvements
 - Post's functionality enhancements
 
-Open [ https://social-media-app-bay-kappa.vercel.app/] to see the result! 
+Open [ https://social-media-app-bay-kappa.vercel.app/] to see the result!

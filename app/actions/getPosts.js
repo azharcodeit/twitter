@@ -8,6 +8,8 @@ export async function getPosts() {
         user: true,
         comments: true,
       },
+      skip: 0,
+      take: 5,
       orderBy: {
         createdAt: "desc",
       },

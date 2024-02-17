@@ -15,28 +15,11 @@ This is a FullStack Twitter clone repository using Next.js](https://nextjs.org/)
 - Comments / Replies
 - Loaders
 - Validation
+- Vercel Deployment at https://social-media-app-bay-kappa.vercel.app/
 
-## To Be included:
+## Working on:
+- Search and Explore Feed
+- Form Validation improvements
+- Post's functionality enhancements
 
-- Vercel Deployment
-
-## Twitter Clone Showcase:
-
-**Pre-Login Page:**
-
-![Screenshot of an onboarding page.](https://github.com/azharcodeit/twitter/blob/main/public/assets/images/screenshots/onboarding.png)
-
-**Sign in and Sign up modals:**
-
-![Screenshot of a sign in page.](https://github.com/azharcodeit/twitter/blob/main/public/assets/images/screenshots/signin.png)
-![Screenshot of a sign up page.](https://github.com/azharcodeit/twitter/blob/main/public/assets/images/screenshots/signup.png)
-
-**Home Page:**
-
-![Screenshot of a home page.](https://github.com/azharcodeit/twitter/blob/main/public/assets/images/screenshots/home.png)
-
-**Profile Page:**
-
-![Screenshot of a profile page.](https://github.com/azharcodeit/twitter/blob/main/public/assets/images/screenshots/profileUser.png)
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [ https://social-media-app-bay-kappa.vercel.app/] to see the result! 

@@ -1,7 +1,7 @@
 "use client";
 import { signIn } from "next-auth/react";
 import { Loader2 } from "lucide-react";
-import { NextResponse } from "next/server";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useState, useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import Modal from "@components/ui/Modal";
@@ -16,6 +16,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleRefresh = () => {
     window.location.replace("/home")
@@ -72,13 +73,24 @@ export default function Login() {
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
-                <Input
-                  id='password'
-                  label='Password'
-                  type='password'
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
+                <div className='relative'>
+                    <Input
+                      id='password'
+                      label='Password'
+                      type={showPassword ? "text" : "password"}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    <button
+                      className='absolute top-6 right-4'
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowPassword((prev) => (prev = !prev));
+                      }}
+                    >
+                      {showPassword ? <FaEye /> : <FaEyeSlash />}
+                    </button>
+                </div>
                 <Button
                   type='submit'
                   variant='outline'

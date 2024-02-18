@@ -10,7 +10,7 @@ const Input = ({ id, label, onChange, value, type = "text", disabled }) => {
         value={value}
         type={type}
         id={id}
-        placeholder=' '
+        placeholder=''
         className={`
           peer
           w-full

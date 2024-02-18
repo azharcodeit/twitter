@@ -7,6 +7,7 @@ import Modal from "@components/ui/Modal";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Input from "@components/ui/Input";
 import Button from "@components/Button";
 
@@ -17,6 +18,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const router = useRouter();
 
@@ -53,7 +55,7 @@ export default function Login() {
       } else if (res.status == 409) {
         setErrorMsg("This email is already taken, try another one");
         toast("This email is already taken, try another one");
-      } 
+      }
     } catch (err) {
       console.log("caught error catch");
     } finally {
@@ -100,13 +102,24 @@ export default function Login() {
                     onChange={(e) => setUsername(e.target.value)}
                     required
                   />
-                  <Input
-                    id='password'
-                    label='Password'
-                    type='password'
-                    onChange={(e) => setPassword(e.target.value)}
-                    required
-                  />
+                  <div className='relative'>
+                    <Input
+                      id='password'
+                      label='Password'
+                      type={showPassword ? "text" : "password"}
+                      onChange={(e) => setPassword(e.target.value)}
+                      required
+                    />
+                    <button
+                      className='absolute top-6 right-4'
+                      onClick={(e) => {
+                        e.preventDefault();
+                        setShowPassword((prev) => (prev = !prev));
+                      }}
+                    >
+                      {showPassword ? <FaEye /> : <FaEyeSlash />}
+                    </button>
+                  </div>
                   <Button
                     type='submit'
                     disabled={loading}

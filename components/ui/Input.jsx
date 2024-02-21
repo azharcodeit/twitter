@@ -34,7 +34,7 @@ const Input = ({ id, label, onChange, value, type = "text", disabled }) => {
           text-md
           duration-150 
           transform 
-          -translate-y-3
+          -translate-y-4
           top-4
           z-2
           origin-[0] 

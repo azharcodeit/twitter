@@ -10,6 +10,11 @@ import { FcGoogle } from "react-icons/fc";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Input from "@components/ui/Input";
 import Button from "@components/Button";
+import {
+  name_validation,
+  email_validation,
+  password_validation,
+} from "@utils/inputValidations";
 
 export default function Login() {
   const [name, setName] = useState("");
@@ -83,16 +88,18 @@ export default function Login() {
                 or
               </div>
               <div className='flex flex-col gap-4 mt-3'>
-                <form onSubmit={onSubmit} className='flex flex-col gap-4'>
+                <form
+                  onSubmit={onSubmit}
+                  // novalidate='true'
+                  className='flex flex-col gap-4'
+                >
                   <Input
-                    id='email'
-                    label='Email'
+                    {...email_validation}
                     onChange={(e) => setEmail(e.target.value)}
                     required
                   />
                   <Input
-                    id='name'
-                    label='Name'
+                    {...name_validation}
                     onChange={(e) => setName(e.target.value)}
                     required
                   />
@@ -104,11 +111,10 @@ export default function Login() {
                   />
                   <div className='relative'>
                     <Input
-                      id='password'
-                      label='Password'
+                      {...password_validation}
+                      minLength="6"
                       type={showPassword ? "text" : "password"}
                       onChange={(e) => setPassword(e.target.value)}
-                      required
                     />
                     <button
                       className='absolute top-6 right-4'

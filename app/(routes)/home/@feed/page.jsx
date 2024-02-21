@@ -13,7 +13,7 @@ async function Feed() {
   let postsFollowing = fetchedFollowingUsersPosts?.map(async (fetchedPost) => {
     const fetchedUser = await getUserById(fetchedPost?.userId);
     if (!fetchedPost) {
-      return <>Loading...</>;
+      return <>Loading... here</>;
     }
     return (
       <PostContainer

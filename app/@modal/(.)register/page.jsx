@@ -90,7 +90,7 @@ export default function Login() {
               <div className='flex flex-col gap-4 mt-3'>
                 <form
                   onSubmit={onSubmit}
-                  // novalidate='true'
+                  novalidate='true'
                   className='flex flex-col gap-4'
                 >
                   <Input

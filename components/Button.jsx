@@ -8,6 +8,7 @@ const Button = ({
   small,
   icon: Icon,
   follow,
+  edit,
   secondary
 }) => {
   return ( 
@@ -16,9 +17,8 @@ const Button = ({
       onClick={onClick}
       className={`
         relative
-        disabled:opacity-70
+        disabled:opacity-80
         disabled:cursor-not-allowed
-        hover:opacity-80
         transition
         font-twitter-chirp-bold
         rounded-3xl
@@ -29,9 +29,10 @@ const Button = ({
         ${small ? 'w-fit min-w-[50px]' : 'w-full'}
         ${small ? 'py-2' : 'py-3'}
         ${small ? 'border-bg-gray' : ''}
-        ${small ? 'px-4' : ''}
+        ${small ? 'px-4 hover:brightness-80' : ''}
         ${small ? 'text-[15px]' : 'text-md'}
-        ${follow ? 'bg-main-secondary' : ''}
+        ${follow ? 'bg-main-secondary hover:opacity-80' : ''}
+        ${edit ?  'hover:bg-black/10' : ''}
         ${secondary ? 'bg-main-secondary' : ''}
         ${secondary ? 'py-1' : ''}
       `}

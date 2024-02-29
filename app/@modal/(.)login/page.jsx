@@ -8,6 +8,7 @@ import Modal from "@components/ui/Modal";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
+import { PiDetectiveLight } from "react-icons/pi";
 import Input from "@components/ui/Input";
 import Button from "@components/Button";
 
@@ -19,7 +20,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleRefresh = () => {
-    window.location.replace("/home")
+    window.location.replace("/home");
   };
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -34,7 +35,7 @@ export default function Login() {
         toast.error("Invalid credentials");
         return;
       } else {
-        handleRefresh()
+        handleRefresh();
         toast.success("Successfully logged in!");
       }
     } catch (error) {
@@ -55,11 +56,35 @@ export default function Login() {
             </h1>
           </div>
           <div className='sm:rounded-5xl flex-auto bg-white shadow-gray-900/10 sm:mx-0 sm:flex-none sm:w-[300px] max-w-[380px]'>
-            <Button
+            {/* <Button
               outline
               label='Continue with Google'
               icon={FcGoogle}
               onClick={()=>signIn("google")}
+            />
+             <div className='mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400'>
+              or
+            </div> */}
+            <Button
+              outline
+              label='Continue as a guest'
+              icon={PiDetectiveLight}
+              onClick={async (e) => {
+                e.preventDefault();
+
+                const res = await signIn("credentials", {
+                  email: "guest@email.com",
+                  password: "pass",
+                  redirect: false,
+                });
+                if (res.error) {
+                  toast.error("Error occured, please try again");
+                  return;
+                } else {
+                  handleRefresh();
+                  toast.success("Successfully logged in!");
+                }
+              }}
             />
             <div className='mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400'>
               or
@@ -74,22 +99,22 @@ export default function Login() {
                   required
                 />
                 <div className='relative'>
-                    <Input
-                      id='password'
-                      label='Password'
-                      type={showPassword ? "text" : "password"}
-                      onChange={(e) => setPassword(e.target.value)}
-                      required
-                    />
-                    <button
-                      className='absolute top-6 right-4'
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setShowPassword((prev) => (prev = !prev));
-                      }}
-                    >
-                      {showPassword ? <FaEye /> : <FaEyeSlash />}
-                    </button>
+                  <Input
+                    id='password'
+                    label='Password'
+                    type={showPassword ? "text" : "password"}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                  />
+                  <button
+                    className='absolute top-6 right-4'
+                    onClick={(e) => {
+                      e.preventDefault();
+                      setShowPassword((prev) => (prev = !prev));
+                    }}
+                  >
+                    {showPassword ? <FaEye /> : <FaEyeSlash />}
+                  </button>
                 </div>
                 <Button
                   type='submit'

@@ -4,6 +4,7 @@ import { toast } from "react-hot-toast";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { FcGoogle } from "react-icons/fc";
+import { PiDetectiveLight } from "react-icons/pi";
 import Button from "@components/Button";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
@@ -59,10 +60,37 @@ const SignInPage = () => {
             <div className='sm:rounded-5xl flex-auto bg-white shadow-gray-900/10 sm:mx-0 sm:flex-none sm:w-[300px] max-w-[380px]'>
               <Button
                 outline
+                disabled
                 label='Continue with Google'
                 className='mt-4 w-full'
                 icon={FcGoogle}
                 onClick={loginWithGoogle}
+              />
+
+              <div className='mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400'>
+                or
+              </div>
+              {/* this is temporary guest login solution, there will be roles in future */}
+              <Button
+                outline
+                label='Continue as a guest' 
+                icon={PiDetectiveLight}
+                onClick={async (e) => {
+                  e.preventDefault();
+
+                  const res = await signIn("credentials", {
+                    email: "guest@email.com",
+                    password: "pass",
+                    redirect: false,
+                  });
+                  if (res.error) {
+                    toast.error("Error occured, please try again");
+                    return;
+                  } else {
+                    handleRefresh();
+                    toast.success("Successfully logged in!");
+                  }
+                }}
               />
               <div className='mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400'>
                 or

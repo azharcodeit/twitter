@@ -7,6 +7,7 @@ import Modal from "@components/ui/Modal";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
+import { PiDetectiveLight } from "react-icons/pi";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import Input from "@components/ui/Input";
 import Button from "@components/Button";
@@ -78,12 +79,33 @@ export default function Login() {
               </h1>
             </div>
             <div className='sm:rounded-5xl flex-auto bg-white shadow-gray-900/10 sm:mx-0 sm:flex-none sm:w-[300px] max-w-[380px]'>
-              <Button
+              {/* <Button
                 outline
                 label='Continue with Google'
                 icon={FcGoogle}
                 onClick={() => signIn("google")}
-              />
+              />  */}
+              <Button
+              outline
+              label='Continue as a guest' 
+              icon={PiDetectiveLight}
+              onClick={async (e) => {
+                e.preventDefault();
+
+                const res = await signIn("credentials", {
+                  email: "guest@email.com",
+                  password: "pass",
+                  redirect: false,
+                });
+                if (res.error) {
+                  toast.error("Error occured, please try again");
+                  return;
+                } else {
+                  handleRefresh();
+                  toast.success("Successfully logged in!");
+                }
+              }}
+            />
               <div className='mx-auto my-4 flex w-full items-center justify-evenly before:mr-4 before:block before:h-px before:flex-grow before:bg-stone-400 after:ml-4 after:block after:h-px after:flex-grow after:bg-stone-400'>
                 or
               </div>

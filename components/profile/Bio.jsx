@@ -84,6 +84,7 @@ function Bio({ fetchedUser, followingInit }) {
             <Button
               outline
               label='Edit profile'
+              edit
               small
               onClick={editModal.onOpen}
             />

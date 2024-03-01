@@ -16,7 +16,12 @@ const SignInPage = () => {
   if (status === "authenticated") {
     router.push("/");
   }
-  useEffect(() => {}, [status]);
+
+  useEffect(() => {}, [status,]);
+  
+  const handleRefresh = () => {
+    window.location.replace("/home");
+  };
 
   const loginWithGoogle = async (e) => {
     e.preventDefault();
@@ -75,9 +80,7 @@ const SignInPage = () => {
                 outline
                 label='Continue as a guest' 
                 icon={PiDetectiveLight}
-                onClick={async (e) => {
-                  e.preventDefault();
-
+                onClick={async () => {
                   const res = await signIn("credentials", {
                     email: "guest@email.com",
                     password: "pass",
